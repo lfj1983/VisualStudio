@@ -1,0 +1,42 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.IO.Ports;
+
+namespace RFIDDriver
+{
+    /// <summary>
+    /// RFID设备访问接口
+    /// </summary>
+    public interface RFIDInterface
+    {
+        /// <summary>
+        /// 初始化设备
+        /// </summary>
+        /// <param name="portName">端口</param>
+        /// <param name="baudRate">波特率</param>
+        /// <param name="dataBits">数据位</param>
+        /// <param name="stopBits">停止位</param>
+        /// <param name="parity">检验位</param>
+        void SetProperties(string portName, int baudRate, int dataBits, StopBits stopBits, Parity parity);
+        /// <summary>
+        /// 初始化设备
+        /// </summary>
+        /// <param name="portName">端口</param>
+        /// <param name="baudRate">波特率</param>
+        /// <param name="dataBits">数据位</param>
+        /// <param name="stopBits">停止位</param>
+        /// <param name="parity">检验位</param>
+        void SetProperties(string portName, int baudRate, int dataBits, int stopBits, int parity);
+
+        /// <summary>
+        /// 打开端口，准备访问设备
+        /// </summary>
+        void Open();
+        /// <summary>
+        /// 关闭端口
+        /// </summary>
+        void Close();
+    }
+}

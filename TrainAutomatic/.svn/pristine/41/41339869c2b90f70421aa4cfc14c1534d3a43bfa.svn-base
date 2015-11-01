@@ -1,0 +1,241 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace S7ModbusDriver
+{
+    public enum S7OffOn
+    {
+        _Off = 0x00,
+        _WriteOn = 0xFF,
+        _On  =0x01
+    }
+
+
+
+    public enum S7QSeat
+    {
+        /// <summary>
+        /// 控制打包机运行点位地址
+        /// </summary>
+        _Cmd_run_seat=0x00,
+        /// <summary>
+        /// 打包机RFID是否写标签完成点位地址
+        /// </summary>
+        _Cmd_rfid_finish_seat = 0x01,
+        /// <summary>
+        /// 采样机卸料完成点位地址
+        /// </summary>
+        _Cmd_download_finish_seat = 0x02
+    }
+
+    public enum S7VOutSeat
+    {
+        _None = 0x00,
+
+        /// <summary>
+        /// 采样机卸料完成点位地址
+        /// </summary>
+        _Cmd_download_finish_seat = 0x32,
+        /// <summary>
+        /// 打包机RFID是否写标签完成点位地址
+        /// </summary>
+        _Cmd_rfid_finish_seat = 0x33
+        
+    }
+
+    public enum S7VInSeat
+    {
+        _None=0x00,
+
+        /// <summary>
+        /// 主机旋转到原点
+        /// </summary>
+        _Cmd_run_origin_seat = 0x13,
+
+        /// <summary>
+        /// 主机旋转到第一次压盖位置
+        /// </summary>
+        _Cmd_run_first_seat = 0x14,
+        /// <summary>
+        /// 主机旋转到第二次压盖位置
+        /// </summary>
+        _Cmd_run_two_seat = 0x15,
+
+        /// <summary>
+        /// 主机旋转到进桶口
+        /// </summary>
+        _Cmd_run_entry_seat = 0x16,
+
+        /// <summary>
+        /// 样桶是否到进桶口
+        /// </summary>
+        _Cmd_entry_bucket_seat = 0x0F,
+
+        /// <summary>
+        /// 是否存在瓶盖
+        /// </summary>
+        _Cmd_cap_seat = 0x11,
+        /// <summary>
+        /// 进桶口是否有已经压过瓶盖的样桶
+        /// </summary>
+        _Cmd_bucket_cap_seat = 0x10,
+        /// <summary>
+        /// 打包机是否故障点位地址
+        /// </summary>
+        _Cmd_error_seat = 0x65
+    };
+
+    public enum S7ISeat
+    {
+        /// <summary>
+        /// 打包机是否运行点位地址
+        /// </summary>
+        _Cmd_run_status_seat=0x00,
+        
+        /// <summary>
+        /// 打包机是否故障点位地址
+        /// </summary>
+        _Cmd_error_seat = 0x01,
+        /// <summary>
+        /// 打包机样桶是否停靠在进口点位地址
+        /// </summary>
+        _Cmd_entry_seat = 0x02,
+        /// <summary>
+        /// 打包机样桶是否停靠到卸料口地址
+        /// </summary>
+        _Cmd_down_seat = 0x03,
+        /// <summary>
+        /// 打包机样桶是否停靠在1号压盖位置的点位地址
+        /// </summary>
+        _Cmd_pack1_seat = 0x04,
+        /// <summary>
+        /// 打包机RFID读卡器是否到位点位地址
+        /// </summary>
+        _Cmd_rfid_seat = 0x05,
+
+        /// <summary>
+        /// 打包桶第二次是否压盖完成
+        /// </summary>
+        _Cmd_pack2_seat = 0x06
+    };
+
+
+    public enum S7Func
+    {
+        _None=0x00,
+        /// <summary>
+        /// 读单个/多个线圈(实际输出)状态，功能1返回任意数量输出点的接通/断开状态(Q)
+        /// </summary>
+        _OutRead=0x01,
+
+        /// <summary>
+        /// 读单个/多个接触器(实际输入)状态。功能2返回任意数量的输入点的接通/断开状态(I)
+        /// </summary>
+        _InRead = 0x02,
+        /// <summary>
+        /// 读单个/多个保持寄存器。功能3返回V存储器的内容。保持寄存器在Modbus下是字类型，
+        /// 在一个请求中最多可读120个字。
+        /// </summary>
+        _VMRead = 0x03,
+        /// <summary>
+        /// 读单个/多个输入寄存器。功能4返回模拟输入值。
+        /// </summary>
+        _AIRead = 0x04,
+
+        /// <summary>
+        /// 写单个线圈(实际输出)。功能5将实际输出点设置为指定值。该输出点不是被强制，
+        /// 用户程序可以 重写由Modbus的请求而写入的值。
+        /// </summary>
+        _OutWriteSingle = 0x05,
+        /// <summary>
+        /// 写单个保持寄存器。功能6写一个单个保持寄存器的值到S7-200的V存储区。
+        /// </summary>
+        _VMWriteSingle = 0x06,
+
+        /// <summary>
+        /// 写多个线圈(实际输出)。功能15写多个实际输出值到S7--200的Q映像区。
+        /// 起始输出点必须是一个字 节的开始(如，Q0.0或Q2.0)，并且要写的输出的数量是8的倍数。这是Modbus从站协议指令的限 定。这些点不是被强制，用户程序可以重写由Modbus的请求而写入的值。
+        /// </summary>
+        _OutWrite = 0x0F,
+        /// <summary>
+        /// 写单个/多个输入寄存器。功能4返回模拟输入值。
+        /// </summary>
+        _AIWrite = 0x10,
+    }
+    public enum S7FuncError
+    {
+        /// <summary>
+        /// 读单个/多个线圈(实际输出)状态错误
+        /// </summary>
+        _OutReadError = 0x81,
+
+        /// <summary>
+        /// 读单个/多个接触器(实际输入)状态错误
+        /// </summary>
+        _InReadError = 0x82,
+        /// <summary>
+        /// 读单个/多个保持寄存器错误
+        /// </summary>
+        _VMReadError = 0x83,
+        /// <summary>
+        /// 读单个/多个输入寄存器错误。
+        /// </summary>
+        _AIReadError = 0x84,
+
+        /// <summary>
+        /// 写单个线圈(实际输出)错误
+        /// </summary>
+        _OutWriteSingleError = 0x85,
+        /// <summary>
+        /// 写单个保持寄存器错误
+        /// </summary>
+        _VMWriteSingleError = 0x86,
+
+        /// <summary>
+        /// 写多个线圈(实际输出)。错误
+        /// </summary>
+        _OutWriteError = 0x8F,
+        /// <summary>
+        /// 写单个/多个输入寄存器错误
+        /// </summary>
+        _AIWrite = 0x90
+    }
+
+    public enum S7Error
+    {
+        None = 0x00,
+        非法功能=0x01,
+        非法数据地址=0x02,
+        非法数据值=0x03,
+        从站设备故障=0x04,
+        /// <summary>
+        /// 与编程命令一起使用。
+        /// 服务器(或从站)已经接受请求，并 切 正 在处理这个请求，但是需要长的持续时间进行这些操作。
+        /// 返回这个响应防止在客户机(或主站)中 发生超时错误。
+        /// 客户机(或主站)可以继续发送轮询程序完成报文来确定是否完 成处理。 
+        /// </summary>
+        确认=0x05,
+        从属设备忙=0x06,
+        存储奇偶性差错=0x08,
+        不可用网关路径=0xA0,
+        网关目标设备响应失败=0x0B
+    }
+
+    /// <summary>
+    /// 运行故障,打包机运行时除“无故障”工作外的故障需要停止打包机运行
+    /// </summary>
+    public enum S7RunError
+    {
+        None=0x00,
+        无瓶盖可=0xA1,
+        打包机托盘故障=0xA2,
+        压盖机1故障=0xA3,
+        压盖机2故障=0xA4,
+        RFID气缸故障=0xA5
+    }
+
+
+
+}

@@ -1,0 +1,67 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:DevicesControl="clr-namespace:DevicesControl;assembly=DevicesControl" x:Class="WinCom.TrackCom" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Width="500" Loaded="UserControl_Loaded">
+	<UserControl.Resources>
+		<Storyboard x:Key="CarriageStoryboard">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="carriage">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:2" Value="214"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:2.3" Value="214"/>
+			</DoubleAnimationUsingKeyFrames>
+			<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="carriage">
+				<DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+				<DiscreteObjectKeyFrame KeyTime="0:0:2" Value="{x:Static Visibility.Visible}"/>
+				<DiscreteObjectKeyFrame KeyTime="0:0:2.3" Value="{x:Static Visibility.Visible}"/>
+			</ObjectAnimationUsingKeyFrames>
+		</Storyboard>
+	</UserControl.Resources>
+	<UserControl.Triggers>
+		<EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard x:Name="BeginStoryboard_CarriageStoryboard" Storyboard="{StaticResource CarriageStoryboard}"/>
+            <StopStoryboard BeginStoryboardName="BeginStoryboard_CarriageStoryboard" />
+		</EventTrigger>
+	</UserControl.Triggers>
+    <Grid>
+    	<Grid Margin="0" Height="96">
+    		<Grid Margin="0,0,0,21" Height="75">
+    			<Path x:Name="Path_Track" Data="M0.5,50.5 L263.84401,50.5 263.84401,59.5 0.5,59.5 z M24.069001,10.500013 L32.068998,10.500013 32.068998,49.500011 24.069001,49.500011 z M234.069,10.500002 L242.069,10.500002 242.069,49.5 234.069,49.5 z M204.069,10.500002 L212.069,10.500002 212.069,49.5 204.069,49.5 z M174.069,10.500002 L182.069,10.500002 182.069,49.5 174.069,49.5 z M144.069,10.500002 L152.069,10.500002 152.069,49.5 144.069,49.5 z M114.069,10.500002 L122.069,10.500002 122.069,49.5 114.069,49.5 z M84.069,10.500002 L92.069,10.500002 92.069,49.5 84.069,49.5 z M54.068998,10.500002 L62.069,10.500002 62.069,49.5 54.068998,49.5 z M0.5,0.5 L263.84401,0.5 263.84401,9.4999994 0.5,9.4999994 z" Fill="#FF878E2B" Margin="0,7.5" StrokeStartLineCap="Flat" Stretch="Fill" StrokeEndLineCap="Flat" Stroke="#FF231916" StrokeThickness="1" StrokeMiterLimit="10" StrokeLineJoin="Miter" HorizontalAlignment="Left" Width="210.344" d:LayoutOverrides="HorizontalAlignment"/>
+    			<DevicesControl:Carriage x:Name="carriage" Margin="0" VerticalAlignment="Center" Height="38" HorizontalAlignment="Left" Width="80.926" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+    				<DevicesControl:Carriage.RenderTransform>
+    					<TransformGroup>
+    						<ScaleTransform/>
+    						<SkewTransform/>
+    						<RotateTransform/>
+    						<TranslateTransform/>
+    					</TransformGroup>
+    				</DevicesControl:Carriage.RenderTransform>
+    			</DevicesControl:Carriage>
+    			<Path Data="M742.961,327.812L297.961,327.812L297.961,257.812L742.961,257.812z" StrokeStartLineCap="Flat" Stretch="Fill" StrokeEndLineCap="Flat" Stroke="#FF231916" StrokeThickness="5" StrokeMiterLimit="10" StrokeLineJoin="Miter" Margin="210.344,0,0,0" d:LayoutOverrides="HorizontalAlignment" Fill="#FF2F2D2D"/>
+    		</Grid>
+    		<Grid>
+    			<Grid.RowDefinitions>
+    				<RowDefinition/>
+    				<RowDefinition Height="30"/>
+    			</Grid.RowDefinitions>
+    			<Grid.ColumnDefinitions>
+    				<ColumnDefinition Width="180"/>
+    				<ColumnDefinition/>
+    			</Grid.ColumnDefinitions>
+    			<DevicesControl:NumberInfo Margin="0" VerticalAlignment="Bottom" d:LayoutOverrides="Width" Grid.Row="1" Name="Track_Number" />
+    			<Viewbox HorizontalAlignment="Right" Margin="0,18.207,40.39,11" Stretch="Fill" Width="39.61" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment">
+    				<DevicesControl:STR2RFID Height="59" Width="60" Name="Track_STR2" />
+    			</Viewbox>
+    			<TextBlock Grid.Column="1" Margin="0" TextWrapping="Wrap" FontSize="37.333" TextAlignment="Center" VerticalAlignment="Center" Foreground="#FFAFAFAF" Visibility="Hidden"><Run Language="zh-cn" Text="卸车大棚"/></TextBlock>
+    		</Grid>
+    		<Grid Height="19.24" Margin="201,0,50.513,0" VerticalAlignment="Bottom" Visibility="Visible">
+    			<Button x:Name="Btn_TestCode" Content="测试车号" HorizontalAlignment="Left" Width="75" d:LayoutOverrides="Height" Click="Btn_TestCode_Click" />
+    			<TextBox x:Name="Txt_TestCode" Margin="80,2,0,0" TextWrapping="Wrap" Text="1623523" d:LayoutOverrides="Height"/>
+    		</Grid>
+    	</Grid>
+        <DevicesControl:IO8Port HorizontalAlignment="Left" Margin="0,240,0,0" Name="Track_iO8Port" VerticalAlignment="Top" Visibility="Hidden" ListenerInterval="500" />
+    </Grid>
+</UserControl>

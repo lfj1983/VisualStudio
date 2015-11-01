@@ -1,0 +1,100 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using Entities;
+using System.Windows.Threading;
+using S7ModbusDriver;
+using PeripheralsDriver.Serial;
+
+namespace S7MSDemo
+{
+    /// <summary>
+    /// MainWindow.xaml 的交互逻辑
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        SerialEntity entity;
+
+        /// <summary>
+        /// 监听计时器
+        /// </summary>
+        private DispatcherTimer m_listenerTimer;
+
+        public MainWindow()
+        {
+            InitializeComponent();
+            entity = new SerialEntity();
+            m_listenerTimer = new DispatcherTimer();
+            m_listenerTimer.Interval = TimeSpan.FromMilliseconds(500);
+            m_listenerTimer.Tick+=new EventHandler(ListenerTimer_Tick);
+            s7MS2001.Success+=new DevicesControl.S7MS200.SuccessHandler(S7MS2001_Success);
+            s7MS2001.Start();
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            entity.PortName = textBox1.Text.ToString();
+            entity.BaudRate = 9600;
+            entity.DataBits = 8;
+            entity.Parity = System.IO.Ports.Parity.None;
+            entity.StopBits = System.IO.Ports.StopBits.One;
+            s7MS2001.S7MS = entity;
+        }
+
+        private void button2_Click(object sender, RoutedEventArgs e)
+        {
+            s7MS2001.AddQ(Convert.ToByte(textBox2.Text.ToString(), 10), 1);
+        }
+
+        private void button3_Click(object sender, RoutedEventArgs e)
+        {
+            s7MS2001.AddQ(Convert.ToByte(textBox2.Text.ToString(),10), 0);
+        }
+
+        private void button4_Click(object sender, RoutedEventArgs e)
+        {
+            //s7MS2001.QuickIn(1);
+            m_listenerTimer.Start();
+        }
+
+        private void button5_Click(object sender, RoutedEventArgs e)
+        {
+            m_listenerTimer.Stop();
+        }
+
+        private void ListenerTimer_Tick(object sender, EventArgs e)
+        {
+            s7MS2001.AddI(0x01);
+            
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            s7MS2001.Stop();
+        }
+
+        private void S7MS2001_Success(object sender,S7MSEventArgs e)
+        {
+            if(e.Type==PeriphSerialType.In){
+                Dispatcher.BeginInvoke(new SetTextDelegate(SetText),new object[]{ ((int)e.S7Value).ToString()});
+            }
+        }
+        delegate void SetTextDelegate(string text);
+        private void SetText(string text)
+        {
+            textBox4.Text =text;
+        }
+
+        
+    }
+}

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DynamicHelp xmlns="http://msdn.microsoft.com/vsdata/xsd/vsdh.xsd" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance" xsi:schemaLocation="http://msdn.microsoft.com/vsdata/xsd/vsdh.xsd">	
+   <LINKGROUP ID="IOPort8Driver" Title="IOPort8Driver Reference Help" Priority="2100">
+      <GLYPH Expanded="vs:/ctxhelp_show.gif" Collapsed="vs:/ctxhelp_hide.gif"/>
+   </LINKGROUP>
+
+
+   <Context>
+      <Keywords>
+         <KItem Name="IOPort8Driver.Port8Cmd.AddrIndex" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:IOPort8Driver.chm::/topic_000000000000000E.html" LinkGroup="IOPort8Driver">AddrIndex Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="IOPort8Driver.IOPort8EventArgs.Data" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:IOPort8Driver.chm::/topic_0000000000000003.html" LinkGroup="IOPort8Driver">Data Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="IOPort8Driver.IOPort8Handle.DecodeData" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:IOPort8Driver.chm::/topic_0000000000000007.html" LinkGroup="IOPort8Driver">DecodeData Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="IOPort8Driver.Port8Cmd.FormatCmd" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:IOPort8Driver.chm::/topic_0000000000000015.html" LinkGroup="IOPort8Driver">FormatCmd Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="IOPort8Driver.IOPort8Handle.GetCmdContext" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:IOPort8Driver.chm::/topic_0000000000000008.html" LinkGroup="IOPort8Driver">GetCmdContext Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="IOPort8Driver.Port8Cmd.GetCmdIndex" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:IOPort8Driver.chm::/topic_0000000000000010.html" LinkGroup="IOPort8Driver">GetCmdIndex Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="IOPort8Driver.Port8Cmd.GetCmdLength" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:IOPort8Driver.chm::/topic_000000000000000F.html" LinkGroup="IOPort8Driver">GetCmdLength Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="IOPort8Driver.Port8Cmd.GetControlCmd" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:IOPort8Driver.chm::/topic_0000000000000011.html" LinkGroup="IOPort8Driver">GetControlCmd Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="IOPort8Driver.Port8Cmd.GetDataLength" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:IOPort8Driver.chm::/topic_000000000000000D.html" LinkGroup="IOPort8Driver">GetDataLength Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="IOPort8Driver.Port8Cmd.GetHeaderLength" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:IOPort8Driver.chm::/topic_000000000000000C.html" LinkGroup="IOPort8Driver">GetHeaderLength Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="IOPort8Driver.Port8Cmd.GetInReadCmd" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:IOPort8Driver.chm::/topic_0000000000000014.html" LinkGroup="IOPort8Driver">GetInReadCmd Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="IOPort8Driver.Port8Cmd.GetInValue" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:IOPort8Driver.chm::/topic_000000000000000B.html" LinkGroup="IOPort8Driver">GetInValue Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="IOPort8Driver.Port8Cmd.GetOutReadCmd" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:IOPort8Driver.chm::/topic_0000000000000013.html" LinkGroup="IOPort8Driver">GetOutReadCmd Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="IOPort8Driver.Port8Cmd.GetOutValue" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:IOPort8Driver.chm::/topic_000000000000000A.html" LinkGroup="IOPort8Driver">GetOutValue Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="IOPort8Driver.Port8Cmd.GetResetCmd" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:IOPort8Driver.chm::/topic_0000000000000012.html" LinkGroup="IOPort8Driver">GetResetCmd Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="IOPort8Driver.IOPort8EventArgs.Header" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:IOPort8Driver.chm::/topic_0000000000000002.html" LinkGroup="IOPort8Driver">Header Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="IOPort8Driver" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:IOPort8Driver.chm::/topic_0000000000000000.html" LinkGroup="IOPort8Driver">IOPort8Driver Namespace</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="IOPort8Driver Reference" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:IOPort8Driver.chm::/topic_0000000000000016.html" LinkGroup="IOPort8Driver">IOPort8Driver Reference</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="IOPort8Driver.IOPort8EventArgs" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:IOPort8Driver.chm::/topic_0000000000000001.html" LinkGroup="IOPort8Driver">IOPort8EventArgs Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="IOPort8Driver.IOPort8Handle" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:IOPort8Driver.chm::/topic_0000000000000005.html" LinkGroup="IOPort8Driver">IOPort8Handle Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="IOPort8Driver.IOPort8Handle.IOPort8Handle" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:IOPort8Driver.chm::/topic_0000000000000006.html" LinkGroup="IOPort8Driver">IOPort8Handle Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="IOPort8Driver.IOPort8EventArgs.Last" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:IOPort8Driver.chm::/topic_0000000000000004.html" LinkGroup="IOPort8Driver">Last Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="IOPort8Driver.Port8Cmd" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:IOPort8Driver.chm::/topic_0000000000000009.html" LinkGroup="IOPort8Driver">Port8Cmd Class</LItem>
+      </Links>
+   </Context>
+   
+
+</DynamicHelp>
+

@@ -1,0 +1,79 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Entities
+{
+    public class BucketEntity
+    {
+        private int m_collieryId;
+
+        public int CollieryId
+        {
+            get { return m_collieryId; }
+            set { m_collieryId = value; }
+        }
+
+        private string m_collieryName;
+
+        public string CollieryName
+        {
+            get { return m_collieryName; }
+            set { m_collieryName = value; }
+        }
+
+        private string m_trainCode;
+
+        public string TrainCode
+        {
+            get { return m_trainCode; }
+            set { m_trainCode = value; }
+        }
+
+
+        private string m_samplingCode;
+
+        /// <summary>
+        /// 获取或设置分样编码
+        /// </summary>
+        public string SamplingCode
+        {
+            get { return m_samplingCode; }
+            set { m_samplingCode = value; }
+        }
+
+        private string m_samCode;
+
+        /// <summary>
+        /// 获取或设置采样编码
+        /// </summary>
+        public string SamCode
+        {
+            get { return m_samCode; }
+            set { m_samCode = value; }
+        }
+        private int m_number;
+        /// <summary>
+        /// 获取或设置桶号
+        /// </summary>
+        public int Number
+        {
+            get { return m_number; }
+            set { m_number = value; }
+        }
+
+        private int m_count;
+        /// <summary>
+        /// 获取或设置子样数
+        /// </summary>
+        public int Count
+        {
+            get { return m_count; }
+            set { m_count = value; }
+        }
+
+
+
+    }
+}

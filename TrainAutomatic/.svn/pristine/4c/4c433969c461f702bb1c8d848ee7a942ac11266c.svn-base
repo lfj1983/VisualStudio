@@ -1,0 +1,120 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.IO.Ports;
+using EntitiesType;
+
+namespace Entities
+{
+    /// <summary>
+    /// 串口设备参数实体类
+    /// </summary>
+    public class SerialEntity
+    {
+        private string m_portName;
+        /// <summary>
+        /// 获取或设置端口
+        /// </summary>
+        public string PortName
+        {
+            get { return m_portName; }
+            set { m_portName = value; }
+        }
+        private int m_baudRate;
+        /// <summary>
+        /// 获取或设置波特率
+        /// </summary>
+        public int BaudRate
+        {
+            get { return m_baudRate; }
+            set { m_baudRate = value; }
+        }
+        private int m_dataBits;
+        /// <summary>
+        /// 获取或设置数据位
+        /// </summary>
+        public int DataBits
+        {
+            get { return m_dataBits; }
+            set { m_dataBits = value; }
+        }
+        private StopBits m_stopBits;
+        /// <summary>
+        /// 获取或设置停止位
+        /// </summary>
+        public StopBits StopBits
+        {
+            get { return m_stopBits; }
+            set { m_stopBits = value; }
+        }
+        private Parity m_parity;
+        /// <summary>
+        /// 获取或设置检验位
+        /// </summary>
+        public Parity Parity
+        {
+            get { return m_parity; }
+            set { m_parity = value; }
+        }
+
+        private object m_otherOne;
+        /// <summary>
+        /// 获取或设置其他参数1
+        /// </summary>
+        public object OtherOne
+        {
+            get { return m_otherOne; }
+            set { m_otherOne = value; }
+        }
+        private object m_otherTwo;
+        /// <summary>
+        /// 获取或设置其他参数2
+        /// </summary>
+        public object OtherTwo
+        {
+            get { return m_otherTwo; }
+            set { m_otherTwo = value; }
+        }
+
+        private int m_flowId;
+        /// <summary>
+        /// 获取或设置主流程ID
+        /// </summary>
+        public int FlowId
+        {
+            get { return m_flowId; }
+            set { m_flowId = value; }
+        }
+
+        private string m_module;
+        /// <summary>
+        /// 获取或设置模块名称
+        /// </summary>
+        public string Module
+        {
+            get { return m_module; }
+            set { m_module = value; }
+        }
+
+        private bool m_enable;
+        /// <summary>
+        /// 获取或设置是否激活
+        /// </summary>
+        public bool Enable
+        {
+            get { return m_enable; }
+            set { m_enable = value; }
+        }
+
+        private SerialsType m_type;
+        /// <summary>
+        /// 获取或设置串口设备类型
+        /// </summary>
+        public SerialsType Type
+        {
+            get { return m_type; }
+            set { m_type = value; }
+        }
+    }
+}

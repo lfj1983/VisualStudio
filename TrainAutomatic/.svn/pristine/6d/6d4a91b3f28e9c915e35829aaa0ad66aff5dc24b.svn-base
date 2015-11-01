@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Validity
+{
+    /// <summary>
+    /// 封装验证数据
+    /// </summary>
+    public class ValidEventArgs
+    {
+        private object m_data;
+        /// <summary>
+        /// 数据源
+        /// </summary>
+        public object Data
+        {
+            get { return m_data; }
+            set { m_data = value; }
+        }
+
+        private bool m_valid;
+        /// <summary>
+        /// 验证是否成功 
+        /// </summary>
+        public bool Valid
+        {
+            get { return m_valid; }
+            set { m_valid = value; }
+        }
+
+        private string m_msg;
+        /// <summary>
+        /// 消息
+        /// </summary>
+        public string Msg
+        {
+            get { return m_msg; }
+            set { m_msg = value; }
+        }
+
+        private object m_other;
+        /// <summary>
+        /// 其他预留传递参数
+        /// </summary>
+        public object Other
+        {
+            get { return m_other; }
+            set { m_other = value; }
+        }
+    }
+}

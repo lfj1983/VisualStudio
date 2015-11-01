@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DynamicHelp xmlns="http://msdn.microsoft.com/vsdata/xsd/vsdh.xsd" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance" xsi:schemaLocation="http://msdn.microsoft.com/vsdata/xsd/vsdh.xsd">	
+   <LINKGROUP ID="STR2Valid" Title="STR2Valid Reference Help" Priority="2100">
+      <GLYPH Expanded="vs:/ctxhelp_show.gif" Collapsed="vs:/ctxhelp_hide.gif"/>
+   </LINKGROUP>
+
+
+   <Context>
+      <Keywords>
+         <KItem Name="STR2Valid.STR2CardValid.Connect" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:STR2Valid.chm::/topic_0000000000000003.html" LinkGroup="STR2Valid">Connect Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="STR2Valid.STR2CardValid.Failed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:STR2Valid.chm::/topic_000000000000000A.html" LinkGroup="STR2Valid">Failed Event</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="STR2Valid.STR2TagValidEventArgs.FailedType" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:STR2Valid.chm::/topic_000000000000000C.html" LinkGroup="STR2Valid">FailedType Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="STR2Valid.STR2CardValid.MinSuttle" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:STR2Valid.chm::/topic_0000000000000002.html" LinkGroup="STR2Valid">MinSuttle Property</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="STR2Valid.STR2CardValid.STR2CardValid" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:STR2Valid.chm::/topic_0000000000000005_overloads--.html" LinkGroup="STR2Valid">STR2CardValid </LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="STR2Valid.STR2CardValid.STR2CardValid" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:STR2Valid.chm::/topic_0000000000000006_overloads--.html" LinkGroup="STR2Valid">STR2CardValid </LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="STR2Valid.STR2CardValid" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:STR2Valid.chm::/topic_0000000000000001.html" LinkGroup="STR2Valid">STR2CardValid Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="STR2Valid.STR2TagValidEventArgs" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:STR2Valid.chm::/topic_000000000000000B.html" LinkGroup="STR2Valid">STR2TagValidEventArgs Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="STR2Valid" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:STR2Valid.chm::/topic_0000000000000000.html" LinkGroup="STR2Valid">STR2Valid Namespace</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="STR2Valid Reference" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:STR2Valid.chm::/topic_000000000000000D.html" LinkGroup="STR2Valid">STR2Valid Reference</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="STR2Valid.STR2CardValid.SetConnect" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:STR2Valid.chm::/topic_0000000000000007.html" LinkGroup="STR2Valid">SetConnect Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="STR2Valid.STR2CardValid.Success" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:STR2Valid.chm::/topic_0000000000000009.html" LinkGroup="STR2Valid">Success Event</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="STR2Valid.STR2CardValid.TagValidSql" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:STR2Valid.chm::/topic_0000000000000004.html" LinkGroup="STR2Valid">TagValidSql Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="STR2Valid.STR2CardValid.validData" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:STR2Valid.chm::/topic_0000000000000008.html" LinkGroup="STR2Valid">validData Method</LItem>
+      </Links>
+   </Context>
+   
+
+</DynamicHelp>
+

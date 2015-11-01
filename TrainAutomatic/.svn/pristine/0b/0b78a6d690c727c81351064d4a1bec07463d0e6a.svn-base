@@ -1,0 +1,201 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Core.Data;
+using System.Collections.Specialized;
+using System.Data;
+using AppContext;
+using Operation.AppsException;
+
+namespace Operation.Sam
+{
+    /// <summary>
+    /// 分样处理类
+    /// </summary>
+    public class SamplingAction
+    {
+        private string m_connect;
+
+        public string Connect
+        {
+            get { return m_connect; }
+            set { m_connect = value; }
+        }
+
+        RODbAdapter<ROracleDb> m_adapter;
+
+        public SamplingAction(string connect)
+        {
+            Connect = connect;
+            Init();
+        }
+
+        private void Init()
+        {
+            m_adapter = new RODbAdapter<ROracleDb>(Connect);
+        }
+
+        /// <summary>
+        /// 获取分样编码
+        /// </summary>
+        /// <param name="samcode"></param>
+        /// <returns></returns>
+        public string GetSamplingCode(string samcode)
+        {
+            if (ValidSamCode(samcode))
+            {
+                if (IsHavedCode(samcode))
+                {
+                    return GetOldSamplingCode(samcode);
+                }
+                else
+                {
+                    string samplingCode = GetNewSamplingCode(samcode);
+                    if (null != samplingCode && "" != samplingCode)
+                    {
+                        SaveSampling(samcode, samplingCode);
+                    }
+                    return samplingCode;
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 保存生成的分样编码
+        /// </summary>
+        /// <param name="samplingCode">分样编码</param>
+        /// <param name="samCode">采样编码</param>
+        /// <returns></returns>
+        public bool SaveNewSamplingCode(string samplingCode,string samCode)
+        {
+            if (IsHavedCode(samCode))
+            {
+                return true;
+            }
+            else
+            {
+                string sql = ApplicationContext.Context.SaveSamplingSql;
+                NameValueCollection param = new NameValueCollection();
+                param.Add("id",ApplicationContext.Context.GetTableID("t_sampling"));
+                param.Add("samplingcode", samplingCode);
+                param.Add("samcode", samCode);
+                int row = m_adapter.Update(sql, param);
+                if (row > 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 根据采样编码生成新的分样编码
+        /// </summary>
+        /// <param name="samCode">采样编码</param>
+        /// <returns></returns>
+        public string GetNewSamplingCode(string samCode)
+        {
+            //m_adapter = new RODbAdapter<ROracleDb>(Connect);
+            string sql = string.Format(ApplicationContext.Context.NewSamplingCodeSql, samCode, samCode, samCode);
+            DataTable table = m_adapter.Query(sql);
+            string samplingCode = null;
+            if (table.Rows.Count > 0)
+            {
+                samplingCode = table.Rows[0]["samplingcode"].ToString();
+                
+            }
+            return samplingCode;
+        }
+
+        /// <summary>
+        /// 保存分样编码记录
+        /// </summary>
+        /// <param name="samcode"></param>
+        /// <param name="samplingcodde"></param>
+        public void SaveSampling(string samcode,string samplingcodde)
+        {
+            string sql = ApplicationContext.Context.SaveSamplingSql;
+            NameValueCollection param = new NameValueCollection();
+            param.Add("id",ApplicationContext.Context.GetTableID("t_sampling"));
+            param.Add("samplingcode",samplingcodde);
+            param.Add("samcode",samcode);
+            int row = m_adapter.Update(sql, param);
+            if (row <= 0)
+            {
+                throw new NoRecordUpdateException();
+            }
+
+        }
+
+        /// <summary>
+        /// 根据采样编码或取已经存在的分样编码
+        /// </summary>
+        /// <param name="samCode">采样编码</param>
+        /// <returns>分样编码</returns>
+        public string GetOldSamplingCode(string samCode)
+        {
+            string sql = ApplicationContext.Context.SamplingcodeBySamcodeSql;
+            NameValueCollection param = new NameValueCollection();
+            param.Add("samcode", samCode);
+            DataTable table = m_adapter.Query(sql, param);
+            return table.Rows[0]["samplingcode"].ToString();
+        }
+
+        /// <summary>
+        /// 验证采样编码是否为系统采样编码
+        /// </summary>
+        /// <param name="samCode">采样编码</param>
+        /// <returns></returns>
+        public bool ValidSamCode(string samCode){
+		    // TODO Auto-generated method stub
+		    String sql = ApplicationContext.Context.ValidSamCodeSql;
+            NameValueCollection param = new NameValueCollection();
+            param.Add("samcode", samCode);
+            DataTable table = m_adapter.Query(sql,param);
+            int cnt = Convert.ToInt32(table.Rows[0][0]);
+            if (cnt > 0)
+            {
+                return true;
+            }
+            return false;
+	    }
+
+        /// <summary>
+        /// 采样编码是否已经分样
+        /// </summary>
+        /// <param name="samCode"></param>
+        /// <returns></returns>
+        public bool IsHavedCode(string samCode){
+            String sql = ApplicationContext.Context.SamCodeIsHavedForSamplingSql;
+            NameValueCollection param = new NameValueCollection();
+            param.Add("samcode", samCode);
+            DataTable table = m_adapter.Query(sql, param);
+            int cnt = Convert.ToInt32(table.Rows[0][0]);
+            if (cnt > 0)
+            {
+                return true;
+            }
+            return false;
+	    }
+        /// <summary>
+        /// 判断分样编码是否存在
+        /// </summary>
+        /// <param name="samplingCode">分样编码</param>
+        /// <returns></returns>
+        public bool IsHavedSampling(string samplingCode)
+        {
+            String sql = ApplicationContext.Context.SamplingcodeIsHavedForSamplingSql;
+            NameValueCollection param = new NameValueCollection();
+            param.Add("samplingcode", samplingCode);
+            DataTable table = m_adapter.Query(sql, param);
+            int cnt = Convert.ToInt32(table.Rows[0][0]);
+            if (cnt > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+    }
+}

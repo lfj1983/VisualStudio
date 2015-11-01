@@ -1,0 +1,107 @@
+﻿using System;
+using PeripheralsDriver.Serial;
+using Commands.IO;
+using ModbusCRC;
+
+namespace S7ModbusDriver
+{
+    public class S7MSHandle<T> : PeriphSerialHandleInterface<byte> where T :S7MsCmdInterface<byte>
+    {
+        private S7MsCmdInterface<byte> m_S7Cmd;
+
+        public S7MSHandle()
+        {
+            m_S7Cmd = System.Activator.CreateInstance<T>();
+        }
+        /// <summary>
+        /// 解析数据
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public PeriphSerialEventArgs DecodeData(byte[] data)
+        {
+            byte[] tmp = new byte[data.Length - 2];
+            byte[] tmpCrc = new byte[2];
+            Array.ConstrainedCopy(data, 0, tmp, 0, tmp.Length);
+            Array.ConstrainedCopy(data, data.Length - 2, tmpCrc, 0, tmpCrc.Length);
+            byte[] crc = RTUCRC16.CalculateCRC(tmp);
+            for (int i = 0; i < tmpCrc.Length; i++)
+            {
+                if (tmpCrc[i] != crc[i])
+                {
+                    throw new CRCException();
+                }
+            }
+            S7MSEventArgs args = new S7MSEventArgs();
+            args.Data = data;
+            try
+            {
+                args.S7FuncCmd = (S7Func)Enum.Parse(typeof(S7Func), data[m_S7Cmd.GetFuncIndex()].ToString());
+            }
+            catch (Exception ex)
+            {
+                args.S7FuncCmd = (S7Func)Enum.Parse(typeof(S7Func), data[m_S7Cmd.GetFuncIndex()-0x80].ToString());
+                args.Type = PeriphSerialType.Error;
+                args.S7Error = (S7Error)Enum.Parse(typeof(S7Error), data[m_S7Cmd.GetErrorCodeIndex()].ToString());
+            }
+            
+            if ((args.S7FuncCmd == S7Func._OutWrite) || (args.S7FuncCmd == S7Func._OutWriteSingle))
+            {
+                args.Type = PeriphSerialType.Out;
+                args.S7Value = (S7OffOn)Enum.Parse(typeof(S7OffOn), data[m_S7Cmd.GetWriteDataIndex()].ToString());
+                
+            }else if ((args.S7FuncCmd == S7Func._InRead))
+            {
+                args.Type = PeriphSerialType.In;
+                args = GetValue(args, data[m_S7Cmd.GetCallQIReadDataIndex()]);
+                
+            }
+            else if ((args.S7FuncCmd == S7Func._OutRead))
+            {
+                args.Type = PeriphSerialType.Out;
+                args = GetValue(args, data[m_S7Cmd.GetCallQIReadDataIndex()]);
+            }
+            else if (args.S7FuncCmd == S7Func._VMRead)
+            {
+                args.Type = PeriphSerialType.In;
+                args = GetValue(args, data[m_S7Cmd.GetCallVReadDataIndex()]);
+            }
+            else if (args.S7FuncCmd == S7Func._VMWriteSingle)
+            {
+                args.Type = PeriphSerialType.Out;
+                args = GetValue(args, data[m_S7Cmd.GetWriteVDataIndex()]);
+            }
+            return args;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private S7MSEventArgs GetValue(S7MSEventArgs args, byte value)
+        {
+            S7OffOn offOnVlaue = S7OffOn._Off;
+            bool isSuccess = Enum.TryParse(Convert.ToString(value, 16), true, out offOnVlaue);
+            if (isSuccess)
+            {
+                args.S7Value = (S7OffOn)Enum.Parse(typeof(S7OffOn), Convert.ToString(value,16));
+            }
+            else
+            {
+                
+                args.S7RunError = (S7RunError)Enum.Parse(typeof(S7RunError), Convert.ToString(value, 16));
+                args.S7Value = S7OffOn._Off;
+            }
+            return args;
+        }
+        /// <summary>
+        /// 继承上下文
+        /// </summary>
+        /// <returns></returns>
+        public IOCmdInterface<byte> GetCmdContext()
+        {
+            return m_S7Cmd;
+        }
+    }
+}

@@ -1,0 +1,77 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Operation.Args
+{
+    public class SamDeviceStatus
+    {
+        private int m_deviceid;
+        /// <summary>
+        /// 设备id
+        /// </summary>
+        public int Deviceid
+        {
+            get { return m_deviceid; }
+            set { m_deviceid = value; }
+        }
+        private bool m_runStatus;
+        /// <summary>
+        /// 采样机运行状态
+        /// </summary>
+        public bool RunStatus
+        {
+            get { return m_runStatus; }
+            set { m_runStatus = value; }
+        }
+        private int m_errorcode;
+        /// <summary>
+        /// 故障编码
+        /// </summary>
+        public int Errorcode
+        {
+            get { return m_errorcode; }
+            set { m_errorcode = value; }
+        }
+        private string m_errorcontent;
+        /// <summary>
+        /// 故障内容
+        /// </summary>
+        public string Errorcontent
+        {
+            get { return m_errorcontent; }
+            set { m_errorcontent = value; }
+        }
+        private bool m_isTurn;
+        /// <summary>
+        /// 是否转桶到位
+        /// </summary>
+        public bool IsTurn
+        {
+            get { return m_isTurn; }
+            set { m_isTurn = value; }
+        }
+        private bool m_conveyor;
+        /// <summary>
+        /// 煤流信号
+        /// </summary>
+        public bool Conveyor
+        {
+            get { return m_conveyor; }
+            set { m_conveyor = value; }
+        }
+
+        private bool m_downFinish;
+        /// <summary>
+        /// 是否下料完成
+        /// </summary>
+        public bool DownFinish
+        {
+            get { return m_downFinish; }
+            set { m_downFinish = value; }
+        }
+
+        
+    }
+}

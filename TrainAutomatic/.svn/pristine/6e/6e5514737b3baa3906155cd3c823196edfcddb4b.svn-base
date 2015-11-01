@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace EntitiesType
+{
+    /// <summary>
+    /// 输入设备类型
+    /// </summary>
+    public enum InDevicesType
+    {
+        煤流检测器,
+        前端计轴定位器,
+        中部计轴定位器,
+        后端计轴定位器
+    }
+}

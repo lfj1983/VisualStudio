@@ -1,0 +1,188 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Media.Animation;
+using System.IO.Ports;
+using PeripheralsDriver.Serial;
+using System.Globalization;
+using RFIDDriver;
+using STR2Driver;
+using AppContext;
+using System.Configuration;
+using Entities;
+using S7ModbusDriver;
+using ModbusCRC;
+using Core.Data;
+using System.Windows.Threading;
+using System.Data;
+using System.Threading;
+
+namespace TrainAutomatic
+{
+    /// <summary>
+    /// MainWindow.xaml 的交互逻辑
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        System.Timers.Timer m_sysTimer;
+
+        System.Timers.Timer m_enterSumTimer;
+
+        private object m_enterSource;
+
+        public object EnterSource
+        {
+            get { return GetValue(EnterSourceProperty); }
+            set { SetValue(EnterSourceProperty,value); }
+        }
+
+        private RODbAdapter<ROracleDb> m_adapter;
+
+        /// <summary>
+        ///获取或设置监听间隔的依赖项属性的声明 
+        /// </summary>
+        public static readonly DependencyProperty EnterSourceProperty;
+        
+        public MainWindow()
+        {
+            InitializeComponent();
+            Init();
+        }
+
+        static MainWindow()
+        {
+            var EnterSourceMetadata = new PropertyMetadata((object)null, null);
+            EnterSourceProperty = DependencyProperty.Register("EnterSource", typeof(object), typeof(MainWindow), EnterSourceMetadata);
+            
+        }
+
+        private void Init()
+        {
+            try
+            {
+                m_adapter = new RODbAdapter<ROracleDb>(ApplicationContext.Context.SysDBConnect);
+                m_sysTimer = new System.Timers.Timer();
+                m_sysTimer.Interval = 1100;
+                m_sysTimer.Elapsed += new System.Timers.ElapsedEventHandler(SysTimer_Elapsed);
+                m_sysTimer.Start();
+                m_sysTimer.Enabled = false;
+
+                m_enterSumTimer = new System.Timers.Timer();
+                m_enterSumTimer.Interval = TimeSpan.FromMinutes(1).TotalMilliseconds;
+                m_enterSumTimer.Elapsed += new System.Timers.ElapsedEventHandler(EnterSumTimer_Elapsed);
+                m_enterSumTimer.Start();
+                m_enterSumTimer.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                m_sysTimer.Enabled = true;
+                Thread.Sleep(1000);
+                m_enterSumTimer.Enabled = true;
+                Thread.Sleep(1000);
+                ShowEnterSum();
+            }
+            catch
+            {
+            }
+        }
+
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            //e.Cancel = true;
+            try
+            {
+                m_sysTimer.Stop();
+                m_enterSumTimer.Stop();
+            }
+            catch
+            {
+            }
+        }
+
+        private void SysTimer_Elapsed(object sender, EventArgs e)
+        {
+            this.Dispatcher.BeginInvoke(new ShowTimerDelegate(ShowTimer), DispatcherPriority.Send, null);
+        }
+
+        private void EnterSumTimer_Elapsed(object sender, EventArgs e)
+        {
+            this.Dispatcher.BeginInvoke(new ShowEnterSumDelegate(ShowEnterSum));
+        }
+
+        delegate void ShowTimerDelegate();
+        private void ShowTimer()
+        {
+            try
+            {
+                txt_systimer.Text = ApplicationContext.Context.GetSystemTimer();
+            }
+            catch (InvalidOperationException ex)
+            {
+                Thread.Sleep(100);
+                this.Dispatcher.BeginInvoke(new ShowTimerDelegate(ShowTimer), DispatcherPriority.Send,null);
+            }
+        }
+
+        delegate void ShowEnterSumDelegate();
+        private void ShowEnterSum()
+        {
+            try
+            {
+                string sql = ApplicationContext.Context.EnterSumSQL;
+                DataTable table = m_adapter.Query(sql);
+                EnterSource = table.Rows[0];
+            }catch(InvalidOperationException ex)
+            {
+                this.Dispatcher.BeginInvoke(new ShowEnterSumDelegate(ShowEnterSum));
+            }
+        }
+
+        private void window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.E && e.KeyboardDevice.IsKeyDown(Key.LeftCtrl) && e.KeyboardDevice.IsKeyDown(Key.LeftShift))
+            {
+                if (this.WindowStyle != System.Windows.WindowStyle.SingleBorderWindow)
+                {
+                    this.WindowStyle = System.Windows.WindowStyle.SingleBorderWindow;
+                }
+                else
+                {
+                    this.WindowStyle = System.Windows.WindowStyle.None;
+                }
+            }
+            
+            
+        }
+
+        private void window_Closed(object sender, EventArgs e)
+        {
+            
+        }
+
+        
+
+
+        
+
+
+    }
+}

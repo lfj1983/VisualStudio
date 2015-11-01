@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Operation.Args
+{
+    public class PotInfo
+    {
+        private int m_number;
+
+        public int Number
+        {
+            get { return m_number; }
+            set { m_number = value; }
+        }
+        private PotStatus m_status;
+
+        public PotStatus Status
+        {
+            get { return m_status; }
+            set { m_status = value; }
+        }
+        private int m_count;
+
+        public int Count
+        {
+            get { return m_count; }
+            set { m_count = value; }
+        }
+    }
+}

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DynamicHelp xmlns="http://msdn.microsoft.com/vsdata/xsd/vsdh.xsd" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance" xsi:schemaLocation="http://msdn.microsoft.com/vsdata/xsd/vsdh.xsd">	
+   <LINKGROUP ID="DevicesControl" Title="DevicesControl Reference Help" Priority="2100">
+      <GLYPH Expanded="vs:/ctxhelp_show.gif" Collapsed="vs:/ctxhelp_hide.gif"/>
+   </LINKGROUP>
+
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl.STR2RFID.Close" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_0000000000000019.html" LinkGroup="DevicesControl">Close Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_0000000000000001.html" LinkGroup="DevicesControl">DevicesControl Namespace</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl Reference" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_000000000000001A.html" LinkGroup="DevicesControl">DevicesControl Reference</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl.STR2RFID.ExceptionEvent" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_0000000000000013.html" LinkGroup="DevicesControl">ExceptionEvent Event</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl.STR2RFID.Msg" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_0000000000000005.html" LinkGroup="DevicesControl">Msg Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl.STR2RFID.MsgChanged" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_0000000000000006.html" LinkGroup="DevicesControl">MsgChanged Event</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl.STR2RFID.PauseReceive" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_0000000000000016.html" LinkGroup="DevicesControl">PauseReceive Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl.STR2RFID.Recover" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_0000000000000017.html" LinkGroup="DevicesControl">Recover Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl.STR2RFID.STR2" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_0000000000000003.html" LinkGroup="DevicesControl">STR2 Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl.STR2RFID.STR2Changed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_0000000000000004.html" LinkGroup="DevicesControl">STR2Changed Event</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl.STR2RFID" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_0000000000000002.html" LinkGroup="DevicesControl">STR2RFID Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl.STR2RFID.STR2RFID" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_0000000000000014.html" LinkGroup="DevicesControl">STR2RFID Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl.STR2RFID.StartRead" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_0000000000000015.html" LinkGroup="DevicesControl">StartRead Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl.STR2RFID.Status" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_000000000000000F.html" LinkGroup="DevicesControl">Status Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl.STR2RFID.StatusChanged" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_0000000000000010.html" LinkGroup="DevicesControl">StatusChanged Event</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl.STR2RFID.StopRead" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_0000000000000018.html" LinkGroup="DevicesControl">StopRead Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl.STR2RFID.TagValidSql" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_0000000000000009.html" LinkGroup="DevicesControl">TagValidSql Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl.STR2RFID.TagValidSqlChanged" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_000000000000000A.html" LinkGroup="DevicesControl">TagValidSqlChanged Event</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl.STR2RFID.ValidCnt" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_0000000000000007.html" LinkGroup="DevicesControl">ValidCnt Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl.STR2RFID.ValidCntChanged" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_0000000000000008.html" LinkGroup="DevicesControl">ValidCntChanged Event</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl.STR2RFID.ValidConnect" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_000000000000000B.html" LinkGroup="DevicesControl">ValidConnect Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl.STR2RFID.ValidConnectChanged" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_000000000000000C.html" LinkGroup="DevicesControl">ValidConnectChanged Event</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl.STR2RFID.ValidFailed" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_0000000000000012.html" LinkGroup="DevicesControl">ValidFailed Event</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl.STR2RFID.ValidMinSuttle" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_000000000000000D.html" LinkGroup="DevicesControl">ValidMinSuttle Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl.STR2RFID.ValidMinSuttleChanged" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_000000000000000E.html" LinkGroup="DevicesControl">ValidMinSuttleChanged Event</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="DevicesControl.STR2RFID.ValidSuccess" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:DevicesControl.chm::/topic_0000000000000011.html" LinkGroup="DevicesControl">ValidSuccess Event</LItem>
+      </Links>
+   </Context>
+   
+
+</DynamicHelp>
+

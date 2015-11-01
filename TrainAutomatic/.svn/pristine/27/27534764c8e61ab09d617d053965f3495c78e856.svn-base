@@ -1,0 +1,59 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace IVT9010Driver
+{
+    public enum IVT9010Func
+    {
+        _Reset=0x70,
+        _Version= 0x72,
+        _ReadTag=0x81,
+        _WriteTag=0x82
+    }
+
+    public enum IVT9010ErrorCode
+    {
+        命令成功完成 = 0x10,
+        命令执行失败 = 0x11,
+        CPU复位错误 = 0x20,
+        打开CW错误 = 0x21,
+        天线未连接 = 0x22,
+        写Flash错误 = 0x23,
+        读Flash错误 = 0x24,
+        设置发射功率错误 = 0x25,
+        盘存标签错误 = 0x31,
+        读标签错误 = 0x32,
+        写标签错误 = 0x33,
+        锁定标签错误 = 0x34,
+        灭活标签错误 = 0x35,
+        无可操作标签错误 = 0x36,
+        成功盘存但访问失败 = 0x37,
+        缓存为空 = 0x38,
+        访问标签错误或访问密码错误 = 0x40,
+        无效的参数 = 0x41,
+        wordCnt参数超过规定长度 = 0x42,
+        MemBank参数超出范围 = 0x43,
+        Lock数据区参数超出范围 = 0x44,
+        LockType参数超出范围 = 0x45,
+        读写器地址无效 = 0x46,
+        Antenna_id超出范围=0x47,
+        输出功率参数超出范围 = 0x48,
+        射频规范区域参数超出范围 = 0x49,
+        波特率参数超出范围 = 0x4A,
+        蜂鸣器设置参数超出范围 = 0x4B,
+        EPC匹配长度越界 = 0x4C,
+        EPC匹配长度错误 = 0x4D,
+        EPC匹配参数超出范围 = 0x4E,
+        频率范围设置参数错误 = 0x4F,
+        无法接收标签的RN16 = 0x50,
+        DRM设置参数错误 = 0x51,
+        PLL不能锁定 = 0x52,
+        射频芯片无响应 = 0x53,
+        输出达不到指定的输出功率 = 0x54,
+        版权认证未通过 = 0x55,
+        频谱规范设置错误 = 0x56,
+        输出功率过低 = 0x57
+    }
+}

@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Operation.AppsException
+{
+    /// <summary>
+    /// 状态更新失败异常
+    /// </summary>
+    public class InvalidException:ApplicationException
+    {
+        public InvalidException():base("状态更新失败") { }
+
+        public InvalidException(string message) : base(message) { }
+
+        public InvalidException(string message, Exception inner) : base(message, inner) { }
+    }
+}

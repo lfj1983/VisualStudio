@@ -1,0 +1,39 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace PeripheralsDriver.Serial
+{
+    /// <summary>
+    /// 串口访问的外围设备访问抽象类
+    /// </summary>
+    public abstract class PeriphSerialAbstract
+    {
+        /// <summary>
+        /// 声明状态监听器委托
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public delegate void ListenersHandler(object sender, PeriphSerialEventArgs e);
+        /// <summary>
+        /// 状态监听器
+        /// </summary>
+        public abstract event ListenersHandler Listeners;
+
+        /// <summary>
+        /// 声明异常事件委托
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public delegate void ExceptionHandler(object sender, object e);
+        /// <summary>
+        /// 异常事件
+        /// </summary>
+        public abstract event ExceptionHandler ExceptionEvent;
+        /// <summary>
+        /// 初始化串口
+        /// </summary>
+        protected abstract void InitPort();
+    }
+}

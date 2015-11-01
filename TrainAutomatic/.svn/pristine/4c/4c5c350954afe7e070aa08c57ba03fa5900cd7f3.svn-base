@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace RFIDDriver
+{
+    /// <summary>
+    /// RFID读写器数据封装类
+    /// </summary>
+    public class TagEventArgs:EventArgs
+    {
+        private object m_data;
+        /// <summary>
+        /// 从读卡设备中取得的原始数据
+        /// </summary>
+        public object Data
+        {
+            get { return m_data; }
+            set { m_data = value; }
+        }
+    }
+}

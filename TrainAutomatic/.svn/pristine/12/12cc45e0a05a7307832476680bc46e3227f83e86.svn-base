@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="DevicesControl.S7MS200"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Viewbox Stretch="Fill">
+		<Grid Margin="0" Width="140" Height="90" d:LayoutOverrides="Width, Height, Margin">
+			<Grid>
+            
+				<Rectangle Fill="#FF67676A" Stroke="Black"/>
+				<Path Data="M79,124.662 L192,124.662" Fill="#FF67676A" Height="1" Margin="27.666,25.996,2.334,0" Stretch="Fill" Stroke="Black" VerticalAlignment="Top"/>
+				<Path Data="M79,124.662 L192,124.662" Fill="#FF67676A" Height="1" Margin="27.666,0,2.334,21.676" Stretch="Fill" Stroke="Black" VerticalAlignment="Bottom"/>
+			</Grid>
+			<Grid HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="27">
+				<Rectangle Fill="#FF67676A" Stroke="Black"/>
+				<Canvas Margin="0" Width="4" Height="20">
+					<Rectangle Fill="Lime" Height="4" Stroke="Black" Width="4"/>
+					<Rectangle Fill="Lime" Stroke="Black" Height="4" Width="4" Canvas.Top="7.668"/>
+					<Rectangle Fill="Lime" Height="4" Stroke="Black" Width="4" Canvas.Top="15.333"/>
+            
+				</Canvas>
+			</Grid>
+			<Grid HorizontalAlignment="Left" Margin="0,36,0,0" Width="27">
+				<Rectangle Fill="#FF67676A" Stroke="Black"/>
+				<Viewbox Margin="0" Stretch="Fill" Width="15" Height="28" >
+					<Grid Height="14.5" Width="7.8">
+						<Path Data="M59,151.33329 L69.5,148.66667 69.5,170.16634 59.166502,166.83306 z" Fill="#FF67676A" Stretch="Fill" Stroke="Black" Margin="0,0,0.05,0.25"/>
+						<Grid Width="1.084" HorizontalAlignment="Left" Margin="2.125,4.152,0,4.252">
+							<Ellipse Fill="#FF67676A" Height="1.084" Margin="0.001,0,0,0" Stroke="Black" VerticalAlignment="Top"/>
+							<Ellipse Fill="#FF67676A" Height="1.084" Stroke="Black" VerticalAlignment="Top" Margin="0,1.68,0.001,0"/>
+							<Ellipse Fill="#FF67676A" Margin="0,0,0.001,1.666" Stroke="Black" Height="1.084" VerticalAlignment="Bottom"/>
+							<Ellipse Fill="#FF67676A" Height="1.084" Stroke="Black" VerticalAlignment="Bottom" Margin="0,0,0.001,0"/>
+						</Grid>
+						<Grid Width="1.106" HorizontalAlignment="Right" Margin="0,3.291,2.177,3.461">
+							<Ellipse Fill="#FF67676A" Stroke="Black" Margin="0,0,0.022,1.709" Height="1.084" VerticalAlignment="Bottom"/>
+							<Ellipse Fill="#FF67676A" Height="1.084" Stroke="Black" VerticalAlignment="Bottom" Margin="0.022,0,0,0"/>
+							<Ellipse Fill="#FF67676A" Margin="0.022,3.332,0,3.332" Stroke="Black"/>
+							<Ellipse Fill="#FF67676A" Height="1.084" Margin="0.022,1.666,0,0" Stroke="Black" VerticalAlignment="Top"/>
+							<Ellipse Fill="#FF67676A" Height="1.084" Stroke="Black" VerticalAlignment="Top" Margin="0.022,0,0,0"/>
+            
+						</Grid>
+            
+					</Grid>
+				</Viewbox>
+			</Grid>
+			<Grid Height="4" Margin="36,28.746,10,0" VerticalAlignment="Top">
+				<Rectangle Fill="#FF67676A" Stroke="Black" Width="4" HorizontalAlignment="Left"/>
+				<Rectangle Fill="#FF67676A" Stroke="Black" Width="4" HorizontalAlignment="Left" Margin="7.5,0,0,0"/>
+				<Rectangle Fill="#FF67676A" Stroke="Black" Width="4" HorizontalAlignment="Left" Margin="15,0,0,0"/>
+				<Rectangle Fill="#FF67676A" Stroke="Black" Width="4" HorizontalAlignment="Left" Margin="22.5,0,0,0"/>
+				<Rectangle Fill="#FF67676A" Stroke="Black" Width="4" HorizontalAlignment="Left" Margin="30,0,0,0"/>
+				<Rectangle Fill="#FF67676A" Stroke="Black" Width="4" HorizontalAlignment="Left" Margin="37.5,0,0,0"/>
+				<Rectangle Fill="#FF67676A" Stroke="Black" Margin="45,0"/>
+				<Rectangle Fill="#FF67676A" Stroke="Black" Width="4" HorizontalAlignment="Right" Margin="0,0,37.5,0"/>
+				<Rectangle Fill="#FF67676A" Stroke="Black" Width="4" HorizontalAlignment="Right" Margin="0,0,30,0"/>
+				<Rectangle Fill="#FF67676A" Stroke="Black" Margin="0,0,22.5,0" HorizontalAlignment="Right" Width="4"/>
+				<Rectangle Fill="#FF67676A" Stroke="Black" Margin="0,0,15,0" HorizontalAlignment="Right" Width="4"/>
+				<Rectangle Fill="#FF67676A" Stroke="Black" Margin="0,0,7.5,0" HorizontalAlignment="Right" Width="4"/>
+				<Rectangle Fill="#FF67676A" Stroke="Black" HorizontalAlignment="Right" Width="4"/>
+            
+			</Grid>
+			<Grid Margin="36,0,10,24.754" Height="4" VerticalAlignment="Bottom">
+				<Rectangle Fill="#FF67676A" Stroke="Black" Width="4" HorizontalAlignment="Left"/>
+				<Rectangle Fill="#FF67676A" Stroke="Black" Width="4" HorizontalAlignment="Left" Margin="7.5,0,0,0"/>
+				<Rectangle Fill="#FF67676A" Stroke="Black" Width="4" HorizontalAlignment="Left" Margin="15,0,0,0"/>
+				<Rectangle Fill="#FF67676A" Stroke="Black" Width="4" HorizontalAlignment="Left" Margin="22.5,0,0,0"/>
+				<Rectangle Fill="#FF67676A" Stroke="Black" Width="4" HorizontalAlignment="Left" Margin="30,0,0,0"/>
+				<Rectangle Fill="#FF67676A" Stroke="Black" Width="4" HorizontalAlignment="Left" Margin="37.5,0,0,0"/>
+				<Rectangle Fill="#FF67676A" Stroke="Black" Margin="45,0"/>
+				<Rectangle Fill="#FF67676A" Stroke="Black" Width="4" HorizontalAlignment="Right" Margin="0,0,37.5,0"/>
+				<Rectangle Fill="#FF67676A" Stroke="Black" Width="4" HorizontalAlignment="Right" Margin="0,0,30,0"/>
+				<Rectangle Fill="#FF67676A" Stroke="Black" Margin="0,0,22.5,0" HorizontalAlignment="Right" Width="4"/>
+				<Rectangle Fill="#FF67676A" Stroke="Black" Margin="0,0,15,0" HorizontalAlignment="Right" Width="4"/>
+				<Rectangle Fill="#FF67676A" Stroke="Black" Margin="0,0,7.5,0" HorizontalAlignment="Right" Width="4"/>
+				<Rectangle Fill="#FF67676A" Stroke="Black" HorizontalAlignment="Right" Width="4"/>
+            
+			</Grid>
+            
+		</Grid>
+	</Viewbox>
+</UserControl>

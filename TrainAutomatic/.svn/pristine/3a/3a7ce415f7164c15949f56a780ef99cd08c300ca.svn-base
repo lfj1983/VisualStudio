@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DynamicHelp xmlns="http://msdn.microsoft.com/vsdata/xsd/vsdh.xsd" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance" xsi:schemaLocation="http://msdn.microsoft.com/vsdata/xsd/vsdh.xsd">	
+   <LINKGROUP ID="EntitiesType" Title="EntitiesType Reference Help" Priority="2100">
+      <GLYPH Expanded="vs:/ctxhelp_show.gif" Collapsed="vs:/ctxhelp_hide.gif"/>
+   </LINKGROUP>
+
+
+   <Context>
+      <Keywords>
+         <KItem Name="EntitiesType Reference" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:EntitiesType.chm::/topic_0000000000000002.html" LinkGroup="EntitiesType">EntitiesType Reference</LItem>
+      </Links>
+   </Context>
+   
+
+</DynamicHelp>
+

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DynamicHelp xmlns="http://msdn.microsoft.com/vsdata/xsd/vsdh.xsd" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance" xsi:schemaLocation="http://msdn.microsoft.com/vsdata/xsd/vsdh.xsd">	
+   <LINKGROUP ID="RFIDDriver" Title="RFIDDriver Reference Help" Priority="2100">
+      <GLYPH Expanded="vs:/ctxhelp_show.gif" Collapsed="vs:/ctxhelp_hide.gif"/>
+   </LINKGROUP>
+
+
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver.RFIDCardDriver<T>.BaudRate" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_0000000000000007.html" LinkGroup="RFIDDriver">BaudRate Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver.RFIDCardDriver<T>.Close" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_0000000000000010.html" LinkGroup="RFIDDriver">Close Method {RFIDDriver.RFIDCardDriver<T>}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver.RFIDInterface.Close" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_0000000000000018.html" LinkGroup="RFIDDriver">Close Method {RFIDDriver.RFIDInterface}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver.TagEventArgs.Data" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_000000000000001A.html" LinkGroup="RFIDDriver">Data Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver.RFIDCardDriver<T>.DataBits" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_0000000000000008.html" LinkGroup="RFIDDriver">DataBits Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver.RFIDHandleInterface<T>.DecodeTag" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_0000000000000013.html" LinkGroup="RFIDDriver">DecodeTag Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver.RFIDAbstract.ExceptionEvent" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_0000000000000004.html" LinkGroup="RFIDDriver">ExceptionEvent Event</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver.RFIDHandleInterface<T>.GetCmdContext" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_0000000000000014.html" LinkGroup="RFIDDriver">GetCmdContext Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver.RFIDCardDriver<T>.Open" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_000000000000000F.html" LinkGroup="RFIDDriver">Open Method {RFIDDriver.RFIDCardDriver<T>}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver.RFIDInterface.Open" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_0000000000000017.html" LinkGroup="RFIDDriver">Open Method {RFIDDriver.RFIDInterface}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver.RFIDCardDriver<T>.Parity" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_000000000000000A.html" LinkGroup="RFIDDriver">Parity Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver.RFIDCardDriver<T>.PortName" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_0000000000000006.html" LinkGroup="RFIDDriver">PortName Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver.RFIDAbstract" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_0000000000000002.html" LinkGroup="RFIDDriver">RFIDAbstract Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver.RFIDCardDriver<T>" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_0000000000000005.html" LinkGroup="RFIDDriver">RFIDCardDriver<T> Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver.RFIDCardDriver<T>.RFIDCardDriver" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_000000000000000C.html" LinkGroup="RFIDDriver">RFIDCardDriver<T> Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_0000000000000001.html" LinkGroup="RFIDDriver">RFIDDriver Namespace</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver Reference" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_000000000000001B.html" LinkGroup="RFIDDriver">RFIDDriver Reference</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver.RFIDAbstract.ReadTagEvent" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_0000000000000003.html" LinkGroup="RFIDDriver">ReadTagEvent Event</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver.RFIDCardDriver<T>.ReceivedBytesThreshold" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_000000000000000B.html" LinkGroup="RFIDDriver">ReceivedBytesThreshold Property</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver.RFIDCardDriver<T>.SetProperties" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_000000000000000D_overloads--.html" LinkGroup="RFIDDriver">SetProperties Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver.RFIDInterface.SetProperties" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_0000000000000016_overloads--.html" LinkGroup="RFIDDriver">SetProperties Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver.RFIDCardDriver<T>.SetProperties" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_000000000000000E_overloads--.html" LinkGroup="RFIDDriver">SetProperties Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver.RFIDInterface.SetProperties" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_0000000000000015_overloads--.html" LinkGroup="RFIDDriver">SetProperties Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver.RFIDCardDriver<T>.StartRead" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_0000000000000011.html" LinkGroup="RFIDDriver">StartRead Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver.RFIDCardDriver<T>.StopBits" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_0000000000000009.html" LinkGroup="RFIDDriver">StopBits Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver.RFIDCardDriver<T>.StopRead" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_0000000000000012.html" LinkGroup="RFIDDriver">StopRead Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="RFIDDriver.TagEventArgs" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:RFIDDriver.chm::/topic_0000000000000019.html" LinkGroup="RFIDDriver">TagEventArgs Class</LItem>
+      </Links>
+   </Context>
+   
+
+</DynamicHelp>
+

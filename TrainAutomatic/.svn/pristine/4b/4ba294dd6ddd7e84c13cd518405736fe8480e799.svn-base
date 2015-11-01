@@ -1,0 +1,189 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Core.Data;
+using System.Data;
+using AppContext;
+using Operation.Args;
+using System.Collections.Specialized;
+using Operation.AppsException;
+using Entities;
+
+namespace Operation.Sam
+{
+    public class SamOperable
+    {
+        private string m_deviceConnect;
+        /// <summary>
+        /// 获取或设置采样机中间数据库连接字符串
+        /// </summary>
+        public string DeviceConnect
+        {
+            get { return m_deviceConnect; }
+            set { m_deviceConnect = value; }
+        }
+
+
+        /// <summary>
+        /// 异常事件的委托
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        public delegate void ExceptionHandler(object sender, object args);
+        /// <summary>
+        /// 异常事件
+        /// </summary>
+        public event ExceptionHandler ExceptionEvent;
+
+        RODbAdapter<RSQLDb> m_adapter;
+
+        public SamOperable(string connect)
+        {
+            DeviceConnect = connect;
+            Init();
+        }
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        private void Init()
+        {
+            m_adapter = new RODbAdapter<RSQLDb>(DeviceConnect);
+        }
+        /// <summary>
+        /// 发送控制命令
+        /// </summary>
+        /// <param name="cmd">控制命令</param>
+        /// <param name="value">值</param>
+        /// <exception cref="NoRecordUpdateException"> 
+        ///     控制命令更新失败
+        /// </exception>
+        public void Control(SamControlCmd cmd, int value)
+        {
+
+            string sql = string.Format(ApplicationContext.Context.SamDeviceControlSql,cmd);
+            NameValueCollection param = new NameValueCollection();
+            param.Add("cmd", value.ToString());
+            param.Add("deviceid", ApplicationContext.Context.SamEntity.SamDeviceId.ToString());
+            int row = 0;
+            try
+            {
+                row = m_adapter.Update(sql, param);
+            }
+            catch (Exception ex)
+            {
+                OnExceptionEvent(ex);
+            }
+            if (row <= 0)
+            {
+                throw new NoRecordUpdateException();
+            }
+        }
+        /// <summary>
+        /// 采样采样机状态
+        /// </summary>
+        /// <param name="cmd"></param>
+        /// <param name="value"></param>
+        public void ControlStatus(SamControlStatusCmd cmd,int value)
+        {
+            string sql = string.Format(ApplicationContext.Context.SamDeviceControlStatusSql, cmd);
+            NameValueCollection param = new NameValueCollection();
+            param.Add("cmd", value.ToString());
+            param.Add("deviceid", ApplicationContext.Context.SamEntity.SamDeviceId.ToString());
+            int row = 0;
+            try
+            {
+                row = m_adapter.Update(sql, param);
+            }
+            catch (Exception ex)
+            {
+                OnExceptionEvent(ex);
+            }
+            if (row <= 0)
+            {
+                throw new NoRecordUpdateException();
+            }
+        }
+
+        /// <summary>
+        /// 获取采样机中间表样罐
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetBuckets()
+        {
+            try
+            {
+                string sql = ApplicationContext.Context.SamDeviceBucketSql;
+                NameValueCollection param = new NameValueCollection();
+                param.Add("deviceid", ApplicationContext.Context.SamEntity.SamDeviceId.ToString());
+                return m_adapter.Query(sql, param);
+            }
+            catch (Exception ex)
+            {
+                OnExceptionEvent(ex);
+            }
+            return null;
+        }
+        /// <summary>
+        /// 获取采样机状态
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetDeviceStatus()
+        {
+            try
+            {
+                string sql = ApplicationContext.Context.SamDeviceStatusSql;
+                NameValueCollection param = new NameValueCollection();
+                param.Add("deviceid", ApplicationContext.Context.SamEntity.SamDeviceId.ToString());
+                return m_adapter.Query(sql, param);
+            }
+            catch (Exception ex)
+            {
+                OnExceptionEvent(ex);
+            }
+            return null;
+        }
+        /// <summary>
+        /// 重置样罐状态为0,和煤样数0
+        /// </summary>
+        /// <param name="bucket"></param>
+        public void ResetBucket(BucketEntity bucket)
+        {
+            SamBuckets buckts = (SamBuckets)Enum.Parse(typeof(SamBuckets), bucket.Number.ToString());
+            SamCount count = (SamCount)Enum.Parse(typeof(SamCount), bucket.Number.ToString());
+            string sql = string.Format(
+                ApplicationContext.Context.SamDeviceResetPotSql,
+                buckts.ToString(),
+                count.ToString());
+            NameValueCollection param = new NameValueCollection();
+            param.Add("deviceid", ApplicationContext.Context.SamEntity.SamDeviceId.ToString());
+            int row = 0;
+            try
+            {
+                row = m_adapter.Update(sql, param);
+            }
+            catch (Exception ex)
+            {
+                OnExceptionEvent(ex);
+            }
+            if (row <= 0)
+            {
+                throw new NoRecordUpdateException();
+            }
+        }
+
+        /// <summary>
+        /// 异常事件
+        /// </summary>
+        /// <param name="e"></param>
+        protected virtual void OnExceptionEvent(object e)
+        {
+            if (null != ExceptionEvent)
+            {
+                (e as Exception).Source += "->"+this.GetType().Name;
+                ExceptionEvent(this, e);
+            }
+        }
+
+    }
+}

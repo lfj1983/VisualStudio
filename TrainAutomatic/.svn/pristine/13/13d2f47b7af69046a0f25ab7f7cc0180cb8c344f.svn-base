@@ -1,0 +1,40 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.IO.Ports;
+
+namespace RFIDDriver
+{
+    /// <summary>
+    /// RFID读写器访问抽象类
+    /// </summary>
+    public abstract class RFIDAbstract
+    {
+        /// <summary>
+        /// 声明RFID数据读取事件委托
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="tag"></param>
+        public delegate void ReadTagHandler(object sender, TagEventArgs tag);
+        /// <summary>
+        /// RFID数据返回事件
+        /// </summary>
+        public abstract event ReadTagHandler ReadTagEvent;
+
+        /// <summary>
+        /// 声明异常事件委托
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public delegate void ExceptionHandler(object sender, object e);
+        /// <summary>
+        /// 异常事件
+        /// </summary>
+        public abstract event ExceptionHandler ExceptionEvent;
+        /// <summary>
+        /// 初始化串口
+        /// </summary>
+        protected abstract void InitPort();
+    }
+}

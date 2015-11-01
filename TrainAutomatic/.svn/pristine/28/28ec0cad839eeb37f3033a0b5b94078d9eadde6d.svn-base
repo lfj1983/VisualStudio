@@ -1,0 +1,65 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace QueueDemo
+{
+    /// <summary>
+    /// MainWindow.xaml 的交互逻辑
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        private Queue<int> m_intQueue;
+
+        public Queue<int> IntQueue
+        {
+            get { return (Queue<int>)GetValue(IntQueueProperty); }
+            set { SetValue(IntQueueProperty,value); }
+        }
+        public static readonly DependencyProperty IntQueueProperty;
+
+
+
+        public MainWindow()
+        {
+            InitializeComponent();
+            IntQueue = new Queue<int>();
+        }
+
+        static MainWindow()
+        {
+            var IntQueueMetadata = new PropertyMetadata((Queue<int>)new Queue<int>(), new PropertyChangedCallback(OnIntQueuePropertyChangedCallback));
+            IntQueueProperty = DependencyProperty.Register("IntQueue", typeof(Queue<int>), typeof(MainWindow), IntQueueMetadata);
+            
+        }
+
+        private static void OnIntQueuePropertyChangedCallback(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            //(sender as MainWindow).OnMsgChanged(e.OldValue, e.NewValue);
+        }
+
+        private void button2_Click(object sender, RoutedEventArgs e)
+        {
+            Random r = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                IntQueue.Enqueue(r.Next(100));
+            }
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("out:"+IntQueue.Dequeue());
+        }
+    }
+}

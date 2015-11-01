@@ -1,0 +1,62 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using RFIDDriver;
+
+namespace IVT9010Driver
+{
+    public class AlienH3TagEventArgs : TagEventArgs
+    {
+        private int  m_TagCount;
+        /// <summary>
+        /// 成功操作的标签总数
+        /// </summary>
+        public int  TagCount
+        {
+            get { return m_TagCount; }
+            set { m_TagCount = value; }
+        }
+
+        string m_tag;
+        /// <summary>
+        /// 标签号
+        /// </summary>
+        public string Tag
+        {
+            get { return m_tag; }
+            set { m_tag = value; }
+        }
+
+        //private int m_DataLen;
+        ///// <summary>
+        ///// 所操作标签的有效长度
+        ///// </summary>
+        //public int DataLen
+        //{
+        //    get { return m_DataLen; }
+        //    set { m_DataLen = value; }
+        //}
+
+        private IVT9010ErrorCode m_ErrCode;
+        /// <summary>
+        /// 错误代码
+        /// </summary>
+        public IVT9010ErrorCode ErrCode
+        {
+            get { return m_ErrCode; }
+            set { m_ErrCode = value; }
+        }
+
+        private IVT9010Func m_Cmd;
+        /// <summary>
+        /// 命令
+        /// </summary>
+        public IVT9010Func Cmd
+        {
+            get { return m_Cmd; }
+            set { m_Cmd = value; }
+        }
+
+      }
+}

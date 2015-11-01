@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DynamicHelp xmlns="http://msdn.microsoft.com/vsdata/xsd/vsdh.xsd" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance" xsi:schemaLocation="http://msdn.microsoft.com/vsdata/xsd/vsdh.xsd">	
+   <LINKGROUP ID="PeripheralsDriver" Title="PeripheralsDriver Reference Help" Priority="2100">
+      <GLYPH Expanded="vs:/ctxhelp_show.gif" Collapsed="vs:/ctxhelp_hide.gif"/>
+   </LINKGROUP>
+
+
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialDriver<T>.BaudRate" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_0000000000000006.html" LinkGroup="PeripheralsDriver">BaudRate Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialDriver<T>.Close" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_0000000000000012.html" LinkGroup="PeripheralsDriver">Close Method {PeripheralsDriver.Serial.PeriphSerialDriver<T>}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialInterface.Close" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_000000000000001B.html" LinkGroup="PeripheralsDriver">Close Method {PeripheralsDriver.Serial.PeriphSerialInterface}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialEventArgs.Data" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_0000000000000014.html" LinkGroup="PeripheralsDriver">Data Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialDriver<T>.DataBits" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_0000000000000007.html" LinkGroup="PeripheralsDriver">DataBits Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialHandleInterface<T>.DecodeData" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_0000000000000016.html" LinkGroup="PeripheralsDriver">DecodeData Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialHandleInterface<T>.GetCmdContext" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_0000000000000017.html" LinkGroup="PeripheralsDriver">GetCmdContext Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialDriver<T>.In" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_000000000000000F.html" LinkGroup="PeripheralsDriver">In Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialDriver<T>.Open" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_0000000000000011.html" LinkGroup="PeripheralsDriver">Open Method {PeripheralsDriver.Serial.PeriphSerialDriver<T>}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialInterface.Open" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_000000000000001A.html" LinkGroup="PeripheralsDriver">Open Method {PeripheralsDriver.Serial.PeriphSerialInterface}</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialDriver<T>.Out" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_000000000000000E.html" LinkGroup="PeripheralsDriver">Out Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialDriver<T>.Parity" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_0000000000000009.html" LinkGroup="PeripheralsDriver">Parity Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialAbstract" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_0000000000000002.html" LinkGroup="PeripheralsDriver">PeriphSerialAbstract Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialDriver<T>" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_0000000000000004.html" LinkGroup="PeripheralsDriver">PeriphSerialDriver<T> Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialDriver<T>.PeriphSerialDriver" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_000000000000000B.html" LinkGroup="PeripheralsDriver">PeriphSerialDriver<T> Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialEventArgs" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_0000000000000013.html" LinkGroup="PeripheralsDriver">PeriphSerialEventArgs Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver Reference" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_000000000000001C.html" LinkGroup="PeripheralsDriver">PeripheralsDriver Reference</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_0000000000000001.html" LinkGroup="PeripheralsDriver">PeripheralsDriver.Serial Namespace</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialDriver<T>.PortName" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_0000000000000005.html" LinkGroup="PeripheralsDriver">PortName Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialDriver<T>.ReceivedBytesThreshold" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_000000000000000A.html" LinkGroup="PeripheralsDriver">ReceivedBytesThreshold Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialDriver<T>.Reset" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_0000000000000010.html" LinkGroup="PeripheralsDriver">Reset Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialDriver<T>.SetProperties" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_000000000000000C_overloads--.html" LinkGroup="PeripheralsDriver">SetProperties Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialInterface.SetProperties" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_0000000000000019_overloads--.html" LinkGroup="PeripheralsDriver">SetProperties Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialDriver<T>.SetProperties" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_000000000000000D_overloads--.html" LinkGroup="PeripheralsDriver">SetProperties Method</LItem>
+      </Links>
+   </Context>
+   
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialInterface.SetProperties" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_0000000000000018_overloads--.html" LinkGroup="PeripheralsDriver">SetProperties Method</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialAbstract.StatusListeners" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_0000000000000003.html" LinkGroup="PeripheralsDriver">StatusListeners Event</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialDriver<T>.StopBits" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_0000000000000008.html" LinkGroup="PeripheralsDriver">StopBits Property</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="PeripheralsDriver.Serial.PeriphSerialEventArgs.Type" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:PeripheralsDriver.chm::/topic_0000000000000015.html" LinkGroup="PeripheralsDriver">Type Property</LItem>
+      </Links>
+   </Context>
+   
+
+</DynamicHelp>
+

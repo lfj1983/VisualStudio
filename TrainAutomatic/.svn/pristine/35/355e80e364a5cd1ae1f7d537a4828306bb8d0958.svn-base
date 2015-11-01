@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Index</title>
+  <meta content="text/html; charset=utf-8" http-equiv="content-type">
+	<style>
+		html { font-family:sans-serif; background-color:#ffffff; font-size:75%;}
+		a { text-decoration:none; color:#000; }
+		.highlighted { background:#06c; color:#fff }
+		#index_items { background:#fff; position:relative; white-space:nowrap;}
+		#loading { background:#a00; color:#fff; position:absolute; top:0; left:0; opacity:0.7; padding:8px; font-weight:bold;}
+	</style>
+	<script>
+		function highlight(el) {
+		    if(parent.frames['zform'].oldHighlight) parent.frames['zform'].oldHighlight.className = "";
+		    el.className = "highlighted";
+		    parent.frames['zform'].oldHighlight = el;
+		}
+	</script>
+</head>
+<body style="direction: ltr;">
+  <div id="index_items">
+    <div id="loading">Loading...</div>
+<a id="w_BaudRate Property" href="topic_000000000000000D.html" target="vbdocright" onclick="highlight(this)">BaudRate Property</a><br/>
+
+<a id="w_DataBits Property" href="topic_000000000000000E.html" target="vbdocright" onclick="highlight(this)">DataBits Property</a><br/>
+
+<a id="w_DefaultState Property" href="topic_0000000000000006.html" target="vbdocright" onclick="highlight(this)">DefaultState Property</a><br/>
+
+<a id="w_DeviceUnit Property" href="topic_000000000000001B.html" target="vbdocright" onclick="highlight(this)">DeviceUnit Property</a><br/>
+
+<a id="w_Enable Property {Entities.InDeviceEntity}" href="topic_0000000000000008.html" target="vbdocright" onclick="highlight(this)">Enable Property {Entities.InDeviceEntity}</a><br/>
+
+<a id="w_Enable Property {Entities.SerialEntity}" href="topic_0000000000000015.html" target="vbdocright" onclick="highlight(this)">Enable Property {Entities.SerialEntity}</a><br/>
+
+<a id="w_Entities Namespace" href="topic_0000000000000000.html" target="vbdocright" onclick="highlight(this)">Entities Namespace</a><br/>
+
+<a id="w_Entities Reference" href="topic_000000000000001C.html" target="vbdocright" onclick="highlight(this)">Entities Reference</a><br/>
+
+<a id="w_FlowId Property {Entities.InDeviceEntity}" href="topic_0000000000000002.html" target="vbdocright" onclick="highlight(this)">FlowId Property {Entities.InDeviceEntity}</a><br/>
+
+<a id="w_FlowId Property {Entities.SerialEntity}" href="topic_0000000000000013.html" target="vbdocright" onclick="highlight(this)">FlowId Property {Entities.SerialEntity}</a><br/>
+
+<a id="w_FlowId Property {Entities.WeighingEntity}" href="topic_0000000000000018.html" target="vbdocright" onclick="highlight(this)">FlowId Property {Entities.WeighingEntity}</a><br/>
+
+<a id="w_InDeviceEntity Class" href="topic_0000000000000001.html" target="vbdocright" onclick="highlight(this)">InDeviceEntity Class</a><br/>
+
+<a id="w_Module Property {Entities.InDeviceEntity}" href="topic_0000000000000003.html" target="vbdocright" onclick="highlight(this)">Module Property {Entities.InDeviceEntity}</a><br/>
+
+<a id="w_Module Property {Entities.SerialEntity}" href="topic_0000000000000014.html" target="vbdocright" onclick="highlight(this)">Module Property {Entities.SerialEntity}</a><br/>
+
+<a id="w_Module Property {Entities.WeighingEntity}" href="topic_0000000000000019.html" target="vbdocright" onclick="highlight(this)">Module Property {Entities.WeighingEntity}</a><br/>
+
+<a id="w_OffState Property" href="topic_0000000000000007.html" target="vbdocright" onclick="highlight(this)">OffState Property</a><br/>
+
+<a id="w_OtherOne Property {Entities.InDeviceEntity}" href="topic_0000000000000009.html" target="vbdocright" onclick="highlight(this)">OtherOne Property {Entities.InDeviceEntity}</a><br/>
+
+<a id="w_OtherOne Property {Entities.SerialEntity}" href="topic_0000000000000011.html" target="vbdocright" onclick="highlight(this)">OtherOne Property {Entities.SerialEntity}</a><br/>
+
+<a id="w_OtherTwo Property {Entities.InDeviceEntity}" href="topic_000000000000000A.html" target="vbdocright" onclick="highlight(this)">OtherTwo Property {Entities.InDeviceEntity}</a><br/>
+
+<a id="w_OtherTwo Property {Entities.SerialEntity}" href="topic_0000000000000012.html" target="vbdocright" onclick="highlight(this)">OtherTwo Property {Entities.SerialEntity}</a><br/>
+
+<a id="w_Parity Property" href="topic_0000000000000010.html" target="vbdocright" onclick="highlight(this)">Parity Property</a><br/>
+
+<a id="w_Port Property" href="topic_0000000000000005.html" target="vbdocright" onclick="highlight(this)">Port Property</a><br/>
+
+<a id="w_PortName Property" href="topic_000000000000000C.html" target="vbdocright" onclick="highlight(this)">PortName Property</a><br/>
+
+<a id="w_SerialEntity Class" href="topic_000000000000000B.html" target="vbdocright" onclick="highlight(this)">SerialEntity Class</a><br/>
+
+<a id="w_StopBits Property" href="topic_000000000000000F.html" target="vbdocright" onclick="highlight(this)">StopBits Property</a><br/>
+
+<a id="w_SysUnit Property" href="topic_000000000000001A.html" target="vbdocright" onclick="highlight(this)">SysUnit Property</a><br/>
+
+<a id="w_Type Property {Entities.InDeviceEntity}" href="topic_0000000000000004.html" target="vbdocright" onclick="highlight(this)">Type Property {Entities.InDeviceEntity}</a><br/>
+
+<a id="w_Type Property {Entities.SerialEntity}" href="topic_0000000000000016.html" target="vbdocright" onclick="highlight(this)">Type Property {Entities.SerialEntity}</a><br/>
+
+<a id="w_WeighingEntity Class" href="topic_0000000000000017.html" target="vbdocright" onclick="highlight(this)">WeighingEntity Class</a><br/>
+
+
+    <div style="height:100%"></div>
+		<script>
+			document.getElementById("loading").style.display = "none";
+		</script>
+  </div>
+</body>
+</html>

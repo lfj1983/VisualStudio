@@ -1,0 +1,143 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Collections;
+using Commands.RFID;
+
+namespace STR2Driver
+{
+    /// <summary>
+    /// STR2读卡器访问控制命令生成器
+    /// </summary>
+    public class STR2Cmd : RFIDCmdInterface<byte>
+    {
+        /// <summary>
+        /// 命令头
+        /// </summary>
+        private byte m_headCmd = 0xFA;
+
+        /// <summary>
+        /// 命令尾
+        /// </summary>
+        private byte m_lastCmd = 0xF5;
+
+        /// <summary>
+        /// 命令长度
+        /// </summary>
+        private int m_cmdLength = 26;
+
+        /// <summary>
+        /// 有效标签数据长度
+        /// </summary>
+        private int m_dataLength = 20;
+
+        /// <summary>
+        /// 报文头长度
+        /// </summary>
+        private int m_headLength = 2;
+
+        /// <summary>
+        /// 功能码索引
+        /// </summary>
+        private int m_cmdIndex = 1;
+
+        /// <summary>
+        /// 获取头字符
+        /// </summary>
+        /// <returns></returns>
+        public byte GetHeadCmd()
+        {
+            return m_headCmd;
+        }
+        /// <summary>
+        /// 获取尾字符
+        /// </summary>
+        /// <returns></returns>
+        public byte GetLastCmd()
+        {
+            return m_lastCmd;
+        }
+        /// <summary>
+        /// 获取命令长度
+        /// </summary>
+        /// <returns></returns>
+        public int GetCmdLength()
+        {
+            return m_cmdLength;
+        }
+        /// <summary>
+        /// 获取有效标签数据长度
+        /// </summary>
+        /// <returns></returns>
+        public int GetDataLength()
+        {
+            return m_dataLength;
+        }
+        /// <summary>
+        /// 获取报文头长度
+        /// </summary>
+        /// <returns></returns>
+        public int GetHeadLength()
+        {
+            return m_headLength;
+        }
+        /// <summary>
+        /// 获取功能码索引
+        /// </summary>
+        /// <returns></returns>
+        public int GetCmdIndex()
+        {
+            return m_cmdIndex;
+        }
+        /// <summary>
+        /// 生成控制命令
+        /// </summary>
+        /// <param name="args">命令数据</param>
+        /// <returns>可访问控制STR2读卡器设备命令</returns>
+        public byte[] GetControlCmd(byte[] args)
+        {
+            ArrayList list = new ArrayList();
+            list.Add(GetHeadCmd());
+            foreach(byte b in args)
+            {
+                list.Add(b);
+            }
+            list.Add(GetLastCmd());
+            return (byte[])list.ToArray(typeof(byte));
+        }
+        /// <summary>
+        /// 获取打开设备命令
+        /// </summary>
+        /// <param name="args">预留扩展参数</param>
+        /// <returns></returns>
+        public byte[] GetReadCmd(int addr,byte[] args)
+        {
+            ArrayList list = new ArrayList();
+            list.Add(GetHeadCmd());
+            list.Add((byte)STR2Func._Open);
+            list.Add(GetLastCmd());
+            return (byte[])list.ToArray(typeof(byte));
+        }
+        /// <summary>
+        /// 获取关闭设备命令
+        /// </summary>
+        /// <param name="args">预留扩展参数</param>
+        /// <returns></returns>
+        public byte[] GetCloseCmd(int addr,byte[] args)
+        {
+            ArrayList list = new ArrayList();
+            list.Add(GetHeadCmd());
+            list.Add((byte)STR2Func._Close);
+            list.Add(GetLastCmd());
+            return (byte[])list.ToArray(typeof(byte));
+        }
+
+
+        public byte[] GetWriteDataCmd(int addr, byte[] args)
+        {
+            throw new NotImplementedException();
+        }
+
+    }
+}

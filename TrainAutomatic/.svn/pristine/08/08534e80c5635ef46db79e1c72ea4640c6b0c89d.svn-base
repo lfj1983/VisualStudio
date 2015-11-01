@@ -1,0 +1,61 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using PeripheralsDriver.Serial;
+using Commands.IO;
+using Commands;
+
+namespace IOPort8Driver
+{
+    /// <summary>
+    /// 8路IO控制板操作类
+    /// </summary>
+    public class IOPort8Handle : PeriphSerialHandleInterface<byte>
+    {
+
+        private IOCmdInterface<byte> m_portCmd;
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public IOPort8Handle()
+        {
+            m_portCmd = new Port8Cmd();
+        }
+
+        /// <summary>
+        /// 解析8路IO控制板数据
+        /// </summary>
+        /// <param name="data">从设备读取到的原始数据</param>
+        /// <returns>封装数据</returns>
+        public PeriphSerialEventArgs DecodeData(byte[] data)
+        {
+            IOPort8EventArgs args = new IOPort8EventArgs();
+            args.Header = new byte[m_portCmd.GetHeaderLength()];
+            Array.Copy(data, 0, args.Header, 0, m_portCmd.GetHeaderLength());
+            args.Data = new byte[m_portCmd.GetDataLength()];
+            Array.Copy(data, m_portCmd.GetHeaderLength(), args.Data, 0, m_portCmd.GetDataLength());
+            args.Last = new byte[m_portCmd.GetCmdLength() - (m_portCmd.GetHeaderLength() + m_portCmd.GetDataLength())];
+            Array.Copy(data, m_portCmd.GetHeaderLength() + m_portCmd.GetDataLength(), args.Last, 0, args.Last.Length);
+            if (data[m_portCmd.GetFuncIndex()].Equals(m_portCmd.GetInCmd()))
+            {
+                args.Type = PeriphSerialType.In;
+            }
+            if (data[m_portCmd.GetFuncIndex()].Equals(m_portCmd.GetOutCmd()))
+            {
+                args.Type = PeriphSerialType.Out;
+            }
+            return args;
+        }
+
+        /// <summary>
+        /// 获取8路控制板命令上下文
+        /// </summary>
+        /// <returns></returns>
+        public IOCmdInterface<byte> GetCmdContext()
+        {
+            return m_portCmd;
+        }
+
+    }
+}

@@ -1,0 +1,30 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace PeripheralsDriver.Serial
+{
+    /// <summary>
+    /// 外围设备类型
+    /// </summary>
+    public enum PeriphSerialType
+    {
+        /// <summary>
+        /// 未知类型，无访问端口类型
+        /// </summary>
+        None = 0,
+        /// <summary>
+        /// 输出
+        /// </summary>
+        Out = 1,
+        /// <summary>
+        /// 输入
+        /// </summary>
+        In = 2,
+        /// <summary>
+        /// 错误类型
+        /// </summary>
+        Error = 3
+    }
+}

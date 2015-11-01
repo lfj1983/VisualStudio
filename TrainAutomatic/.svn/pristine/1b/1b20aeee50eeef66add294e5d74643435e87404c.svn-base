@@ -1,0 +1,120 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.IO.Ports;
+using RFIDDriver;
+using Commands.RFID;
+using System.Collections;
+
+namespace STR2Driver
+{
+    /// <summary>
+    /// STR2返回数据操作类
+    /// </summary>
+    public class STR2Handle :RFIDHandleInterface<byte>
+    {
+        private STR2Cmd m_str2Cmd;
+
+        public STR2Handle()
+        {
+            m_str2Cmd = new STR2Cmd();
+        }
+        /// <summary>
+        /// 解析数据并封装到TagEventArgs对象
+        /// </summary>
+        /// <param name="data">原始数据</param>
+        /// <returns>解析封装结果数据</returns>
+        public TagEventArgs DecodeTag(byte[] data)
+        {
+            
+            try
+            {
+                List<byte> list = data.ToList<byte>();
+                if (list.Contains(m_str2Cmd.GetHeadCmd()) && list.Contains(m_str2Cmd.GetLastCmd()))
+                {
+                    int startIndex = list.IndexOf(m_str2Cmd.GetHeadCmd());
+                    int lastIndex = list.IndexOf(m_str2Cmd.GetLastCmd(), startIndex);
+                    if (lastIndex <= startIndex + 4)
+                    {
+                        throw new Exception("错误标签数据");
+                    }
+                    int length = (lastIndex - startIndex) + 1;
+                    
+                    byte[] tmp = new byte[length];
+                    Array.Copy(data, startIndex, tmp, 0, length);
+
+                    STR2TagEventArgs args = DecodeSTR2Tag(tmp);
+                    args.Sequenced = Convert.ToInt32(tmp[22]);
+                    args.Count = Convert.ToInt32(tmp[23]);
+                    return args;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(string.Format("解析标签数据失败{0}",ex.Message));
+            }
+            return null;
+        }
+        /// <summary>
+        /// 获取STR2命令生成器上下文
+        /// </summary>
+        /// <returns></returns>
+        public RFIDCmdInterface<byte> GetCmdContext()
+        {
+            return m_str2Cmd;
+        }
+        /// <summary>
+        /// 解码数据并封装
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        protected STR2TagEventArgs DecodeSTR2Tag(byte[] data)
+        {
+            STR2TagEventArgs args = new STR2TagEventArgs();
+            byte[] tagData = new byte[m_str2Cmd.GetDataLength()];
+            Array.ConstrainedCopy(data, m_str2Cmd.GetHeadLength(), tagData, 0, tagData.Length);
+            args.Attribute = GetValue(tagData, 0, 1);
+            args.Kind = GetValue(tagData, 1, 1);
+            args.Model = GetValue(tagData, 1, 5);
+            args.Tag = GetValue(tagData, 7, 7);
+            return args;
+        }
+
+        /// <summary>
+        /// 字符转换
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="start"></param>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        protected string GetValue(byte[] source,int start,int length)
+        {
+            
+            try
+            {
+                byte[] data = new byte[length];
+                
+                Array.ConstrainedCopy(source, start, data, 0, length);
+                StringBuilder sb = new StringBuilder();
+                foreach(byte b in data)
+                {
+                    sb.Append(ReferTable[b]);
+                }
+                return sb.ToString();//Encoding.ASCII.GetString(data,0,data.Length);
+            }catch(Exception ex)
+            {
+                throw new Exception("解析标签字符数据失败"+ex.Message);
+            }
+
+        }
+
+        private static char[] ReferTable = { ' ', '!' ,'"','#','$','%','&',',','(',')','*','+','`','-','.','/',
+                                           '0','1','2','3','4','5','6','7','8','9',':',';','<','=','>','?','@',
+                                           'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q',
+                                           'R','S','T','U','V','W','X','Y','Z','[','\\',']',' ','_'};
+
+    }
+}

@@ -1,0 +1,97 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace DevicesControl
+{
+    /// <summary>
+    /// IOPort.xaml 的交互逻辑
+    /// </summary>
+    public partial class IOPort : UserControl
+    {
+     /// <summary>
+     /// 定义并绑定一个Status属性
+     /// </summary>
+       private int  m_Status;
+       //使用传统的.net属性封装WPF依赖项属性
+       public int  Status
+       {   
+           //WPF属性的属性过程是使用在DependencyObject基类中定义的GetValue()和SetValue()方法
+           get { return (int )GetValue(StatusProperty); }
+           set { SetValue(StatusProperty, value); }
+       }
+
+       public static readonly DependencyProperty StatusProperty;//定义一个Status的依赖属性
+       public delegate void StatusChangedHandler(object sender, int oldValue, int newValue);//定义一个StatusChanged的委托线程
+       public event StatusChangedHandler StatusChanged;//自定义一个Status的改变事件
+
+       public delegate void ClickHandler(object sender);//自定义一个Click的委托线程
+       public event ClickHandler Click;//自定义一个Click事件
+       
+
+        public IOPort()
+        {
+            InitializeComponent();
+        }
+        /// <summary>
+        /// 静态声明并注册属性
+        /// </summary>
+       static IOPort()
+        {
+            var StatusMatadata = new PropertyMetadata((int)0, new PropertyChangedCallback(OnStatusPropertyChangedCallback));
+            StatusProperty = DependencyProperty.Register("Status", typeof(int), typeof(IOPort), StatusMatadata);
+        }
+       /// <summary>
+       /// Status属性改变事件的回调函数
+       /// </summary>
+       /// <param name="sender"></param>
+       /// <param name="e"></param>
+        private static void OnStatusPropertyChangedCallback(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            (sender as IOPort).OnStatusChanged(Convert.ToInt32(e.OldValue), Convert.ToInt32(e.NewValue));
+        }
+        /// <summary>
+        /// Status改变事件的触发
+        /// </summary>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        protected virtual void OnStatusChanged(int oldValue,int newValue)
+        {
+            if (null != StatusChanged)
+            {
+                StatusChanged(this,oldValue, newValue);
+            }
+        }
+        /// <summary>
+        /// Click事件的触发
+        /// </summary>
+        /// <param name="sender"></param>
+        protected virtual void OnClick(object sender )
+        {
+            if (null != Click)
+            {
+                Click(sender);
+            }
+        }
+        /// <summary>
+        /// 对UserControl声明一个PreviewMouseDown事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UserControl_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            OnClick(this);//调用OnClick事件
+        }
+        
+    }
+}

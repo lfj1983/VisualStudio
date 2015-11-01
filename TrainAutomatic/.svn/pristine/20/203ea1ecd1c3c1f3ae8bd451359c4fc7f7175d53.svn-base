@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Commands.IO;
+
+namespace S7ModbusDriver
+{
+    public interface S7MsCmdInterface<T> : IOCmdInterface<T>
+    {
+        int GetWriteDataIndex();
+        int GetWriteVDataIndex();
+        int GetErrorCodeIndex();
+
+        int GetCallQIReadDataIndex();
+        int GetCallVReadDataIndex();
+
+    }
+}

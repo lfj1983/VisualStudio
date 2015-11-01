@@ -1,0 +1,144 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Media.Animation;
+using System.Windows.Threading;
+
+namespace DevicesControl
+{
+    /// <summary>
+    /// SamMachine.xaml 的交互逻辑
+    /// </summary>
+    public partial class SamMachine : UserControl
+    {
+        
+        Storyboard m_samStoryboard;
+        Storyboard m_pack_EntryStoryboard;
+        Storyboard m_pack_OriginStoryboard;
+        Storyboard m_pack_FirstStoryboard;
+        Storyboard m_pack_TwoStoryboard;
+        Storyboard m_pack_OutStoryboard;
+
+        public SamMachine()
+        {
+            InitializeComponent();
+            Init();
+        }
+
+        private void Init()
+        {
+            m_samStoryboard = (Storyboard)this.FindResource("SamStoryboard");
+            m_pack_EntryStoryboard = (Storyboard)this.FindResource("Pack_EntryStoryboard");
+            m_pack_OriginStoryboard = (Storyboard)this.FindResource("Pack_OriginStoryboard");
+            m_pack_FirstStoryboard = (Storyboard)this.FindResource("Pack_FirstStoryboard");
+            m_pack_TwoStoryboard = (Storyboard)this.FindResource("Pack_TwoStoryboard");
+            m_pack_OutStoryboard = (Storyboard)this.FindResource("Pack_OutStoryboard");
+            
+        }
+
+        delegate void PlaySamDelegate();
+        public void PlaySam()
+        {
+            try
+            {
+                m_samStoryboard.Begin(this, true);
+            }
+            catch (InvalidOperationException ex)
+            {
+                this.Dispatcher.BeginInvoke(new PlaySamDelegate(PlaySam), DispatcherPriority.Send, null);
+            }
+        }
+
+        delegate void StopSamDelegate();
+        public void StopSam()
+        {
+            try
+            {
+                m_samStoryboard.Stop(this);
+            }
+            catch (InvalidOperationException ex)
+            {
+                this.Dispatcher.BeginInvoke(new StopSamDelegate(StopSam), DispatcherPriority.Send, null);
+            }
+        }
+
+        delegate void PlayPackEntrySeatDelegate();
+        public void PlayPackEntrySeat()
+        {
+            try
+            {
+                m_pack_EntryStoryboard.Begin(this, true);
+            }
+            catch (InvalidOperationException ex)
+            {
+                this.Dispatcher.BeginInvoke(new PlayPackEntrySeatDelegate(PlayPackEntrySeat), DispatcherPriority.Send, null);
+            }
+        }
+
+        delegate void PlayPackOriginSeatDelegate();
+        public void PlayPackOriginSeat()
+        {
+            try
+            {
+                m_pack_OriginStoryboard.Begin(this, true);
+            }catch (InvalidOperationException ex)
+            {
+                this.Dispatcher.BeginInvoke(new PlayPackOriginSeatDelegate(PlayPackOriginSeat), DispatcherPriority.Send, null);
+            }
+        }
+
+        delegate void PlayPackFirstSeatDelegate();
+        public void PlayPackFirstSeat()
+        {
+            try
+            {
+                m_pack_FirstStoryboard.Begin(this, true);
+            }
+            catch (InvalidOperationException ex)
+            {
+                this.Dispatcher.BeginInvoke(new PlayPackFirstSeatDelegate(PlayPackFirstSeat), DispatcherPriority.Send, null);
+            }
+        }
+
+        delegate void PlayPackTwoSeatDelegate();
+        public void PlayPackTwoSeat()
+        {
+            try
+            {
+                m_pack_TwoStoryboard.Begin(this, true);
+            }
+            catch (InvalidOperationException ex)
+            {
+                this.Dispatcher.BeginInvoke(new PlayPackTwoSeatDelegate(PlayPackTwoSeat),DispatcherPriority.Send,null);
+            }
+        }
+
+        delegate void PlayPackOutSeatDelegate();
+        public void PlayPackOutSeat()
+        {
+            try
+            {
+                m_pack_OutStoryboard.Begin(this, true);
+            }
+            catch (InvalidOperationException ex)
+            {
+                this.Dispatcher.BeginInvoke(new PlayPackOutSeatDelegate(PlayPackOutSeat), DispatcherPriority.Send, null);
+            }
+        }
+
+
+
+
+
+    }
+}

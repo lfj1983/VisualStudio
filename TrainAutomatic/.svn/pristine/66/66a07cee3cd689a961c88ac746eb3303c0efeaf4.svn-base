@@ -1,0 +1,1607 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using Operation.Sam;
+using AppContext;
+using System.Data;
+using System.Windows.Threading;
+using Operation.Args;
+using System.Reflection;
+using Core.Util;
+using Core.Entity;
+using Operation.AppsException;
+using System.Threading;
+using DevicesControl;
+using Entities;
+using IVT9010Driver;
+using System.ComponentModel;
+
+namespace WinCom
+{
+    /// <summary>
+    /// SamCom.xaml 的交互逻辑
+    /// </summary>
+    public partial class SamCom : UserControl
+    {
+        private object m_dataSource;
+        /// <summary>
+        /// 绑定DataSource属性
+        /// </summary>
+        public object DataSource
+        {
+            get { return (object)GetValue(DataSourceProperty); }
+            set { SetValue(DataSourceProperty, value); }
+        }
+        /// <summary>
+        /// 绑定依赖项属性DataSource
+        /// </summary>
+        public static readonly DependencyProperty DataSourceProperty;
+        /// <summary>
+        /// DataSource属性改变事件的委托
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        public delegate void DataSourceChangedHandler(object sender, object oldValue, object newValue);
+        /// <summary>
+        /// DataSource属性的改变事件
+        /// </summary>
+        public event DataSourceChangedHandler DataSourceChanged;
+        
+
+        public static readonly DependencyProperty SambucketProperty;
+        /// <summary>
+        /// 采样桶属性改变事件的委托
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        public delegate void SambucketChangedHandler(object sender, string oldValue, string newValue);
+        /// <summary>
+        /// 采样桶改变事件
+        /// </summary>
+        public event SambucketChangedHandler SambucketChanged;
+
+        /// <summary>
+        /// 给打包桶绑定属性
+        /// </summary>
+        private string m_packagebucket;
+
+        public string Packagebucket
+        {
+            get { return (string)GetValue(PackagebucketProperty); }
+            set { SetValue(PackagebucketProperty, value); }
+        }
+        /// <summary>
+        /// 打包桶依赖项属性的声明
+        /// </summary>
+        public static readonly DependencyProperty PackagebucketProperty;
+        /// <summary>
+        /// 打包桶改变事件的委托
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        public delegate void PackagebucketChangedHandler(object sender, string oldValue, string newValue);
+        /// <summary>
+        /// 打包桶改变事件
+        /// </summary>
+        public event PackagebucketChangedHandler PackagebucketChanged;
+
+
+
+        /// <summary>
+        /// 给煤样绑定属性
+        /// </summary>
+        private string m_coal;
+
+        public string Coal
+        {
+            get { return (string)GetValue(CoalProperty); }
+            set { SetValue(CoalProperty, value); }
+        }
+        /// <summary>
+        /// 煤样依赖项属性的声明
+        /// </summary>
+        public static readonly DependencyProperty CoalProperty;
+        /// <summary>
+        /// 煤样改变事件的委托
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        public delegate void CoalChangedHandler(object sender, string oldValue, string newValue);
+        /// <summary>
+        /// 煤样的改变事件
+        /// </summary>
+        public event CoalChangedHandler CoalChanged;
+
+        private object m_msg;
+        /// <summary>
+        /// 获取或设置消息
+        /// </summary>
+        
+        public object Msg
+        {
+            get { return GetValue(MsgProperty); }
+            set {
+                SetValue(MsgProperty, value);
+            }
+        }
+        /// <summary>
+        /// 消息依赖项属性的声明
+        /// </summary>
+        public static readonly DependencyProperty MsgProperty;
+        /// <summary>
+        /// 消息改变事件的委托
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        public delegate void MsgChangedHandler(object sender, object oldValue, object newValue);
+        /// <summary>
+        /// 消息改变事件
+        /// </summary>
+        public event MsgChangedHandler MsgChanged;
+
+        public delegate void ExceptionHandler(object sender, object args);
+        /// <summary>
+        /// 异常事件
+        /// </summary>
+        public event ExceptionHandler ExceptionEvent;
+
+        /// <summary>
+        /// 采样机处理类
+        /// </summary>
+        SamOperable m_samOper;
+
+        public SamOperable SamOper
+        {
+            get { return m_samOper; }
+            set { m_samOper = value; }
+        }
+
+        /// <summary>
+        /// 采样编码处理类
+        /// </summary>
+        /// 
+        SamAction m_samAction;
+
+        public SamAction SamAction
+        {
+            get { return m_samAction; }
+            set { m_samAction = value; }
+        }
+        /// <summary>
+        /// 分样处理类
+        /// </summary>
+        SamplingAction m_samplingAction;
+
+        private int m_collieryId = 0;
+
+        public int CollieryId
+        {
+            get { return m_collieryId; }
+            set { m_collieryId = value; }
+        }
+
+        /// <summary>
+        /// 定义计时器m_samStatusListenerTimer
+        /// </summary>
+        DispatcherTimer m_samStatusListenerTimer;
+
+        SamDeviceStatus m_samStatus;
+
+        public SamDeviceStatus SamStatus
+        {
+            get { return (SamDeviceStatus)GetValue(SamStatusProperty); }
+            set { SetValue(SamStatusProperty, value); }
+        }
+		/// <summary>
+        /// 定义SamDeviceStatus的依赖项属性
+        /// </summary>
+        public static readonly DependencyProperty SamStatusProperty;
+        public delegate void SamDeviceStatusChangedHandler(object sender, SamDeviceStatus newValue);
+        /// <summary>
+        /// 定义SamDeviceStatusChanged事件
+        /// </summary>
+        public event SamDeviceStatusChangedHandler SamDeviceStatusChanged;
+
+        private bool m_offLine;
+
+        [DefaultValue(false)]
+        public bool OffLine
+        {
+          get { return Convert.ToBoolean(GetValue(OffLineProperty)); }
+          set { SetValue(OffLineProperty,value); }
+        }
+        public static readonly DependencyProperty OffLineProperty;
+
+        public delegate void OffLineChangedHandler(object sender, bool offLine);
+        public event OffLineChangedHandler OffLineChanged;
+
+        /// <summary>
+        /// 定义DownloadFinished事件的委托
+        /// </summary>
+        /// <param name="sender"></param>
+        public delegate void DownloadFinishedHandler(object sender);
+        /// <summary>
+        /// 定义DownloadFinished事件
+        /// </summary>
+        /// <param name="sender"></param>
+        public event DownloadFinishedHandler DownloadFinished;
+
+        /// <summary>
+        /// 定义SamRun事件的委托
+        /// </summary>
+        /// <param name="sender"></param>
+        public delegate void SamRunHandler(object sender);
+        /// <summary>
+        /// 定义SamRun事件
+        /// </summary>
+        /// <param name="sender"></param>
+        public event SamRunHandler SamRun;
+        
+        /// <summary>
+        /// 定义SamStop事件的委托
+        /// </summary>
+        /// <param name="sender"></param>
+        public delegate void SamStopHandler(object sender);
+        /// <summary>
+        /// 定义SamStop事件
+        /// </summary>
+        /// <param name="sender"></param>
+        public event SamStopHandler SamStop;
+
+        public delegate void TurnFinishHandler(object sender);
+        public event TurnFinishHandler TurnFinish;
+        public delegate void TurnUnFinishHandler(object sender);
+        public event TurnUnFinishHandler TurnUnFinish;
+
+        public delegate void UnConveyorHandler(object sender);
+        public event UnConveyorHandler UnConveyor;
+
+        public delegate void ConveyoredHandler(object sender);
+        public event ConveyoredHandler Conveyored;
+
+        Queue<BucketEntity> m_bucketQueue = null;
+
+
+        public delegate void WriteTagedHandler(object sender, AlienH3TagEventArgs args);
+        /// <summary>
+        /// 写卡完成事件
+        /// </summary>
+        public event WriteTagedHandler WriteTaged;
+
+        public delegate void ReadTagedHandler(object sender, AlienH3TagEventArgs args);
+        /// <summary>
+        /// 读卡完成事件
+        /// </summary>
+        public event ReadTagedHandler ReadTaged;
+
+        public delegate void BucketFullHandler(object sender, PotInfo pot);
+        /// <summary>
+        /// 集样罐满事件
+        /// </summary>
+        public event BucketFullHandler BucketFull;
+
+        public delegate void SamFinishedHandler(object sender);
+        /// <summary>
+        /// 采样完成事件
+        /// </summary>
+        public event SamFinishedHandler SamFinished;
+
+        public delegate void PackAllFinishedHandler(object sender);
+        /// <summary>
+        /// 所有样桶打包完成
+        /// </summary>
+        public event PackAllFinishedHandler PackAllFinished;
+
+        
+
+        private DispatcherTimer m_bucketFullChanedDelayTimer;
+
+        private bool m_isChangedBucket = false;
+
+        /// <summary>
+        /// 是否旋转样桶
+        /// </summary>
+        public bool IsChangedBucket
+        {
+            get { return m_isChangedBucket; }
+            set { m_isChangedBucket = value; }
+        }
+
+        private bool m_packingAll = false;
+
+        public bool PackingAll
+        {
+            get { return m_packingAll; }
+        }
+
+        private BucketEntity m_samBucket;
+
+        public BucketEntity SamBucket
+        {
+            get { return m_samBucket; }
+        }
+
+        private BucketEntity m_packingBucket;
+
+        public BucketEntity PackingBucket
+        {
+            get { return m_packingBucket; }
+        }
+
+        public delegate void PackRunHandler(object sender);
+        /// <summary>
+        /// 打包机启动事件
+        /// </summary>
+        public event PackRunHandler PackRun;
+
+        public delegate void PackStopHandler(object sender);
+        /// <summary>
+        /// 打包机停止事件
+        /// </summary>
+        public event PackStopHandler PackStop;
+
+        public delegate void PackOriginSeatHandler(object sender);
+
+        public delegate void PackExceptionHandler(object sender, object args);
+        public event PackExceptionHandler PackException;
+
+        /// <summary>
+        /// 打包机原点事件
+        /// </summary>
+        public event PackOriginSeatHandler PackOriginSeat;
+
+        public delegate void PackFirstSeatHandler(object sender);
+        /// <summary>
+        /// 打包机第一次压盖事件
+        /// </summary>
+        public event PackFirstSeatHandler PackFirstSeat;
+
+        public delegate void PackTwoSeatHandler(object sender);
+        /// <summary>
+        /// 打包机第二次压盖事件
+        /// </summary>
+        public event PackTwoSeatHandler PackTwoSeat;
+
+        public delegate void PackEntrySeatHandler(object sender);
+        /// <summary>
+        /// 打包机主机在入口事件
+        /// </summary>
+        public event PackEntrySeatHandler PackEntrySeat;
+
+        public delegate void PackSingleFinishedHandler(object sender, BucketEntity args);
+        /// <summary>
+        /// 打包机单次打包完成
+        /// </summary>
+        public event PackSingleFinishedHandler PackSingleFinished;
+
+        public delegate void TurnBucketHandler(object sender, BucketEntity bucket, int samInterval, int divertorInterval);
+        public event TurnBucketHandler TurnBucketed;
+
+        private System.Timers.Timer m_packAllDelayTimer;
+
+        public SamCom()
+        {
+            InitializeComponent();
+            Init();
+        }
+        /// <summary>
+        /// 静态定义并注册依赖项属性
+        /// </summary>
+        static SamCom()
+        {
+            var DataSourceMetadata = new PropertyMetadata((object)null, new PropertyChangedCallback(OnDataSourcePropertyChangedCallback));
+            DataSourceProperty = DependencyProperty.Register("DataSource", typeof(object), typeof(SamCom), DataSourceMetadata);
+            var SambucketMetadata = new PropertyMetadata((string)"", new PropertyChangedCallback(OnSambucketPropertyChangedCallback));
+            SambucketProperty = DependencyProperty.Register("Sambucket", typeof(string), typeof(SamCom), SambucketMetadata);
+            var PackagebucketMetadata = new PropertyMetadata((string)"", new PropertyChangedCallback(OnPackagebucketPropertyChangedCallback));
+            PackagebucketProperty = DependencyProperty.Register("Packagebucket", typeof(string), typeof(SamCom), PackagebucketMetadata);
+            var CoalMetadata = new PropertyMetadata((string)"", new PropertyChangedCallback(OnCoalPropertyChangedCallback));
+            CoalProperty = DependencyProperty.Register("Coal", typeof(string), typeof(SamCom), CoalMetadata);
+
+            var MsgMetadata = new PropertyMetadata((object)"", new PropertyChangedCallback(OnMsgPropertyChangedCallback));
+            MsgProperty = DependencyProperty.Register("Msg", typeof(object), typeof(SamCom), MsgMetadata);
+
+            var SamStatusMetadata = new PropertyMetadata((SamDeviceStatus)null, new PropertyChangedCallback(OnSamDeviceStatusPropertyChangedCallback));
+            SamStatusProperty = DependencyProperty.Register("SamStatus", typeof(SamDeviceStatus), typeof(SamCom), SamStatusMetadata);
+
+            var OffLineMetadata = new PropertyMetadata((bool)false, new PropertyChangedCallback(OnOffLinePropertyChangedCallback));
+            OffLineProperty = DependencyProperty.Register("OffLine", typeof(bool), typeof(SamCom), OffLineMetadata);
+            
+            
+            
+        }
+        /// <summary>
+        ///初始化
+        /// </summary>
+        private void Init()
+        {
+            try
+            {
+                m_samOper = new SamOperable(ApplicationContext.Context.SamDeviceConnect);
+                m_samAction = new SamAction(ApplicationContext.Context.SysDBConnect);
+                m_samplingAction = new SamplingAction(ApplicationContext.Context.SysDBConnect);
+                m_samOper.ExceptionEvent += new SamOperable.ExceptionHandler(m_samOper_ExceptionEvent);
+                m_samAction.ExceptionEvent += new SamAction.ExceptionHandler(m_samAction_ExceptionEvent);
+                m_samStatusListenerTimer = new DispatcherTimer(DispatcherPriority.Input);
+                m_samStatusListenerTimer.Interval = TimeSpan.FromMilliseconds(ApplicationContext.Context.SamStatusInterval);
+                m_samStatusListenerTimer.Tick += new EventHandler(SamStatusListenerTimer_Tick);
+                m_samStatusListenerTimer.Start();
+                m_samStatusListenerTimer.IsEnabled = false;
+
+                m_bucketFullChanedDelayTimer = new DispatcherTimer(DispatcherPriority.Send);
+                m_bucketFullChanedDelayTimer.Interval = TimeSpan.FromMilliseconds(ApplicationContext.Context.BucketFullToBucketInternal);
+                m_bucketFullChanedDelayTimer.Tick+=new EventHandler(BucketFullChanedDelayTimer_Tick);
+                m_bucketFullChanedDelayTimer.Start();
+                m_bucketFullChanedDelayTimer.IsEnabled = false;
+
+                m_packAllDelayTimer = new System.Timers.Timer();
+                m_packAllDelayTimer.Interval = ApplicationContext.Context.PackAllDelayInternal;
+                m_packAllDelayTimer.Elapsed += new System.Timers.ElapsedEventHandler(m_packAllDelayTimer_Elapsed);
+                m_packAllDelayTimer.Start();
+                m_packAllDelayTimer.Enabled = false;
+
+                SamStatus = new SamDeviceStatus();
+                PackMachine1.S7MSerial = ApplicationContext.Context.Pack;
+                PackMachine1.PLCAddress = Convert.ToInt32( ApplicationContext.Context.Pack.OtherOne);
+                PackMachine1.RFIDAddress = Convert.ToInt32(ApplicationContext.Context.PackRFID.OtherOne);
+                PackMachine1.RfidSerial = ApplicationContext.Context.PackRFID;
+                PackMachine1.PLCListenerInterval = ApplicationContext.Context.PLCListenerInterval;
+                PackMachine1.ListenerInterval = ApplicationContext.Context.PackDeviceInternal;
+                PackMachine1.PackStop += new DevicesControl.PackMachine.PackStopHandler(PackMachine1_PackStop);
+                PackMachine1.WriteTaged+=new PackMachine.WriteTagedHandler(PackMachine1_WriteTaged);
+                PackMachine1.ReadTaged+=new PackMachine.ReadTagedHandler(PackMachine1_ReadTaged);
+                PackMachine1.RunSuccessed+=new PackMachine.RunSuccessedHandler(PackMachine1_RunSuccessed);
+                PackMachine1.OriginSeat += new DevicesControl.PackMachine.OriginSeatHandler(PackMachine1_OriginSeat);
+                PackMachine1.CapSeat += new PackMachine.CapSeatHandler(PackMachine1_CapSeat);
+                PackMachine1.NoneCap += new DevicesControl.PackMachine.NoneCapHandler(PackMachine1_NoneCap);
+                PackMachine1.BucketEntrySeat += new DevicesControl.PackMachine.BucketEntrySeatHandler(PackMachine1_BucketEntrySeat);
+                PackMachine1.BucketDownSeat += new DevicesControl.PackMachine.BucketDownSeatHandler(PackMachine1_BucketDownSeat);
+                PackMachine1.BucketPackFirstSeat += new DevicesControl.PackMachine.BucketFirstSeatHandler(PackMachine1_BucketPackFirstSeat);
+                PackMachine1.BucketPackTwoSeat += new DevicesControl.PackMachine.BucketPackTwoSeatHandler(PackMachine1_BucketPackTwoSeat);
+                PackMachine1.RfidSeat += new DevicesControl.PackMachine.RfidSeatHandler(PackMachine1_RfidSeat);
+                PackMachine1.RunEntrySeat += new PackMachine.RunEntrySeatHandler(PackMachine1_RunEntrySeat);
+                PackMachine1.BcketCapSeat += new PackMachine.BcketCapSeatHandler(PackMachine1_BcketCapSeat);
+                PackMachine1.PackFinish+=new PackMachine.PackFinishHandler(PackMachine1_PackFinish);
+                PackMachine1.ExceptionEvent += new PackMachine.ExceptionHandler(PackMachine1_ExceptionEvent);
+            }
+            catch (Exception ex)
+            {
+                OnExceptionEvent(ex);
+            }
+        }
+
+
+        void m_samAction_ExceptionEvent(object sender, object args)
+        {
+            OnExceptionEvent(args);
+        }
+
+        void m_samOper_ExceptionEvent(object sender, object args)
+        {
+            OnExceptionEvent(args);
+        }
+
+        protected void PackMachine1_ExceptionEvent(object sender, object args)
+        {
+            OnPackException(args);
+            //OnExceptionEvent(args);
+        }
+
+        private static void OnOffLinePropertyChangedCallback(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            (sender as SamCom).OnOffLineChanged(Convert.ToBoolean(e.NewValue));
+        }
+
+        protected virtual void OnOffLineChanged(bool offLine)
+        {
+            try
+            {
+                if (null != OffLineChanged)
+                {
+                    OffLineChanged(this, offLine);
+                }
+            }
+            finally
+            {
+                PackMachine1.OffLine = offLine;
+            }
+        }
+
+        /// <summary>
+        /// SamDeviceStatusProperty改变的回调函数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private static void OnSamDeviceStatusPropertyChangedCallback(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            (sender as SamCom).OnSamDeviceStatusChanged((SamDeviceStatus)e.NewValue);
+        }
+
+        private static void OnMsgPropertyChangedCallback(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            (sender as SamCom).OnMsgChanged(e.OldValue, e.NewValue);
+        }
+        /// <summary>
+        /// Msg改变事件的触发
+        /// </summary>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        protected virtual void OnMsgChanged(object oldValue, object newValue)
+        {
+            if (null != MsgChanged && (!oldValue.Equals(newValue)))
+            {
+                MsgChanged(this, oldValue, newValue);
+            }
+        }
+
+        /// <summary>
+        ///DataSource改变事件的回调函数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private static void OnDataSourcePropertyChangedCallback(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            (sender as SamCom).OnDataSourceChanged(e.OldValue, e.NewValue);
+        }
+        /// <summary>
+        ///DataSource事件的触发
+        /// </summary>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        protected virtual void OnDataSourceChanged(object oldValue, object newValue)
+        {
+            try
+            {
+                DataRow row = newValue as DataRow;
+                StartSam(row);
+            }catch(Exception ex)
+            {
+                OnExceptionEvent(ex);
+            }
+            finally{
+                if (null != DataSourceChanged)
+                {
+                    DataSourceChanged(this, oldValue, newValue);
+                }
+            }
+        }
+        /// <summary>
+        /// Sambucket改变事件的回调函数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private static void OnSambucketPropertyChangedCallback(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            (sender as SamCom).OnSambucketChanged(e.OldValue.ToString(), e.NewValue.ToString());
+        }
+        /// <summary>
+        /// Sambucket改变事件的触发
+        /// </summary>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        protected virtual void OnSambucketChanged(string oldValue, string newValue)
+        {
+            if (null != SambucketChanged)
+            {
+                SambucketChanged(this, oldValue, newValue);
+            }
+        }
+
+        /// <summary>
+        /// Packagebucket改变事件的回调函数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private static void OnPackagebucketPropertyChangedCallback(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            (sender as SamCom).OnPackagebucketChanged(e.OldValue.ToString(), e.NewValue.ToString());
+        }
+        /// <summary>
+        /// Packagebucket改变事件的触发
+        /// </summary>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        protected virtual void OnPackagebucketChanged(string oldValue, string newValue)
+        {
+            if (null != PackagebucketChanged)
+            {
+                PackagebucketChanged(this, oldValue, newValue);
+
+            }
+        }
+        /// <summary>
+        /// Coal改变事件的回调函数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private static void OnCoalPropertyChangedCallback(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            (sender as SamCom).OnCoalChanged(e.OldValue.ToString(), e.NewValue.ToString());
+        }
+        /// <summary>
+        ///Coal改变事件的触发
+        /// </summary>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        protected virtual void OnCoalChanged(string oldValue, string newValue)
+        {
+            if (null != CoalChanged)
+            {
+                CoalChanged(this, oldValue, newValue);
+
+            }
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            StartListener();
+        }
+
+        
+
+        /// <summary>
+        /// 采样委托
+        /// </summary>
+        /// <param name="row"></param>
+        delegate void StartSamDelegate(DataRow row);
+        /// <summary>
+        /// 开始采样
+        /// </summary>
+        /// <param name="row"></param>
+        private void StartSam(DataRow row)
+        {
+            if (!m_packingAll)
+            {
+                m_bucketFullChanedDelayTimer.IsEnabled = false;
+                int tmpCollieryId = Convert.ToInt32(row["collieryId"]);
+                m_samBucket = null;
+                try
+                {
+                    
+                    CollieryId = tmpCollieryId;
+                    if (tmpCollieryId != 0)
+                    {
+                        m_samAction.CollieryIsNullToNotNull(tmpCollieryId);
+                    }
+                    m_samBucket = m_samAction.GetBucket(tmpCollieryId);
+                    if (null != m_samBucket)
+                    {
+                        m_samBucket.CollieryId = tmpCollieryId;
+                        m_samBucket.CollieryName = row["collieryname"].ToString();
+                        m_samBucket.TrainCode = row["traincode"].ToString();
+                        IsChangedBucket = true;
+                        ChangedBucket(m_samBucket);
+                        m_samAction.SaveSamData(Convert.ToInt32(row["id"]), m_samBucket.SamCode);
+                    }
+                }
+                catch (NotBucketException ex)
+                {
+                    //StartPackInvalidBucket();
+                    OnExceptionEvent(ex);
+                }
+                catch (Exception ex)
+                {
+                    m_packingAll = false;
+                    OnExceptionEvent(ex);
+                }
+            }
+            else
+            {
+                Thread.Sleep(1000);
+                this.Dispatcher.BeginInvoke(new StartSamDelegate(StartSam),DispatcherPriority.Input, new object[] { row });
+            }
+
+        }
+        /// <summary>
+        /// 更新采样桶
+        /// </summary>
+        private void UpdateBuckets(DataTable table)
+        {
+            List<PotInfo> list = new List<PotInfo>();
+            
+            foreach (DataRow row in table.Rows)
+            {
+                string[] bucketsNames = Enum.GetNames(typeof(SamBuckets));
+                foreach (string bucketName in bucketsNames)
+                {
+                    PotInfo pot = new PotInfo();
+                    pot.Number = (int)Enum.Parse(typeof(SamBuckets), bucketName);
+                    string countName = Enum.Parse(typeof(SamCount), pot.Number.ToString()).ToString();
+                    pot.Status = (PotStatus)Enum.Parse(typeof(PotStatus), row[bucketName].ToString());
+                    pot.Count = Convert.ToInt32(row[countName]);
+                    list.Add(pot);
+                }
+            }
+            try
+            {
+                m_samAction.UpdateBucket(list.ToArray());
+            }
+            finally
+            {
+                EventPot(list.ToArray());
+            }
+        }
+
+        private void EventPot(PotInfo[] pots)
+        {
+            try
+            {
+                if (!m_packingAll)
+                {
+                    foreach (PotInfo pot in pots)
+                    {
+                        if (pot.Status == PotStatus.罐满)
+                        {
+                            OnBucketFull(pot);
+                        }
+                    }
+                }
+            }
+            catch (NotBucketException ex)
+            {
+                //StartPackInvalidBucket();
+                OnExceptionEvent(ex);
+            }
+        }
+
+        /// <summary>
+        /// 异常事件
+        /// </summary>
+        /// <param name="e"></param>
+        protected virtual void OnExceptionEvent(object e)
+        {
+            try
+            {
+                SendMsg((e as Exception).Message);
+            }
+            finally
+            {
+                
+                if (null != ExceptionEvent)
+                {
+                    (e as Exception).Source += "->"+this.GetType().Name;
+                    ExceptionEvent(this, e);
+                }
+            }
+        }
+
+
+        protected virtual void OnSamDeviceStatusChanged(SamDeviceStatus status)
+        {
+            try
+            {
+                if (null != SamDeviceStatusChanged)
+                {
+                    SamDeviceStatusChanged(this, status);
+                }
+            }
+            finally
+            {
+
+                RegistEvents(status);
+            }
+        }
+
+        protected virtual void OnDownloadFinish()
+        {
+            try
+            {
+                if (null != DownloadFinished)
+                {
+                    DownloadFinished(this);
+                }
+            }
+            finally
+            {
+
+                
+
+            }
+        }
+
+        private void PackMachine1_RunSuccessed(object sender)
+        {
+            try
+            {
+                OnPackRun();
+            }
+            finally
+            {
+                m_samOper.ControlStatus(SamControlStatusCmd.downFinish, 0);
+                SendMsg("启动打包成功,开始打包...");
+                ApplicationContext.DoEvents();
+            }
+        }
+
+        private void RegistEvents(SamDeviceStatus status)
+        {
+            if (null != status)
+            {
+                if (status.DownFinish)
+                {
+                    OnDownloadFinish();
+                }
+                if (status.RunStatus)
+                {
+                    OnSamRun();
+                }
+                else
+                {
+                    OnSamStop();
+                }
+                if (status.IsTurn)
+                {
+                    OnTurnFinish();
+                }
+                else
+                {
+                    OnTurnUnFinish();
+                }
+                if (status.Conveyor)
+                {
+                    OnConveyored();
+                }
+                else
+                {
+                    OnUnConveyor();
+                }
+                if (null != status.Errorcode && 0!= status.Errorcode)
+                {
+                    string msg = string.Format("采样机故障编码：{0}\n内容{1}", status.Errorcode, status.Errorcontent);
+                    OnExceptionEvent(new Exception(msg));
+                }
+            }
+            
+        }
+
+        protected virtual void OnConveyored()
+        {
+            if (null != Conveyored)
+            {
+                Conveyored(this);
+            }
+        }
+
+        protected virtual void OnUnConveyor()
+        {
+            if (null != UnConveyor)
+            {
+                UnConveyor(this);
+            }
+        }
+
+        protected virtual void OnTurnFinish()
+        {
+            if (null != TurnFinish)
+            {
+                TurnFinish(this);
+            }
+        }
+
+        protected virtual void OnTurnUnFinish()
+        {
+            if (null != TurnUnFinish)
+            {
+                TurnUnFinish(this);
+            }
+        }
+
+        protected virtual void OnSamRun()
+        {
+            if (null != SamRun)
+            {
+                SamRun(this);
+            }
+        }
+		/// <summary>
+        /// SamStop事件的触发
+        /// </summary>
+        protected virtual void OnSamStop()
+        {
+            if (null != SamStop)
+            {
+                SamStop(this);
+            }
+        }
+        /// <summary>
+        /// SamStatusListenerTimer_Tick事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void SamStatusListenerTimer_Tick(object sender, EventArgs args)
+        {
+            SamStatusChanged();
+        }
+
+        delegate void SamStatusChangedDelegate();
+        private void SamStatusChanged()
+        {
+            try
+            {
+                DataTable table = m_samOper.GetDeviceStatus();
+                SamDeviceStatus status = new SamDeviceStatus();
+                SamStatus = (SamDeviceStatus)Tools.TableToEntity(table, status);
+                if (!PackMachine1.Packing)
+                {
+                    DataTable potsTable = m_samOper.GetBuckets();
+                    Grid_pots.DataContext = potsTable.Rows[0];
+                    UpdateBuckets(potsTable);
+                }
+            }
+            catch (InvalidOperationException ex)
+            {
+                this.Dispatcher.BeginInvoke(new SamStatusChangedDelegate(SamStatusChanged));
+            }
+            catch (Exception ex)
+            {
+                OnExceptionEvent(ex);
+            }
+        }
+
+        /// <summary>
+        /// StartListener方法
+        /// </summary>
+        private void StartListener()
+        {
+            
+            try
+            {
+                m_samStatusListenerTimer.IsEnabled = true;
+            }
+            catch(Exception ex)
+            {
+                OnExceptionEvent(ex);
+            }
+        }
+
+        /// <summary>
+        /// StopListener方法
+        /// </summary>
+        private void StopListener()
+        {
+            try
+            {
+                m_samStatusListenerTimer.IsEnabled = false;
+            }
+            catch (Exception ex)
+            {
+                OnExceptionEvent(ex);
+            }
+        }
+
+        /// <summary>
+        /// StartPackBucket方法
+        /// </summary>
+        private void StartPackBucket()
+        {
+            if (!m_packingAll)
+            {
+                BucketEntity[] buckets = null;
+                if (OffLine)
+                {
+                    buckets = m_samAction.GetOffLineBuckets();
+
+                }
+                else
+                {
+                    buckets = m_samAction.GetWaitPackBucket();
+                    
+                }
+                if (null!=buckets && buckets.Length != 0)
+                {
+                    Dispatcher.BeginInvoke(new PackBucketsDelegate(PackBuckets), new object[] { buckets });
+                }
+                else
+                {
+                    OnExceptionEvent(new Exception("未找到有效打包样桶,请确认使用正确样桶及采样编码"));
+                }
+                
+            }
+        }
+
+        private void StartPackBucket(int collieryId)
+        {
+            if (!m_packingAll)
+            {
+                BucketEntity[] buckets = m_samAction.GetWaitPackBucket(collieryId);
+                Dispatcher.BeginInvoke(new PackBucketsDelegate(PackBuckets), new object[] { buckets });
+            }
+        }
+
+        private void StartPackInvalidBucket()
+        {
+            if (!m_packingAll)
+            {
+                BucketEntity[] buckets = m_samAction.GetWaitPackInvalidBucket();
+                Dispatcher.BeginInvoke(new PackBucketsDelegate(PackBuckets), new object[] { buckets });
+            }
+        }
+
+        private void StartPackInvalidBucket(int collieryId)
+        {
+            if (!m_packingAll)
+            {
+                BucketEntity[] buckets = m_samAction.GetWaitPackInvalidBucket(collieryId);
+                Dispatcher.BeginInvoke(new PackBucketsDelegate(PackBuckets), new object[] { buckets });
+            }
+            
+        }
+
+
+        delegate void PackBucketsDelegate(BucketEntity[] buckets);
+        private void PackBuckets(BucketEntity[] buckets)
+        {
+            try
+            {
+                if (buckets.Count() > 0 && !m_packingAll)
+                {
+                    m_packingAll = true;
+                    m_samOper.Control(SamControlCmd.runDown, 1);
+                    m_bucketQueue = new Queue<BucketEntity>();
+                    foreach (BucketEntity bucket in buckets)
+                    {
+                        try
+                        {
+                            if (OffLine)
+                            {
+                                bucket.SamplingCode = null;
+                            }
+                            else
+                            {
+                                string code = m_samplingAction.GetSamplingCode(bucket.SamCode);
+                                if (code != null)
+                                {
+                                    bucket.SamplingCode = code;
+                                }
+                                else
+                                {
+                                    throw new Exception(string.Format("[{0}]号样桶采样编码[{1}]无法生成分样编码", bucket.Number, bucket.SamCode));
+                                }
+                            }
+                            m_bucketQueue.Enqueue(bucket);
+                        }
+                        catch (Exception ex)
+                        {
+                            OnExceptionEvent(string.Format("生成分样编码异常{0}", ex.Message));
+                        }
+                    }
+
+                    PackMachine1.StartListener();
+                }
+            }
+            catch (Exception ex)
+            {
+                m_packingAll = false;
+            }
+            
+        }
+
+        delegate void PackingBucketsDelegate();
+        private void PackingBuckets()
+        {
+            try
+            {
+
+                if (null != m_bucketQueue && m_bucketQueue.Count() > 0 && !PackMachine1.Packing && PackMachine1.PackBucket==null)
+                {
+                    BucketEntity bucket = m_bucketQueue.Peek();
+                    m_samOper.Control(SamControlCmd.downPortNo, bucket.Number);
+                    SendMsg("发送打包样桶" + bucket.Number);
+                    m_packingBucket = bucket;
+                    PackMachine1.PackBucket = bucket;
+                }
+            }
+            catch (InvalidOperationException ex)
+            {
+                this.Dispatcher.BeginInvoke(new PackingBucketsDelegate(PackingBuckets),DispatcherPriority.Send,null);
+            }
+        }
+
+
+
+
+        
+
+        delegate void SendMsgDelegate(string msg);
+        private void SendMsg(string msg)
+        {
+            try
+            {
+                Msg = msg;
+            }
+            catch (InvalidOperationException ex)
+            {
+                this.Dispatcher.BeginInvoke(new SendMsgDelegate(SendMsg), new object[] { msg });
+            }
+        }
+
+        private void PackMachine1_WriteTaged(object sender,AlienH3TagEventArgs args)
+        {
+            OnWriteTaged(args);
+        }
+
+        private void PackMachine1_ReadTaged(object sender, AlienH3TagEventArgs args)
+        {
+            OnReadTaged(args);
+        }
+
+        protected virtual void OnWriteTaged(AlienH3TagEventArgs args)
+        {
+            try
+            {
+                if (null != WriteTaged)
+                {
+                    WriteTaged(this, args);
+                }
+            }
+            finally
+            {
+                SendMsg("打包机写卡成功");
+            }
+        }
+
+        protected virtual void OnReadTaged(AlienH3TagEventArgs args)
+        {
+            try
+            {
+                if (null != ReadTaged)
+                {
+                    ReadTaged(this, args);
+                }
+            }
+            finally
+            {
+                SendMsg("打包机读卡成功");
+            }
+        }
+
+        protected virtual void OnBucketFull(PotInfo pot)
+        {
+            try
+            {
+                if (null != BucketFull)
+                {
+                    BucketFull(this, pot);
+                }
+            }
+            finally
+            {
+                
+               SendMsg(string.Format("{0}#样桶已满，启动更换集样桶流程", pot.Number));
+               ChangedFullBucket(pot);
+               
+            }
+        }
+
+        delegate void ChangedFullBucketDelegate(PotInfo pot);
+        private void ChangedFullBucket(PotInfo pot)
+        {
+            try
+            {
+                if (m_samAction.ValidChangedBucket(CollieryId, pot))
+                {
+                    SendMsg(string.Format("当前煤矿{0}#集样桶已满", pot.Number));
+                    m_samAction.Invalid(CollieryId, pot);
+                    BucketEntity bucket = m_samAction.NewSamBucket();
+                    bucket.CollieryId = CollieryId;
+                    bucket.TrainCode = m_samBucket.TrainCode;
+                    m_samAction.NewSamCodeRecord(CollieryId, bucket);
+                    m_bucketFullChanedDelayTimer.IsEnabled = true;
+
+                    SendMsg(string.Format("启动延迟更换集样桶计时器,延迟换桶时间{0}", m_bucketFullChanedDelayTimer.Interval));
+                    ChangedBucket(bucket);
+                }
+                else
+                {
+                    SendMsg(string.Format("已满{0}#集样桶不是当前煤矿有效样桶", pot.Number));
+                }
+            }catch(Exception ex)
+            {
+                OnExceptionEvent(ex);
+            }
+        }
+
+        delegate void ChangedBucketDelegate(BucketEntity bucket);
+        private void ChangedBucket(BucketEntity bucket)
+        {
+            if (!IsChangedBucket)
+            {
+                Thread.Sleep(500);
+                Dispatcher.BeginInvoke(new ChangedBucketDelegate(ChangedBucket), DispatcherPriority.Send, new object[] { bucket });
+                
+            }
+            else
+            {
+                int samInterval = 120;
+                int divertorInterval = 60;
+                try
+                {
+                    try
+                    {
+                        m_samBucket = bucket;
+                        samInterval =  m_samAction.GetSamInterval(bucket.CollieryId,bucket.TrainCode);
+                        divertorInterval = m_samAction.GetDivertorInterval(bucket.CollieryId, bucket.TrainCode);
+                    }catch(Exception ex)
+                    {
+                        OnExceptionEvent(ex);
+                    }
+                    
+                    m_samOper.Control(SamControlCmd.runDown, 0);
+                    m_samOper.Control(SamControlCmd.downPortNo, 0);
+                    m_samOper.Control(SamControlCmd.samInterval, samInterval);
+                    m_samOper.Control(SamControlCmd.divertorInterval, divertorInterval);
+                    m_samOper.ControlStatus(SamControlStatusCmd.isTurn, 0);
+                    m_samOper.Control(SamControlCmd.portNo, bucket.Number);
+                    
+                    SendMsg(string.Format("车厢{0},收集样桶号{1},采样周期{2}秒,缩分周期{3}秒",
+                                        bucket.TrainCode, bucket.Number, samInterval, divertorInterval));
+                    OnTurnBucketed(bucket, samInterval, divertorInterval);
+                }
+                finally
+                {
+                    IsChangedBucket = false;
+                    OnSamFinish();
+                }
+            }
+        }
+
+        protected virtual void OnTurnBucketed(BucketEntity bucket, int samInterval, int divertorInterval)
+        {
+            if (null != TurnBucketed)
+            {
+                TurnBucketed(this, bucket, samInterval, divertorInterval);
+            }
+        }
+
+        protected virtual void OnSamFinish()
+        {
+            if(null!=SamFinished)
+            {
+                SamFinished(this);
+            }
+        }
+
+        /// <summary>
+        /// 延迟换样桶时间
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void BucketFullChanedDelayTimer_Tick(object sender, EventArgs args)
+        {
+            SendMsg("延迟更换样桶时间已到,准备更换集样桶");
+            IsChangedBucket = true;
+            m_bucketFullChanedDelayTimer.IsEnabled = false;
+
+        }
+
+        private void PackMachine1_PackRun(object sender)
+        {
+            SendMsg("打包机运行");
+        }
+
+        private void PackMachine1_PackStop(object sender)
+        {
+            SendMsg("打包机停止");
+        }
+
+
+        private void PackMachine1_OriginSeat(object sender)
+        {
+            SendMsg("打包机停到原点位");
+            Thread.Sleep(300);
+            OnPackOriginSeat();
+        }
+
+        private void PackMachine1_NoneCap(object sender)
+        {
+            SendMsg("打包机无瓶盖可用");
+        }
+
+        private void PackMachine1_BucketEntrySeat(object sender)
+        {
+            SendMsg("打包机样桶进入打包机");
+        }
+
+        private void PackMachine1_BucketDownSeat(object sender)
+        {
+            try
+            {
+                if (!PackMachine1.Packing && PackMachine1.PackStatusInfo.Cmd_run_origin_seat && PackMachine1.PackStatusInfo.Cmd_cap_seat)
+                {
+                    PackingBuckets();
+
+                }
+                
+                else if (!PackMachine1.PackStatusInfo.Cmd_run_origin_seat)
+                {
+                    OnExceptionEvent(new Exception("打包未就绪原因：打包机未在原点"));
+                }
+                else if (!PackMachine1.PackStatusInfo.Cmd_cap_seat)
+                {
+                    OnExceptionEvent(new Exception("打包未就绪原因：打包机无瓶盖可用"));
+                }
+                else if (!PackMachine1.Packing)
+                {
+                    OnExceptionEvent(new Exception("未启动打包流程"));
+                }
+            }
+            finally
+            {
+                if (SamStatus.DownFinish && null != PackMachine1.PackBucket)
+                {
+                    PackMachine1.ResetDownloadSeat();
+                    Thread.Sleep(800);
+                    PackMachine1.DownloadRecive();
+                }
+            }
+        }
+
+        private void PackMachine1_BucketPackFirstSeat(object sender)
+        {
+            SendMsg("打包机停到第一次压盖位");
+            OnPackFirstSeat();
+        }
+
+        private void PackMachine1_BucketPackTwoSeat(object sender)
+        {
+            SendMsg("打包机停到第二次压盖位");
+            OnPackTwoSeat();
+        }
+
+
+        private void PackMachine1_PackFinish(object sender,BucketEntity args)
+        {
+            if (null != args)
+            {
+                try
+                {
+                    SavePackData(args);
+                }
+                finally
+                {
+                    //ApplicationContext.DoEvents();
+                }
+            }
+        }
+
+        delegate void SavePackDataDelegate(BucketEntity args);
+        private void SavePackData(BucketEntity args)
+        {
+            try
+            {
+
+                //m_samOper.ResetBucket(args);
+                
+                if (!OffLine)
+                {
+                    m_samAction.UpdatePackFinish(args);
+                    SendMsg(string.Format("单桶打包完成,打包桶号[{0}],编码[{1}]", args.Number, args.SamplingCode));
+                    //ApplicationContext.DoEvents();
+                }
+                else
+                {
+                    SendMsg(string.Format("单桶打包完成,打包桶号[{0}]", args.Number));
+                    //ApplicationContext.DoEvents();
+                }
+                m_samOper.Control(SamControlCmd.clearPort, args.Number);
+                m_bucketQueue.Dequeue();
+                OnPackSingleFinished(args);
+                PackAllFinish();
+            }
+            catch (InvalidOperationException ex)
+            {
+                this.Dispatcher.BeginInvoke(new SavePackDataDelegate(SavePackData), DispatcherPriority.Send, new object[] { args });
+            }
+            finally
+            {
+                PackMachine1.PackBucket = null;
+                //Thread.Sleep(1000);
+            }
+        }
+
+        delegate void PackAllFinishDelegate();
+        private void PackAllFinish(){
+            try
+            {
+                if ((null != m_bucketQueue) && m_bucketQueue.Count() <= 0)
+                {
+                    try
+                    {
+                        m_packAllDelayTimer.Enabled = true;
+                        m_packingAll = false;
+                        PackMachine1.StopListener();
+                        m_samAction.UpdateClearTime();
+                        OnPackAllFinished();
+                        Thread.Sleep(200);
+                        OnPackStop();
+                        SendMsg("所有待打包样桶打包完成");
+                        if ((null != DataSource) && (DataSource.GetType() != typeof(string)))
+                        {
+                            DataRow rw = DataSource as DataRow;
+                            this.Dispatcher.BeginInvoke(new StartSamDelegate(StartSam), DispatcherPriority.Send, new object[] { DataSource });
+                        }
+
+
+                    }catch (InvalidOperationException ex)
+                    {
+                        this.Dispatcher.BeginInvoke(new PackAllFinishDelegate(PackAllFinish));
+                    }
+                    catch (Exception ex)
+                    {
+                        OnExceptionEvent(ex);
+                    }
+                }
+                
+            }
+            catch (InvalidOperationException ex)
+            {
+                this.Dispatcher.BeginInvoke(new PackAllFinishDelegate(PackAllFinish));
+            }
+            finally
+            {
+                
+            }
+        }
+
+
+        private void m_packAllDelayTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            try
+            {
+                ResetDown();
+                m_packAllDelayTimer.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                OnExceptionEvent(ex);
+            }
+        }
+        delegate void ResetDownDeledate();
+        public void ResetDown()
+        {
+            try
+            {
+                m_samOper.Control(SamControlCmd.runDown, 0);
+                m_samOper.Control(SamControlCmd.clearPort, 0);
+                m_samOper.Control(SamControlCmd.downPortNo, 0);
+            }
+            catch (InvalidOperationException ex)
+            {
+                this.Dispatcher.Invoke(new ResetDownDeledate(ResetDown), DispatcherPriority.Send, null);
+            }
+        }
+
+
+        protected virtual void OnPackAllFinished()
+        {
+            if (null != PackAllFinished)
+            {
+                PackAllFinished(this);
+            }
+        }
+
+        private void PackMachine1_RfidSeat(object sender, IVT9010 ivt9010)
+        {
+            SendMsg("打包机读卡器停到位");
+        }
+
+        private void PackMachine1_CapSeat(object sender)
+        {
+            SendMsg("打包机有瓶盖可用");
+        }
+
+        private void PackMachine1_RunEntrySeat(object sender)
+        {
+            try
+            {
+                SendMsg("打包机转到进桶口");
+            }
+            finally
+            {
+                OnPackEntrySeat();
+            }
+            
+        }
+
+        private void PackMachine1_BcketCapSeat(object sender)
+        {
+            SendMsg("打包机进桶口为已经压盖样桶");
+        }
+
+        private void Btn_HandlerPack_Click(object sender, RoutedEventArgs e)
+        {
+            SendMsg("人工启动打包清桶");
+            StartPackBucket();
+        }
+
+
+        protected virtual void OnPackOriginSeat()
+        {
+            if (null != PackOriginSeat)
+            {
+                PackOriginSeat(this);
+            }
+        }
+
+        protected virtual void OnPackFirstSeat()
+        {
+            if (null != PackFirstSeat)
+            {
+                PackFirstSeat(this);
+            }
+        }
+
+        protected virtual void OnPackTwoSeat()
+        {
+            if (null != PackTwoSeat)
+            {
+                PackTwoSeat(this);
+            }
+        }
+
+        protected virtual void OnPackEntrySeat()
+        {
+            if (null != PackEntrySeat)
+            {
+                PackEntrySeat(this);
+            }
+        }
+
+        protected virtual void OnPackSingleFinished(BucketEntity bucket)
+        {
+            if (null != PackSingleFinished)
+            {
+                PackSingleFinished(this, bucket);
+            }
+        }
+
+        protected virtual void OnPackRun()
+        {
+            if (null != PackRun)
+            {
+                PackRun(this);
+            }
+        }
+
+        protected virtual void OnPackStop()
+        {
+            if (null != PackStop)
+            {
+                PackStop(this);
+            }
+        }
+
+        protected virtual void OnPackException(object args)
+        {
+            if (null != PackException)
+            {
+                PackException(this, args);
+            }
+        }
+
+        /// <summary>
+        /// 更新清样时间
+        /// </summary>
+        public void UpdateClearTime()
+        {
+            m_samAction.UpdateClearTime();
+        }
+
+
+    }
+}

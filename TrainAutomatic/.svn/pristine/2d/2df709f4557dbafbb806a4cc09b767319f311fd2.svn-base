@@ -1,0 +1,20 @@
+﻿DevicesControl
+
+
+library
+C#
+.cs
+E:\Visual Studio\Projects\WPF\TrainAutomatic\DevicesControl\obj\x86\Debug\
+DevicesControl
+none
+false
+DEBUG;TRACE
+
+11-556924306
+
+151097138461
+28-393403464
+Carriage.xaml;IO8Port.xaml;IOPort.xaml;IVT9010.xaml;PackHandler.xaml;PackMachine.xaml;NumberInfo.xaml;S7MS200.xaml;SamMachine.xaml;SensorNode.xaml;STR2RFID.xaml;
+
+False
+

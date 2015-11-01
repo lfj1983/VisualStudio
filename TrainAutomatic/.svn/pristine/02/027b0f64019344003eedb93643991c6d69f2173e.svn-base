@@ -1,0 +1,713 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using PeripheralsDriver;
+using System.IO.Ports;
+using IOPort8Driver;
+using PeripheralsDriver.Serial;
+using System.Windows.Threading;
+using System.ComponentModel;
+using Entities;
+using System.Threading;
+using System.Timers;
+
+namespace DevicesControl
+{
+    /// <summary>
+    /// IO8Port.xaml 的交互逻辑
+    /// </summary>
+    public partial class IO8Port : UserControl
+    {
+		/// <summary>
+        /// 定义并初始化定时器
+        /// </summary>
+        DispatcherTimer m_senderTimer;
+       
+        PeriphSerialDriver<IOPort8Handle> m_io8Port;
+        private int m_Count;
+        /// <summary>
+        /// 绑定一个Count属性
+        /// </summary>
+        [DefaultValue(8)]
+        public int Count
+        {
+            get { return (int)GetValue(CountProperty); }
+            set { SetValue(CountProperty, value); }
+        }
+        /// <summary>
+        /// 声明Count的依赖项属性
+        /// </summary>
+        public static readonly DependencyProperty CountProperty;
+        /// <summary>
+        /// Count改变事件的委托
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        public delegate void CountChangedHandler(object sender, int oldValue, int newValue);
+        /// <summary>
+        /// Count的改变事件
+        /// </summary>
+        public event CountChangedHandler CountChanged;
+       
+        byte[] m_inPorts;
+        /// <summary>
+        /// 绑定InPorts属性
+        /// </summary>
+        [DefaultValue(8)]
+        public byte[] InPorts
+        {
+            get { return (byte[])GetValue(InPortsProperty); }
+            set { SetValue(InPortsProperty, value); }
+        }
+        /// <summary>
+        /// 声明InPorts的依赖项属性
+        /// </summary>
+        public static readonly DependencyProperty InPortsProperty;
+        /// <summary>
+        /// InPorts改变事件的委托
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        public delegate void InPortsChangedHandler(object sender, byte[] oldValue, byte[] newValue);
+        /// <summary>
+        /// InPorts的改变事件
+        /// </summary>
+        public event InPortsChangedHandler InPortsChanged;
+        
+
+        byte[] m_outPorts;
+        /// <summary>
+        /// 绑定OutPorts属性
+        /// </summary>
+        [DefaultValue(8)]
+        public byte[] OutPorts
+        {
+            get { return (byte[])GetValue(OutPortsProperty); }
+            set { SetValue(OutPortsProperty, value); }
+        }
+        /// <summary>
+        /// 声明OutPorts的依赖项属性
+        /// </summary>
+        public static readonly DependencyProperty OutPortsProperty;
+        /// <summary>
+        /// OutPorts改变事件的委托
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        public delegate void OutPortsChangedHandeler(object sender, byte[] oldValue, byte[] newValue);
+        /// <summary>
+        /// OutPorts的改变事件
+        /// </summary>
+        public event OutPortsChangedHandeler OutPortsChanged;
+        /// <summary>
+        /// 绑定一个Io8Serial属性
+        /// </summary>
+        private SerialEntity m_io8Serial;
+
+        public SerialEntity Io8Serial
+        {
+            get { return (SerialEntity)GetValue(Io8SerialProperty); }
+            set { SetValue(Io8SerialProperty, value); }
+        }
+        /// <summary>
+        /// 声明Io8Serial的依赖项属性
+        /// </summary>
+        public static readonly DependencyProperty Io8SerialProperty;
+        /// <summary>
+        /// Io8Serial改变事件的委托
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        public delegate void Io8SerialChangedHandeler(object sender, object oldValue, object  newValue);
+        /// <summary>
+        /// Io8Serial的改变事件
+        /// </summary>
+        public event Io8SerialChangedHandeler Io8SerialChanged;
+        
+        private int m_address;
+        /// <summary>
+        /// 获取或设置板子的地址属性
+        /// </summary>
+        public int Address
+        {
+            get { return (int)GetValue(AddressProperty); }
+            set { SetValue(AddressProperty, value); }
+        }
+
+        public static readonly DependencyProperty AddressProperty;
+        public delegate void AddressChangedHandeler(object sender, int oldValue, int newValue);
+        /// <summary>
+        /// 设备访问地址改变事件
+        /// </summary>
+        public event AddressChangedHandeler AddressChanged;
+
+        private int m_listenerInterval;
+
+        /// <summary>
+        /// 获取或设置监听计时器的时间间隔
+        /// </summary>
+        [DefaultValue(500)]
+        public int ListenerInterval
+        {
+            get { return Convert.ToInt32(GetValue(ListenerIntervalProperty)); }
+            set { SetValue(ListenerIntervalProperty, value); }
+        }
+
+        public static readonly DependencyProperty ListenerIntervalProperty;
+        public delegate void ListenerIntervalChangedHandler(object sender, int newValue);
+        /// <summary>
+        /// 监听计时器时间间隔改变事件
+        /// </summary>
+        public event ListenerIntervalChangedHandler ListenerIntervalChanged;
+
+
+        private object m_msg;
+        /// <summary>
+        /// 获取或设置消息
+        /// </summary>
+        public object Msg
+        {
+            get { return GetValue(MsgProperty); }
+            set { SetValue(MsgProperty, value); }
+        }
+        /// <summary>
+        /// 声明消息依赖项属性
+        /// </summary>
+        public static readonly DependencyProperty MsgProperty;
+        /// <summary>
+        /// 消息内容改变事件的委托
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        public delegate void MsgChangedHandler(object sender, object oldValue, object newValue);
+
+        /// <summary>
+        /// 消息内容改变事件
+        /// </summary>
+        public event MsgChangedHandler MsgChanged;
+
+        public delegate void ExceptionHandler(object sender, object args);
+        /// <summary>
+        /// 异常事件
+        /// </summary>
+        public event ExceptionHandler ExceptionEvent;
+
+        public IO8Port()
+        {
+            InitializeComponent();
+            m_io8Port = new PeriphSerialDriver<IOPort8Handle>();
+            m_senderTimer = new DispatcherTimer(DispatcherPriority.Send);
+            m_senderTimer.Interval = TimeSpan.FromMilliseconds(ListenerInterval);
+            m_senderTimer.Tick += new EventHandler(SenderTimer_tick);
+            m_senderTimer.Start();
+            m_senderTimer.IsEnabled = false;
+            m_io8Port.Listeners += new PeriphSerialAbstract.ListenersHandler(IO8Port_StatusListeners);
+            m_io8Port.ExceptionEvent+=new PeriphSerialAbstract.ExceptionHandler(IO8Port_ExceptionEvent);
+            
+        }
+       /// <summary>
+       /// 静态声明并注册属性
+       /// </summary>
+        static IO8Port()
+        {
+            var MsgMetadata = new PropertyMetadata((string)"", new PropertyChangedCallback(OnMsgPropertyChangedCallback));
+            MsgProperty = DependencyProperty.Register("Msg", typeof(string), typeof(IO8Port), MsgMetadata);
+
+            var CountMatadata = new PropertyMetadata((int)8, new PropertyChangedCallback(OnCountPropertyChangedCallback));
+            CountProperty = DependencyProperty.Register("Count", typeof(int), typeof(IO8Port), CountMatadata);
+
+            var InPortsMatadata = new PropertyMetadata((byte[])new byte[8], new PropertyChangedCallback(OnInPortsPropertyChangedCallback));
+            InPortsProperty = DependencyProperty.Register("InPorts", typeof(byte[]), typeof(IO8Port), InPortsMatadata);
+
+            var OutPortsMatadata = new PropertyMetadata((byte[])new byte[8], new PropertyChangedCallback(OnOutPortsPropertyChangedCallback));
+            OutPortsProperty = DependencyProperty.Register("OutPorts", typeof(byte[]), typeof(IO8Port), OutPortsMatadata);
+
+            var Io8SerialMatadata = new PropertyMetadata((SerialEntity)null, new PropertyChangedCallback(OnIo8SerialPropertyChangedCallback));
+            Io8SerialProperty = DependencyProperty.Register("Io8Serial", typeof(SerialEntity), typeof(IO8Port), Io8SerialMatadata);
+
+            var AddressMatadata = new PropertyMetadata((int)0, new PropertyChangedCallback(OnAddressPropertyChangedCallback));
+            AddressProperty = DependencyProperty.Register("Address", typeof(int), typeof(IO8Port), AddressMatadata);
+
+            var ListenerIntervalMatadata = new PropertyMetadata((int)500, new PropertyChangedCallback(OnListenerIntervalPropertyChangedCallback));
+            ListenerIntervalProperty = DependencyProperty.Register("ListenerInterval", typeof(int), typeof(IO8Port), ListenerIntervalMatadata);
+            
+            
+        }
+        /// <summary>
+        /// 初始化串口
+        /// </summary>
+        /// <param name="port"></param>
+        private void Init(SerialEntity port)
+        {
+            try
+            {
+                if (null != port)
+                {
+                    m_io8Port.Close();
+                    m_io8Port.SetProperties(port.PortName, port.BaudRate, port.DataBits, port.StopBits, port.Parity);
+                    m_io8Port.ReceivedBytesThreshold = 15;
+                    m_io8Port.Open();
+                }
+            }
+            catch (Exception ex)
+            {
+                OnExceptionEvent(ex);
+            }
+        }
+
+        private static void OnListenerIntervalPropertyChangedCallback(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            (sender as IO8Port).OnListenerIntervalChanged(Convert.ToInt32(e.NewValue));
+        }
+
+        protected virtual void OnListenerIntervalChanged(int interval)
+        {
+            try
+            {
+                SetListenerInterval(interval);
+            }
+            finally
+            {
+                if (null != ListenerIntervalChanged)
+                {
+                    ListenerIntervalChanged(this, interval);
+                }
+            }
+        }
+
+        private void SetListenerInterval(int interval)
+        {
+            try
+            {
+                //if (m_senderTimer.IsEnabled)
+                //{
+                //    m_senderTimer.IsEnabled = false;
+                //    m_senderTimer.Interval = TimeSpan.FromMilliseconds(interval);
+                //    m_senderTimer.IsEnabled = true;
+                //}
+                //else
+                //{
+                    m_senderTimer.Interval = TimeSpan.FromMilliseconds(interval);
+                //}
+
+            }
+            catch (Exception ex)
+            {
+                OnExceptionEvent(ex);
+            }
+        }
+
+        private static void OnCountPropertyChangedCallback(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            (sender as IO8Port).OnCountChanged(Convert.ToInt32(e.OldValue), Convert.ToInt32(e.NewValue));
+        }
+        /// <summary>
+        /// Count事件的触发
+        /// </summary>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        protected virtual void OnCountChanged(int oldValue, int newValue)
+        {
+            try
+            {
+                InPorts = new byte[newValue];
+                OutPorts = new byte[newValue];
+            }
+            catch (Exception ex)
+            {
+                OnExceptionEvent(ex);
+            }
+            finally
+            {
+                if (null != CountChanged)
+                {
+                    CountChanged(this, oldValue, newValue);
+                }
+            }
+
+        }
+        /// <summary>
+        /// InPorts属性改变事件的回调函数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private static void OnInPortsPropertyChangedCallback(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            (sender as IO8Port).OnInPortsChanged((byte[])e.OldValue,(byte[])e.NewValue);
+        }
+        /// <summary>
+        /// InPortsProperty的改变事件
+        /// </summary>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        protected virtual void OnInPortsChanged(byte[] oldValue, byte[] newValue)
+        {
+            try
+            {
+                InitInports(newValue);
+            }
+            catch(Exception ex)
+            {
+                OnExceptionEvent(ex);
+            }
+            finally
+            {
+                if (null != InPortsChanged)
+                {
+                    InPortsChanged(this, oldValue, newValue);
+                }
+            }
+            
+        }
+
+        private static void OnOutPortsPropertyChangedCallback(DependencyObject sender,DependencyPropertyChangedEventArgs e)
+        {
+            (sender as IO8Port).OnOutPortsChanged((byte[])e.OldValue, (byte[])e.NewValue);
+        }
+        /// <summary>
+        /// OutPortsProperty改变事件
+        /// </summary>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        protected virtual void OnOutPortsChanged(byte[] oldValue, byte[] newValue)
+        {
+            try
+            {
+                InitOutports(newValue);
+            }
+            catch (Exception ex)
+            {
+                OnExceptionEvent(ex);
+            }
+            finally
+            {
+                if (null != OutPortsChanged)
+                {
+                    OutPortsChanged(this, oldValue, newValue);
+                }
+            }
+        }
+        /// <summary>
+        /// 对Inports初始化
+        /// </summary>
+        /// <param name="data"></param>
+        public void InitInports(byte[] data)
+        {  
+            //判断data数组的长度与InPortPanel中控件的个数是否相等
+            if (data.Length == InPortPanel.Children.Count)
+            {
+                for (int i = 0; i < data.Length; i++)
+                {
+                   (InPortPanel.Children[i] as IOPort).Status = data[i];//把当前第i个IOPort的status置为data[i]
+                }
+            }
+            else
+            {
+                InPortPanel.Children.Clear();//清空当前InPortPanel中的控件
+                for (int i = 0; i < data.Length; i++)
+                {
+                    IOPort port = new IOPort();//初始并实例化IOPort
+                    
+                    port.Margin = new Thickness(2);//每个Port之间的间隔是2
+
+                    InPortPanel.Children.Add(port);//在InPortPanel中添加控件
+                }
+            }
+        }
+        /// <summary>
+        /// 对Outports初始化（与上面对应）
+        /// </summary>
+        /// <param name="data"></param>
+        public void InitOutports(byte[] data)
+        {
+            if (data.Length == OutPortPanel.Children.Count)
+            {
+                for (int i = 0; i < data.Length; i++)
+                {  
+                   (OutPortPanel.Children[i] as IOPort).Status = data[i];
+                }
+            }
+            else
+            {
+                OutPortPanel.Children.Clear();
+                for (int i = 0; i < data.Length; i++)
+                {
+                    IOPort port = new IOPort();
+                    port.Margin = new Thickness(2);
+                    port.Click += new DevicesControl.IOPort.ClickHandler(Port_Click);
+                    OutPortPanel.Children.Add(port);
+                }
+            }
+         }
+        /// <summary>
+        /// Io8Serial属性改变事件的回调函数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private static void OnIo8SerialPropertyChangedCallback(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            (sender as IO8Port).OnIo8SerialChanged(e.OldValue,e.NewValue);
+        }
+        /// <summary>
+        /// Io8Serial属性改变事件的触发
+        /// </summary>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        protected virtual void OnIo8SerialChanged(object oldValue,object newValue)
+        {
+            try
+            {
+                Init((SerialEntity)newValue);
+            }
+            catch (Exception ex)
+            {
+                OnExceptionEvent(ex);
+            }
+            finally
+            {
+                if (null != Io8SerialChanged)
+                {
+                    Io8SerialChanged(this, oldValue, newValue);
+                }
+            }
+        }
+        /// <summary>
+        /// 地址属性改变事件的回调函数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private static void OnAddressPropertyChangedCallback(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            (sender as IO8Port).OnAddressChanged(Convert.ToInt32(e.OldValue), Convert.ToInt32(e.NewValue));
+        }
+        /// <summary>
+        /// 板子地址改变事件的触发
+        /// </summary>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        protected virtual void OnAddressChanged(int oldValue, int newValue)
+        {
+            if (null != AddressChanged)
+            {
+                AddressChanged(this, oldValue, newValue);
+            }
+        }
+        /// <summary>
+        /// IO8Port状态的监听事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void IO8Port_StatusListeners(object sender, PeriphSerialEventArgs args)
+        {
+           Dispatcher.BeginInvoke(new InitPortsDelegate(InitPorts), new object[] { args });
+        }
+        /// <summary>
+        /// IO8Port的异常事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="ex"></param>
+        private void IO8Port_ExceptionEvent(object sender, object ex)
+        {
+            //Dispatcher.Invoke(new ThreadMsgDelegate(ThreadMsg), new object[] { ex.ToString() });
+            OnExceptionEvent(ex);
+        }
+
+        /// <summary>
+        /// 异常事件
+        /// </summary>
+        /// <param name="e"></param>
+        protected virtual void OnExceptionEvent(object e)
+        {
+            try
+            {
+                SendMsg((e as Exception).Message);
+            }
+            finally
+            {
+                if (null != ExceptionEvent)
+                {
+                    ExceptionEvent(this, e);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 跨线程Msg改变事件
+        /// </summary>
+        /// <param name="msg"></param>
+        delegate void SendMsgDelegate(string msg);
+        private void SendMsg(string msg)
+        {
+            try
+            {
+                Msg = msg;
+            }
+            catch (InvalidOperationException ex)
+            {
+                
+                this.Dispatcher.BeginInvoke(new SendMsgDelegate(SendMsg), new object[] { msg });
+            }
+        }
+
+        /// <summary>
+        /// 声明InitPorts的委托
+        /// </summary>
+        /// <param name="args"></param>
+        delegate void InitPortsDelegate(IOPort8EventArgs args);
+        //定义InitPorts事件
+        private void InitPorts(IOPort8EventArgs args)
+        {
+            IOPort8EventArgs arg = args as IOPort8EventArgs;//把args强制转换成IOPort8EventArgs类型然后赋值给arg
+            //判断arg.Type与PeriphSerialType.In（输入）是否相等
+            if (arg.Type == PeriphSerialType.In)
+            {
+                InPorts = arg.Data;//把arg.Data的值直接赋给InPorts
+               
+             }
+            //判断arg.Type与PeriphSerialType.Out（输出）是否相等
+            if (arg.Type == PeriphSerialType.Out)
+            {
+                OutPorts = arg.Data;//把arg.Data的值直接赋给OutPorts
+            }
+        }
+        /// <summary>
+        /// 获取输入的状态
+        /// </summary>
+        /// <param name="portnumber"></param>
+        /// <returns></returns>
+        public int  GetInStatus(int portnumber)
+        {
+            return (InPortPanel.Children[portnumber - 1] as IOPort).Status;//把InPortPanel.Children[portnumber - 1]转换成IOPort，返回IOPort.Status
+        }
+        /// <summary>
+        /// 获取输出的状态
+        /// </summary>
+        /// <param name="portnumber"></param>
+        /// <returns></returns>
+        public int GetOutStatus(int portnumber)
+        {
+            return (OutPortPanel.Children[portnumber - 1] as IOPort).Status;
+        }
+        /// <summary>
+        /// 计时器开始
+        /// </summary>
+        public void Start()
+        {
+            m_senderTimer.IsEnabled = true;
+        }
+        /// <summary>
+        /// 计时器停止
+        /// </summary>
+        public void Stop()
+        {
+            m_senderTimer.IsEnabled = false;
+        }
+        /// <summary>
+        ///定义 DispatcherTime_tick事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void SenderTimer_tick(object sender, EventArgs e)
+        {
+            SendCmd();
+        }
+
+        delegate void SendCmdDelegate();
+        public void SendCmd()
+        {
+            try
+            {
+                m_io8Port.ReadOut(Address, 0);//读取输出状态
+                System.Threading.Thread.Sleep(100);//线程休眠时间的设置
+                m_io8Port.ReadIn(Address, 0);//读取输入状态
+            }
+            catch (InvalidOperationException ex)
+            {
+                this.Dispatcher.BeginInvoke(new SendCmdDelegate(SendCmd));
+            }
+        }
+
+        /// <summary>
+        ///  m_io8Port串口打开
+        /// </summary>
+        public void Open()
+        {
+            m_io8Port.Open();
+        }
+        /// <summary>
+        ///  m_io8Port串口关闭
+        /// </summary>
+        public void Close()
+        {
+            //if (m_senderTimer.IsEnabled)
+            //{
+                m_senderTimer.IsEnabled = false;
+            //}
+            m_io8Port.Close();
+        }
+        /// <summary>
+        /// 定义Out方法
+        /// </summary>
+        /// <param name="port"></param>
+        /// <param name="cmd"></param>
+        public void Out(int port,int cmd)
+        {
+            m_io8Port.Out(Address , port, cmd);//调用参数为（板子地址、端口号、命令）的方法m_io8Port.Out
+        }
+        /// <summary>
+        /// 定义Port_Click事件
+        /// </summary>
+        /// <param name="sender"></param>
+        public void Port_Click(object sender)
+        {
+            IOPort port = sender as IOPort;//把sender转换为IOPort赋值给port
+            int p = OutPortPanel.Children.IndexOf(port);//把OutPortPanel中Port的索引值赋给p
+            if (1 == port.Status)
+            { 
+                Out(p + 1, 0);//调用Out方法
+            }
+            else
+            {
+                Out(p + 1, 1);
+            }
+            
+        }
+        /// <summary>
+        /// MsgProperty改变事件的回调函数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private static void OnMsgPropertyChangedCallback(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            (sender as IO8Port).OnMsgChanged(e.OldValue, e.NewValue);
+        }
+
+        /// <summary>
+        /// 消息改变事件的触发
+        /// </summary>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        protected virtual void OnMsgChanged(object oldValue, object newValue)
+        {
+            if (null != MsgChanged)
+            {
+                MsgChanged(this, oldValue, newValue);
+            }
+        }
+    }
+}

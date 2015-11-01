@@ -1,0 +1,88 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Entities
+{
+    public class SamInfoEntity
+    {
+        private int m_samId;
+
+        /// <summary>
+        ///  获取或设置采样机Id
+        /// </summary>
+        public int SamId
+        {
+            get { return m_samId; }
+            set { m_samId = value; }
+        }
+
+        private string m_samName;
+        /// <summary>
+        /// 获取或设置采样机名称
+        /// </summary>
+        public string SamName
+        {
+            get { return m_samName; }
+            set { m_samName = value; }
+        }
+
+        private string m_samType;
+        /// <summary>
+        /// 获取或设置采样机类型：
+        /// 桥式/皮带/旋臂式
+        /// </summary>
+        public string SamType
+        {
+            get { return m_samType; }
+            set { m_samType = value; }
+        }
+
+        private string m_samStatus;
+        /// <summary>
+        /// 获取或设置采样机状态：
+        /// 在线/维护
+        /// </summary>
+        public string SamStatus
+        {
+            get { return m_samStatus; }
+            set { m_samStatus = value; }
+        }
+
+        private int m_bucketCount;
+        /// <summary>
+        /// 获取或设置样桶数量
+        /// </summary>
+        public int BucketCount
+        {
+            get { return m_bucketCount; }
+            set { m_bucketCount = value; }
+        }
+
+        private int m_samDeviceId;
+        /// <summary>
+        /// 获取或设置采样机设备ID
+        /// </summary>
+        public int SamDeviceId
+        {
+            get { return m_samDeviceId; }
+            set { m_samDeviceId = value; }
+        }
+
+
+        private string m_clearTimeName;
+        /// <summary>
+        /// 获取或设置采样机清样时间名称
+        /// </summary>
+        public string ClearTimeName
+        {
+            get { return m_clearTimeName; }
+            set { m_clearTimeName = value; }
+        }
+
+
+
+
+    }
+}

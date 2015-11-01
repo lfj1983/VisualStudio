@@ -1,0 +1,79 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using AppContext;
+using Operation.Args;
+using Operation.AppsException;
+using System.Collections.Specialized;
+using Core;
+using Core.Data;
+using System.Data;
+
+namespace Operation.CenterControl
+{
+    public class CenterOperation
+    {
+       RODbAdapter<ROracleDb> m_oracleAdp;
+
+        /// <summary>
+        /// 连接数据库
+        /// </summary>
+        /// <param name="conn">ApplicationContext.Context.SysDBConnect</param>
+        public CenterOperation(string conn)
+        {
+            m_oracleAdp = new RODbAdapter<ROracleDb>(conn);
+            
+        }
+        /// <summary>
+        /// 获取1号采样机控制中心配置
+        /// </summary>
+        /// <param name="cmd"></param>
+        /// <returns></returns>
+        public object GetValueByDevice1(CenterControlCmd1 cmd)
+        {
+            string sql = string.Format(ApplicationContext.Context.CenterValueByColumnSql, cmd.ToString());
+            
+            DataTable table = m_oracleAdp.Query(sql);
+            object value = table.Rows[0][0];
+            return value;
+        }
+        /// <summary>
+        /// 获取2号采样机控制中心配置
+        /// </summary>
+        /// <param name="cmd"></param>
+        public object GetValueByDevice2(CenterControlCmd2 cmd)
+        {
+            string sql = string.Format(ApplicationContext.Context.CenterValueByColumnSql, cmd.ToString());
+            
+            DataTable table = m_oracleAdp.Query(sql);
+            object value = table.Rows[0][0];
+            return value;
+        }
+
+        /// <summary>
+        /// 1号采样机
+        /// </summary>
+        /// <param name="cmd"></param>
+        /// <param name="value"></param>
+        public void Control1(CenterControlCmd1 cmd, object value)
+        {
+            string sql = string.Format(ApplicationContext.Context.CenterControlSQL, cmd);
+            NameValueCollection param = new NameValueCollection();
+            param.Add("value", value.ToString());
+            int row = m_oracleAdp.Update(sql, param);
+        }
+        /// <summary>
+        /// 2号采样机
+        /// </summary>
+        /// <param name="cmd"></param>
+        /// <param name="value"></param>
+        public void Control2(CenterControlCmd2 cmd, object value)
+        {
+            string sql = string.Format(ApplicationContext.Context.CenterControlSQL, cmd);
+            NameValueCollection param = new NameValueCollection();
+            param.Add("value", value.ToString());
+            int row = m_oracleAdp.Update(sql, param);
+        }
+    }
+}

@@ -1,0 +1,757 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Index</title>
+  <meta content="text/html; charset=utf-8" http-equiv="content-type">
+	<style>
+		html { font-family:sans-serif; background-color:#ffffff; font-size:75%;}
+		a { text-decoration:none; color:#000; }
+		.highlighted { background:#06c; color:#fff }
+		#index_items { background:#fff; position:relative; white-space:nowrap;}
+		#loading { background:#a00; color:#fff; position:absolute; top:0; left:0; opacity:0.7; padding:8px; font-weight:bold;}
+	</style>
+	<script>
+		function highlight(el) {
+		    if(parent.frames['zform'].oldHighlight) parent.frames['zform'].oldHighlight.className = "";
+		    el.className = "highlighted";
+		    parent.frames['zform'].oldHighlight = el;
+		}
+	</script>
+</head>
+<body style="direction: ltr;">
+  <div id="index_items">
+    <div id="loading">Loading...</div>
+<a id="w_AddrIndex Property" href="topic_0000000000000078.html" target="vbdocright" onclick="highlight(this)">AddrIndex Property</a><br/>
+
+<a id="w_App Class" href="topic_00000000000000A4.html" target="vbdocright" onclick="highlight(this)">App Class</a><br/>
+
+<a id="w_AppContext Namespace" href="topic_00000000000000A8.html" target="vbdocright" onclick="highlight(this)">AppContext Namespace</a><br/>
+
+<a id="w_ApplicationContext Class" href="topic_00000000000000A9.html" target="vbdocright" onclick="highlight(this)">ApplicationContext Class</a><br/>
+
+<a id="w_Attribute Property" href="topic_0000000000000063.html" target="vbdocright" onclick="highlight(this)">Attribute Property</a><br/>
+
+<a id="w_BaudRate Property {Entities.SerialEntity}" href="topic_0000000000000093.html" target="vbdocright" onclick="highlight(this)">BaudRate Property {Entities.SerialEntity}</a><br/>
+
+<a id="w_BaudRate Property {PeripheralsDriver.Serial.PeriphSerialDriver&lt;T&gt;}" href="topic_0000000000000022.html" target="vbdocright" onclick="highlight(this)">BaudRate Property {PeripheralsDriver.Serial.PeriphSerialDriver&lt;T&gt;}</a><br/>
+
+<a id="w_BaudRate Property {RFIDDriver.RFIDCardDriver&lt;T&gt;}" href="topic_0000000000000008.html" target="vbdocright" onclick="highlight(this)">BaudRate Property {RFIDDriver.RFIDCardDriver&lt;T&gt;}</a><br/>
+
+<a id="w_CallProc Method {Core.Data.RODbAdapter&lt;T&gt;}" href="topic_00000000000000CA.html" target="vbdocright" onclick="highlight(this)">CallProc Method {Core.Data.RODbAdapter&lt;T&gt;}</a><br/>
+
+<a id="w_CallProc Method {Core.Data.RODbInterface&lt;T, P&gt;}" href="topic_00000000000000D5.html" target="vbdocright" onclick="highlight(this)">CallProc Method {Core.Data.RODbInterface&lt;T, P&gt;}</a><br/>
+
+<a id="w_CallProc Method {Core.Data.ROleDb}" href="topic_00000000000000E2.html" target="vbdocright" onclick="highlight(this)">CallProc Method {Core.Data.ROleDb}</a><br/>
+
+<a id="w_CallProc Method {Core.Data.ROracleDb}" href="topic_00000000000000EF.html" target="vbdocright" onclick="highlight(this)">CallProc Method {Core.Data.ROracleDb}</a><br/>
+
+<a id="w_CallProc Method {Core.Data.RSQLDb}" href="topic_00000000000000FC.html" target="vbdocright" onclick="highlight(this)">CallProc Method {Core.Data.RSQLDb}</a><br/>
+
+<a id="w_CallProcFun Method {Core.Data.RODbAdapter&lt;T&gt;}" href="topic_00000000000000CE.html" target="vbdocright" onclick="highlight(this)">CallProcFun Method {Core.Data.RODbAdapter&lt;T&gt;}</a><br/>
+
+<a id="w_CallProcFun Method {Core.Data.RODbInterface&lt;T, P&gt;}" href="topic_00000000000000D7.html" target="vbdocright" onclick="highlight(this)">CallProcFun Method {Core.Data.RODbInterface&lt;T, P&gt;}</a><br/>
+
+<a id="w_CallProcFun Method {Core.Data.ROleDb}" href="topic_00000000000000E6.html" target="vbdocright" onclick="highlight(this)">CallProcFun Method {Core.Data.ROleDb}</a><br/>
+
+<a id="w_CallProcFun Method {Core.Data.ROracleDb}" href="topic_00000000000000F3.html" target="vbdocright" onclick="highlight(this)">CallProcFun Method {Core.Data.ROracleDb}</a><br/>
+
+<a id="w_CallProcFun Method {Core.Data.RSQLDb}" href="topic_0000000000000100.html" target="vbdocright" onclick="highlight(this)">CallProcFun Method {Core.Data.RSQLDb}</a><br/>
+
+<a id="w_CallProcZip Method {Core.Data.RODbAdapter&lt;T&gt;}" href="topic_00000000000000CD.html" target="vbdocright" onclick="highlight(this)">CallProcZip Method {Core.Data.RODbAdapter&lt;T&gt;}</a><br/>
+
+<a id="w_CallProcZip Method {Core.Data.RODbInterface&lt;T, P&gt;}" href="topic_00000000000000D9.html" target="vbdocright" onclick="highlight(this)">CallProcZip Method {Core.Data.RODbInterface&lt;T, P&gt;}</a><br/>
+
+<a id="w_CallProcZip Method {Core.Data.ROleDb}" href="topic_00000000000000E5.html" target="vbdocright" onclick="highlight(this)">CallProcZip Method {Core.Data.ROleDb}</a><br/>
+
+<a id="w_CallProcZip Method {Core.Data.ROracleDb}" href="topic_00000000000000F2.html" target="vbdocright" onclick="highlight(this)">CallProcZip Method {Core.Data.ROracleDb}</a><br/>
+
+<a id="w_CallProcZip Method {Core.Data.RSQLDb}" href="topic_00000000000000FF.html" target="vbdocright" onclick="highlight(this)">CallProcZip Method {Core.Data.RSQLDb}</a><br/>
+
+<a id="w_Capacity Property" href="topic_0000000000000066.html" target="vbdocright" onclick="highlight(this)">Capacity Property</a><br/>
+
+<a id="w_Close Method {DevicesControl.STR2RFID}" href="topic_000000000000015B.html" target="vbdocright" onclick="highlight(this)">Close Method {DevicesControl.STR2RFID}</a><br/>
+
+<a id="w_Close Method {PeripheralsDriver.Serial.PeriphSerialDriver&lt;T&gt;}" href="topic_000000000000002E.html" target="vbdocright" onclick="highlight(this)">Close Method {PeripheralsDriver.Serial.PeriphSerialDriver&lt;T&gt;}</a><br/>
+
+<a id="w_Close Method {PeripheralsDriver.Serial.PeriphSerialInterface}" href="topic_0000000000000037.html" target="vbdocright" onclick="highlight(this)">Close Method {PeripheralsDriver.Serial.PeriphSerialInterface}</a><br/>
+
+<a id="w_Close Method {RFIDDriver.RFIDCardDriver&lt;T&gt;}" href="topic_0000000000000011.html" target="vbdocright" onclick="highlight(this)">Close Method {RFIDDriver.RFIDCardDriver&lt;T&gt;}</a><br/>
+
+<a id="w_Close Method {RFIDDriver.RFIDInterface}" href="topic_0000000000000019.html" target="vbdocright" onclick="highlight(this)">Close Method {RFIDDriver.RFIDInterface}</a><br/>
+
+<a id="w_Connect Property" href="topic_0000000000000169.html" target="vbdocright" onclick="highlight(this)">Connect Property</a><br/>
+
+<a id="w_Context Class {AppContext}" href="topic_00000000000000AA.html" target="vbdocright" onclick="highlight(this)">Context Class {AppContext}</a><br/>
+
+<a id="w_Context Class {Core.Util}" href="topic_000000000000011D.html" target="vbdocright" onclick="highlight(this)">Context Class {Core.Util}</a><br/>
+
+<a id="w_Context Constructor {AppContext.Context}" href="topic_00000000000000BE.html" target="vbdocright" onclick="highlight(this)">Context Constructor {AppContext.Context}</a><br/>
+
+<a id="w_Context Constructor {Core.Util.Context}" href="topic_000000000000011E.html" target="vbdocright" onclick="highlight(this)">Context Constructor {Core.Util.Context}</a><br/>
+
+<a id="w_ContextConnect Property" href="topic_00000000000000AB.html" target="vbdocright" onclick="highlight(this)">ContextConnect Property</a><br/>
+
+<a id="w_Core.Data Namespace" href="topic_00000000000000C1.html" target="vbdocright" onclick="highlight(this)">Core.Data Namespace</a><br/>
+
+<a id="w_Core.Encode Namespace" href="topic_0000000000000101.html" target="vbdocright" onclick="highlight(this)">Core.Encode Namespace</a><br/>
+
+<a id="w_Core.Entity Namespace" href="topic_0000000000000108.html" target="vbdocright" onclick="highlight(this)">Core.Entity Namespace</a><br/>
+
+<a id="w_Core.Log Namespace" href="topic_000000000000010F.html" target="vbdocright" onclick="highlight(this)">Core.Log Namespace</a><br/>
+
+<a id="w_Core.Util Namespace" href="topic_000000000000011C.html" target="vbdocright" onclick="highlight(this)">Core.Util Namespace</a><br/>
+
+<a id="w_Count Property" href="topic_0000000000000069.html" target="vbdocright" onclick="highlight(this)">Count Property</a><br/>
+
+<a id="w_CreateFile Method" href="topic_000000000000011A.html" target="vbdocright" onclick="highlight(this)">CreateFile Method</a><br/>
+
+<a id="w_Data Property {IOPort8Driver.IOPort8EventArgs}" href="topic_000000000000006D.html" target="vbdocright" onclick="highlight(this)">Data Property {IOPort8Driver.IOPort8EventArgs}</a><br/>
+
+<a id="w_Data Property {PeripheralsDriver.Serial.PeriphSerialEventArgs}" href="topic_0000000000000030.html" target="vbdocright" onclick="highlight(this)">Data Property {PeripheralsDriver.Serial.PeriphSerialEventArgs}</a><br/>
+
+<a id="w_Data Property {RFIDDriver.TagEventArgs}" href="topic_000000000000001B.html" target="vbdocright" onclick="highlight(this)">Data Property {RFIDDriver.TagEventArgs}</a><br/>
+
+<a id="w_Data Property {Validity.ValidEventArgs}" href="topic_0000000000000161.html" target="vbdocright" onclick="highlight(this)">Data Property {Validity.ValidEventArgs}</a><br/>
+
+<a id="w_DataBits Property {Entities.SerialEntity}" href="topic_0000000000000094.html" target="vbdocright" onclick="highlight(this)">DataBits Property {Entities.SerialEntity}</a><br/>
+
+<a id="w_DataBits Property {PeripheralsDriver.Serial.PeriphSerialDriver&lt;T&gt;}" href="topic_0000000000000023.html" target="vbdocright" onclick="highlight(this)">DataBits Property {PeripheralsDriver.Serial.PeriphSerialDriver&lt;T&gt;}</a><br/>
+
+<a id="w_DataBits Property {RFIDDriver.RFIDCardDriver&lt;T&gt;}" href="topic_0000000000000009.html" target="vbdocright" onclick="highlight(this)">DataBits Property {RFIDDriver.RFIDCardDriver&lt;T&gt;}</a><br/>
+
+<a id="w_Decode Method {Core.Encode.EncodeInterface}" href="topic_0000000000000104.html" target="vbdocright" onclick="highlight(this)">Decode Method {Core.Encode.EncodeInterface}</a><br/>
+
+<a id="w_Decode Method {Core.Encode.EncodeText}" href="topic_0000000000000107.html" target="vbdocright" onclick="highlight(this)">Decode Method {Core.Encode.EncodeText}</a><br/>
+
+<a id="w_DecodeData Method {IOPort8Driver.IOPort8Handle}" href="topic_0000000000000071.html" target="vbdocright" onclick="highlight(this)">DecodeData Method {IOPort8Driver.IOPort8Handle}</a><br/>
+
+<a id="w_DecodeData Method {PeripheralsDriver.Serial.PeriphSerialHandleInterface&lt;T&gt;}" href="topic_0000000000000032.html" target="vbdocright" onclick="highlight(this)">DecodeData Method {PeripheralsDriver.Serial.PeriphSerialHandleInterface&lt;T&gt;}</a><br/>
+
+<a id="w_DecodeTag Method {RFIDDriver.RFIDHandleInterface&lt;T&gt;}" href="topic_0000000000000014.html" target="vbdocright" onclick="highlight(this)">DecodeTag Method {RFIDDriver.RFIDHandleInterface&lt;T&gt;}</a><br/>
+
+<a id="w_DecodeTag Method {STR2Driver.STR2Handle}" href="topic_000000000000005F.html" target="vbdocright" onclick="highlight(this)">DecodeTag Method {STR2Driver.STR2Handle}</a><br/>
+
+<a id="w_DefaultState Property" href="topic_000000000000008C.html" target="vbdocright" onclick="highlight(this)">DefaultState Property</a><br/>
+
+<a id="w_DeleteFiles Method" href="topic_000000000000012A.html" target="vbdocright" onclick="highlight(this)">DeleteFiles Method</a><br/>
+
+<a id="w_DeleteHistoryZipFiles Class" href="topic_0000000000000129.html" target="vbdocright" onclick="highlight(this)">DeleteHistoryZipFiles Class</a><br/>
+
+<a id="w_DeviceUnit Property" href="topic_00000000000000A1.html" target="vbdocright" onclick="highlight(this)">DeviceUnit Property</a><br/>
+
+<a id="w_DevicesControl Namespace" href="topic_0000000000000143.html" target="vbdocright" onclick="highlight(this)">DevicesControl Namespace</a><br/>
+
+<a id="w_Download Class" href="topic_000000000000012C.html" target="vbdocright" onclick="highlight(this)">Download Class</a><br/>
+
+<a id="w_Download Constructor" href="topic_0000000000000130.html" target="vbdocright" onclick="highlight(this)">Download Constructor</a><br/>
+
+<a id="w_DownloadFile Method" href="topic_0000000000000132.html" target="vbdocright" onclick="highlight(this)">DownloadFile Method</a><br/>
+
+<a id="w_Enable Property {Entities.InDeviceEntity}" href="topic_000000000000008E.html" target="vbdocright" onclick="highlight(this)">Enable Property {Entities.InDeviceEntity}</a><br/>
+
+<a id="w_Enable Property {Entities.SerialEntity}" href="topic_000000000000009B.html" target="vbdocright" onclick="highlight(this)">Enable Property {Entities.SerialEntity}</a><br/>
+
+<a id="w_Encode Method {Core.Encode.EncodeInterface}" href="topic_0000000000000103.html" target="vbdocright" onclick="highlight(this)">Encode Method {Core.Encode.EncodeInterface}</a><br/>
+
+<a id="w_Encode Method {Core.Encode.EncodeText}" href="topic_0000000000000106.html" target="vbdocright" onclick="highlight(this)">Encode Method {Core.Encode.EncodeText}</a><br/>
+
+<a id="w_EncodeInterface Interface" href="topic_0000000000000102.html" target="vbdocright" onclick="highlight(this)">EncodeInterface Interface</a><br/>
+
+<a id="w_EncodeText Class" href="topic_0000000000000105.html" target="vbdocright" onclick="highlight(this)">EncodeText Class</a><br/>
+
+<a id="w_Entities Namespace" href="topic_0000000000000086.html" target="vbdocright" onclick="highlight(this)">Entities Namespace</a><br/>
+
+<a id="w_ExceptionEvent Event {DevicesControl.STR2RFID}" href="topic_0000000000000155.html" target="vbdocright" onclick="highlight(this)">ExceptionEvent Event {DevicesControl.STR2RFID}</a><br/>
+
+<a id="w_ExceptionEvent Event {RFIDDriver.RFIDAbstract}" href="topic_0000000000000005.html" target="vbdocright" onclick="highlight(this)">ExceptionEvent Event {RFIDDriver.RFIDAbstract}</a><br/>
+
+<a id="w_FStream Property" href="topic_000000000000010B.html" target="vbdocright" onclick="highlight(this)">FStream Property</a><br/>
+
+<a id="w_Failed Event {STR2Valid.STR2CardValid}" href="topic_0000000000000170.html" target="vbdocright" onclick="highlight(this)">Failed Event {STR2Valid.STR2CardValid}</a><br/>
+
+<a id="w_Failed Event {Validity.ValidAbstract}" href="topic_000000000000015F.html" target="vbdocright" onclick="highlight(this)">Failed Event {Validity.ValidAbstract}</a><br/>
+
+<a id="w_FailedType Property" href="topic_0000000000000172.html" target="vbdocright" onclick="highlight(this)">FailedType Property</a><br/>
+
+<a id="w_FileFullName Property" href="topic_000000000000012D.html" target="vbdocright" onclick="highlight(this)">FileFullName Property</a><br/>
+
+<a id="w_FileState Class" href="topic_0000000000000109.html" target="vbdocright" onclick="highlight(this)">FileState Class</a><br/>
+
+<a id="w_FileState Constructor" href="topic_000000000000010A.html" target="vbdocright" onclick="highlight(this)">FileState Constructor</a><br/>
+
+<a id="w_FlowId Property {AppContext.Context}" href="topic_00000000000000B3.html" target="vbdocright" onclick="highlight(this)">FlowId Property {AppContext.Context}</a><br/>
+
+<a id="w_FlowId Property {Entities.InDeviceEntity}" href="topic_0000000000000088.html" target="vbdocright" onclick="highlight(this)">FlowId Property {Entities.InDeviceEntity}</a><br/>
+
+<a id="w_FlowId Property {Entities.SerialEntity}" href="topic_0000000000000099.html" target="vbdocright" onclick="highlight(this)">FlowId Property {Entities.SerialEntity}</a><br/>
+
+<a id="w_FlowId Property {Entities.WeighingEntity}" href="topic_000000000000009E.html" target="vbdocright" onclick="highlight(this)">FlowId Property {Entities.WeighingEntity}</a><br/>
+
+<a id="w_FlowName Property" href="topic_00000000000000B1.html" target="vbdocright" onclick="highlight(this)">FlowName Property</a><br/>
+
+<a id="w_FlowSQL Property" href="topic_00000000000000AD.html" target="vbdocright" onclick="highlight(this)">FlowSQL Property</a><br/>
+
+<a id="w_Format Method" href="topic_0000000000000137.html" target="vbdocright" onclick="highlight(this)">Format Method</a><br/>
+
+<a id="w_FormatCmd Method" href="topic_000000000000007F.html" target="vbdocright" onclick="highlight(this)">FormatCmd Method</a><br/>
+
+<a id="w_FormatKeyValue Method" href="topic_0000000000000138.html" target="vbdocright" onclick="highlight(this)">FormatKeyValue Method</a><br/>
+
+<a id="w_FormatTTS Method" href="topic_000000000000013D.html" target="vbdocright" onclick="highlight(this)">FormatTTS Method</a><br/>
+
+<a id="w_FormatTTSStr Method" href="topic_000000000000013E.html" target="vbdocright" onclick="highlight(this)">FormatTTSStr Method</a><br/>
+
+<a id="w_FormatTools Class" href="topic_0000000000000135.html" target="vbdocright" onclick="highlight(this)">FormatTools Class</a><br/>
+
+<a id="w_GetCloseCmd Method {Commands.RFID.RFIDCmdInterface&lt;T&gt;}" href="topic_000000000000004C.html" target="vbdocright" onclick="highlight(this)">GetCloseCmd Method {Commands.RFID.RFIDCmdInterface&lt;T&gt;}</a><br/>
+
+<a id="w_GetCloseCmd Method {STR2Driver.STR2Cmd}" href="topic_000000000000005C.html" target="vbdocright" onclick="highlight(this)">GetCloseCmd Method {STR2Driver.STR2Cmd}</a><br/>
+
+<a id="w_GetCmdContext Method {IOPort8Driver.IOPort8Handle}" href="topic_0000000000000072.html" target="vbdocright" onclick="highlight(this)">GetCmdContext Method {IOPort8Driver.IOPort8Handle}</a><br/>
+
+<a id="w_GetCmdContext Method {PeripheralsDriver.Serial.PeriphSerialHandleInterface&lt;T&gt;}" href="topic_0000000000000033.html" target="vbdocright" onclick="highlight(this)">GetCmdContext Method {PeripheralsDriver.Serial.PeriphSerialHandleInterface&lt;T&gt;}</a><br/>
+
+<a id="w_GetCmdContext Method {RFIDDriver.RFIDHandleInterface&lt;T&gt;}" href="topic_0000000000000015.html" target="vbdocright" onclick="highlight(this)">GetCmdContext Method {RFIDDriver.RFIDHandleInterface&lt;T&gt;}</a><br/>
+
+<a id="w_GetCmdContext Method {STR2Driver.STR2Handle}" href="topic_0000000000000060.html" target="vbdocright" onclick="highlight(this)">GetCmdContext Method {STR2Driver.STR2Handle}</a><br/>
+
+<a id="w_GetCmdIndex Method {Commands.IO.IOCmdInterface&lt;T&gt;}" href="topic_0000000000000039.html" target="vbdocright" onclick="highlight(this)">GetCmdIndex Method {Commands.IO.IOCmdInterface&lt;T&gt;}</a><br/>
+
+<a id="w_GetCmdIndex Method {Commands.RFID.RFIDCmdInterface&lt;T&gt;}" href="topic_0000000000000049.html" target="vbdocright" onclick="highlight(this)">GetCmdIndex Method {Commands.RFID.RFIDCmdInterface&lt;T&gt;}</a><br/>
+
+<a id="w_GetCmdIndex Method {IOPort8Driver.Port8Cmd}" href="topic_000000000000007A.html" target="vbdocright" onclick="highlight(this)">GetCmdIndex Method {IOPort8Driver.Port8Cmd}</a><br/>
+
+<a id="w_GetCmdIndex Method {STR2Driver.STR2Cmd}" href="topic_0000000000000059.html" target="vbdocright" onclick="highlight(this)">GetCmdIndex Method {STR2Driver.STR2Cmd}</a><br/>
+
+<a id="w_GetCmdLength Method {Commands.IO.IOCmdInterface&lt;T&gt;}" href="topic_000000000000003A.html" target="vbdocright" onclick="highlight(this)">GetCmdLength Method {Commands.IO.IOCmdInterface&lt;T&gt;}</a><br/>
+
+<a id="w_GetCmdLength Method {Commands.RFID.RFIDCmdInterface&lt;T&gt;}" href="topic_0000000000000046.html" target="vbdocright" onclick="highlight(this)">GetCmdLength Method {Commands.RFID.RFIDCmdInterface&lt;T&gt;}</a><br/>
+
+<a id="w_GetCmdLength Method {IOPort8Driver.Port8Cmd}" href="topic_0000000000000079.html" target="vbdocright" onclick="highlight(this)">GetCmdLength Method {IOPort8Driver.Port8Cmd}</a><br/>
+
+<a id="w_GetCmdLength Method {STR2Driver.STR2Cmd}" href="topic_0000000000000056.html" target="vbdocright" onclick="highlight(this)">GetCmdLength Method {STR2Driver.STR2Cmd}</a><br/>
+
+<a id="w_GetControlCmd Method {Commands.IO.IOCmdInterface&lt;T&gt;}" href="topic_000000000000003F.html" target="vbdocright" onclick="highlight(this)">GetControlCmd Method {Commands.IO.IOCmdInterface&lt;T&gt;}</a><br/>
+
+<a id="w_GetControlCmd Method {Commands.RFID.RFIDCmdInterface&lt;T&gt;}" href="topic_000000000000004A.html" target="vbdocright" onclick="highlight(this)">GetControlCmd Method {Commands.RFID.RFIDCmdInterface&lt;T&gt;}</a><br/>
+
+<a id="w_GetControlCmd Method {Commands.Sealing.SealCmdInterface&lt;T&gt;}" href="topic_000000000000004E.html" target="vbdocright" onclick="highlight(this)">GetControlCmd Method {Commands.Sealing.SealCmdInterface&lt;T&gt;}</a><br/>
+
+<a id="w_GetControlCmd Method {IOPort8Driver.Port8Cmd}" href="topic_000000000000007B.html" target="vbdocright" onclick="highlight(this)">GetControlCmd Method {IOPort8Driver.Port8Cmd}</a><br/>
+
+<a id="w_GetControlCmd Method {STR2Driver.STR2Cmd}" href="topic_000000000000005A.html" target="vbdocright" onclick="highlight(this)">GetControlCmd Method {STR2Driver.STR2Cmd}</a><br/>
+
+<a id="w_GetControlCmd Method {SealDriver.SealCmd}" href="topic_0000000000000082.html" target="vbdocright" onclick="highlight(this)">GetControlCmd Method {SealDriver.SealCmd}</a><br/>
+
+<a id="w_GetDataLength Method {Commands.IO.IOCmdInterface&lt;T&gt;}" href="topic_000000000000003B.html" target="vbdocright" onclick="highlight(this)">GetDataLength Method {Commands.IO.IOCmdInterface&lt;T&gt;}</a><br/>
+
+<a id="w_GetDataLength Method {Commands.RFID.RFIDCmdInterface&lt;T&gt;}" href="topic_0000000000000047.html" target="vbdocright" onclick="highlight(this)">GetDataLength Method {Commands.RFID.RFIDCmdInterface&lt;T&gt;}</a><br/>
+
+<a id="w_GetDataLength Method {IOPort8Driver.Port8Cmd}" href="topic_0000000000000077.html" target="vbdocright" onclick="highlight(this)">GetDataLength Method {IOPort8Driver.Port8Cmd}</a><br/>
+
+<a id="w_GetDataLength Method {STR2Driver.STR2Cmd}" href="topic_0000000000000057.html" target="vbdocright" onclick="highlight(this)">GetDataLength Method {STR2Driver.STR2Cmd}</a><br/>
+
+<a id="w_GetFileName Method" href="topic_000000000000011B.html" target="vbdocright" onclick="highlight(this)">GetFileName Method</a><br/>
+
+<a id="w_GetHeadCmd Method {Commands.RFID.RFIDCmdInterface&lt;T&gt;}" href="topic_0000000000000044.html" target="vbdocright" onclick="highlight(this)">GetHeadCmd Method {Commands.RFID.RFIDCmdInterface&lt;T&gt;}</a><br/>
+
+<a id="w_GetHeadCmd Method {STR2Driver.STR2Cmd}" href="topic_0000000000000054.html" target="vbdocright" onclick="highlight(this)">GetHeadCmd Method {STR2Driver.STR2Cmd}</a><br/>
+
+<a id="w_GetHeadLength Method {Commands.RFID.RFIDCmdInterface&lt;T&gt;}" href="topic_0000000000000048.html" target="vbdocright" onclick="highlight(this)">GetHeadLength Method {Commands.RFID.RFIDCmdInterface&lt;T&gt;}</a><br/>
+
+<a id="w_GetHeadLength Method {STR2Driver.STR2Cmd}" href="topic_0000000000000058.html" target="vbdocright" onclick="highlight(this)">GetHeadLength Method {STR2Driver.STR2Cmd}</a><br/>
+
+<a id="w_GetHeaderLength Method {Commands.IO.IOCmdInterface&lt;T&gt;}" href="topic_000000000000003C.html" target="vbdocright" onclick="highlight(this)">GetHeaderLength Method {Commands.IO.IOCmdInterface&lt;T&gt;}</a><br/>
+
+<a id="w_GetHeaderLength Method {IOPort8Driver.Port8Cmd}" href="topic_0000000000000076.html" target="vbdocright" onclick="highlight(this)">GetHeaderLength Method {IOPort8Driver.Port8Cmd}</a><br/>
+
+<a id="w_GetInReadCmd Method {Commands.IO.IOCmdInterface&lt;T&gt;}" href="topic_0000000000000042.html" target="vbdocright" onclick="highlight(this)">GetInReadCmd Method {Commands.IO.IOCmdInterface&lt;T&gt;}</a><br/>
+
+<a id="w_GetInReadCmd Method {IOPort8Driver.Port8Cmd}" href="topic_000000000000007E.html" target="vbdocright" onclick="highlight(this)">GetInReadCmd Method {IOPort8Driver.Port8Cmd}</a><br/>
+
+<a id="w_GetInValue Method {Commands.IO.IOCmdInterface&lt;T&gt;}" href="topic_000000000000003E.html" target="vbdocright" onclick="highlight(this)">GetInValue Method {Commands.IO.IOCmdInterface&lt;T&gt;}</a><br/>
+
+<a id="w_GetInValue Method {IOPort8Driver.Port8Cmd}" href="topic_0000000000000075.html" target="vbdocright" onclick="highlight(this)">GetInValue Method {IOPort8Driver.Port8Cmd}</a><br/>
+
+<a id="w_GetInstance Method" href="topic_0000000000000123.html" target="vbdocright" onclick="highlight(this)">GetInstance Method</a><br/>
+
+<a id="w_GetLastCmd Method {Commands.RFID.RFIDCmdInterface&lt;T&gt;}" href="topic_0000000000000045.html" target="vbdocright" onclick="highlight(this)">GetLastCmd Method {Commands.RFID.RFIDCmdInterface&lt;T&gt;}</a><br/>
+
+<a id="w_GetLastCmd Method {STR2Driver.STR2Cmd}" href="topic_0000000000000055.html" target="vbdocright" onclick="highlight(this)">GetLastCmd Method {STR2Driver.STR2Cmd}</a><br/>
+
+<a id="w_GetMethod (Object, String) Method" href="topic_0000000000000124.html" target="vbdocright" onclick="highlight(this)">GetMethod (Object, String) Method</a><br/>
+
+<a id="w_GetMethod (String, String) Method" href="topic_0000000000000125.html" target="vbdocright" onclick="highlight(this)">GetMethod (String, String) Method</a><br/>
+
+<a id="w_GetOffCmd Method {Commands.Sealing.SealCmdInterface&lt;T&gt;}" href="topic_0000000000000050.html" target="vbdocright" onclick="highlight(this)">GetOffCmd Method {Commands.Sealing.SealCmdInterface&lt;T&gt;}</a><br/>
+
+<a id="w_GetOffCmd Method {SealDriver.SealCmd}" href="topic_0000000000000084.html" target="vbdocright" onclick="highlight(this)">GetOffCmd Method {SealDriver.SealCmd}</a><br/>
+
+<a id="w_GetOnCmd Method {Commands.Sealing.SealCmdInterface&lt;T&gt;}" href="topic_000000000000004F.html" target="vbdocright" onclick="highlight(this)">GetOnCmd Method {Commands.Sealing.SealCmdInterface&lt;T&gt;}</a><br/>
+
+<a id="w_GetOnCmd Method {SealDriver.SealCmd}" href="topic_0000000000000083.html" target="vbdocright" onclick="highlight(this)">GetOnCmd Method {SealDriver.SealCmd}</a><br/>
+
+<a id="w_GetOpenCmd Method {Commands.RFID.RFIDCmdInterface&lt;T&gt;}" href="topic_000000000000004B.html" target="vbdocright" onclick="highlight(this)">GetOpenCmd Method {Commands.RFID.RFIDCmdInterface&lt;T&gt;}</a><br/>
+
+<a id="w_GetOpenCmd Method {STR2Driver.STR2Cmd}" href="topic_000000000000005B.html" target="vbdocright" onclick="highlight(this)">GetOpenCmd Method {STR2Driver.STR2Cmd}</a><br/>
+
+<a id="w_GetOutReadCmd Method {Commands.IO.IOCmdInterface&lt;T&gt;}" href="topic_0000000000000041.html" target="vbdocright" onclick="highlight(this)">GetOutReadCmd Method {Commands.IO.IOCmdInterface&lt;T&gt;}</a><br/>
+
+<a id="w_GetOutReadCmd Method {IOPort8Driver.Port8Cmd}" href="topic_000000000000007D.html" target="vbdocright" onclick="highlight(this)">GetOutReadCmd Method {IOPort8Driver.Port8Cmd}</a><br/>
+
+<a id="w_GetOutValue Method {Commands.IO.IOCmdInterface&lt;T&gt;}" href="topic_000000000000003D.html" target="vbdocright" onclick="highlight(this)">GetOutValue Method {Commands.IO.IOCmdInterface&lt;T&gt;}</a><br/>
+
+<a id="w_GetOutValue Method {IOPort8Driver.Port8Cmd}" href="topic_0000000000000074.html" target="vbdocright" onclick="highlight(this)">GetOutValue Method {IOPort8Driver.Port8Cmd}</a><br/>
+
+<a id="w_GetPropertyValue Method" href="topic_0000000000000128.html" target="vbdocright" onclick="highlight(this)">GetPropertyValue Method</a><br/>
+
+<a id="w_GetResetCmd Method {Commands.IO.IOCmdInterface&lt;T&gt;}" href="topic_0000000000000040.html" target="vbdocright" onclick="highlight(this)">GetResetCmd Method {Commands.IO.IOCmdInterface&lt;T&gt;}</a><br/>
+
+<a id="w_GetResetCmd Method {IOPort8Driver.Port8Cmd}" href="topic_000000000000007C.html" target="vbdocright" onclick="highlight(this)">GetResetCmd Method {IOPort8Driver.Port8Cmd}</a><br/>
+
+<a id="w_GetSealCmd Method {Commands.Sealing.SealCmdInterface&lt;T&gt;}" href="topic_0000000000000051.html" target="vbdocright" onclick="highlight(this)">GetSealCmd Method {Commands.Sealing.SealCmdInterface&lt;T&gt;}</a><br/>
+
+<a id="w_GetSealCmd Method {SealDriver.SealCmd}" href="topic_0000000000000085.html" target="vbdocright" onclick="highlight(this)">GetSealCmd Method {SealDriver.SealCmd}</a><br/>
+
+<a id="w_GetSize Method" href="topic_000000000000012B.html" target="vbdocright" onclick="highlight(this)">GetSize Method</a><br/>
+
+<a id="w_GetStringCallProc Method {Core.Data.RODbAdapter&lt;T&gt;}" href="topic_00000000000000CB.html" target="vbdocright" onclick="highlight(this)">GetStringCallProc Method {Core.Data.RODbAdapter&lt;T&gt;}</a><br/>
+
+<a id="w_GetStringCallProc Method {Core.Data.RODbInterface&lt;T, P&gt;}" href="topic_00000000000000D6.html" target="vbdocright" onclick="highlight(this)">GetStringCallProc Method {Core.Data.RODbInterface&lt;T, P&gt;}</a><br/>
+
+<a id="w_GetStringCallProc Method {Core.Data.ROleDb}" href="topic_00000000000000E3.html" target="vbdocright" onclick="highlight(this)">GetStringCallProc Method {Core.Data.ROleDb}</a><br/>
+
+<a id="w_GetStringCallProc Method {Core.Data.ROracleDb}" href="topic_00000000000000F0.html" target="vbdocright" onclick="highlight(this)">GetStringCallProc Method {Core.Data.ROracleDb}</a><br/>
+
+<a id="w_GetStringCallProc Method {Core.Data.RSQLDb}" href="topic_00000000000000FD.html" target="vbdocright" onclick="highlight(this)">GetStringCallProc Method {Core.Data.RSQLDb}</a><br/>
+
+<a id="w_GetThrowMsg Method" href="topic_0000000000000136.html" target="vbdocright" onclick="highlight(this)">GetThrowMsg Method</a><br/>
+
+<a id="w_GetType Method" href="topic_0000000000000126.html" target="vbdocright" onclick="highlight(this)">GetType Method</a><br/>
+
+<a id="w_Header Property" href="topic_000000000000006C.html" target="vbdocright" onclick="highlight(this)">Header Property</a><br/>
+
+<a id="w_IO8Port Property" href="topic_00000000000000B5.html" target="vbdocright" onclick="highlight(this)">IO8Port Property</a><br/>
+
+<a id="w_IOPort8Driver Namespace" href="topic_000000000000006A.html" target="vbdocright" onclick="highlight(this)">IOPort8Driver Namespace</a><br/>
+
+<a id="w_IOPort8EventArgs Class" href="topic_000000000000006B.html" target="vbdocright" onclick="highlight(this)">IOPort8EventArgs Class</a><br/>
+
+<a id="w_IOPort8Handle Class" href="topic_000000000000006F.html" target="vbdocright" onclick="highlight(this)">IOPort8Handle Class</a><br/>
+
+<a id="w_IOPort8Handle Constructor" href="topic_0000000000000070.html" target="vbdocright" onclick="highlight(this)">IOPort8Handle Constructor</a><br/>
+
+<a id="w_In Method" href="topic_000000000000002B.html" target="vbdocright" onclick="highlight(this)">In Method</a><br/>
+
+<a id="w_InDeviceEntity Class" href="topic_0000000000000087.html" target="vbdocright" onclick="highlight(this)">InDeviceEntity Class</a><br/>
+
+<a id="w_InDeviceSql Property" href="topic_00000000000000AF.html" target="vbdocright" onclick="highlight(this)">InDeviceSql Property</a><br/>
+
+<a id="w_InitInDevices Method" href="topic_00000000000000C0.html" target="vbdocright" onclick="highlight(this)">InitInDevices Method</a><br/>
+
+<a id="w_InitSerials Method" href="topic_00000000000000BF.html" target="vbdocright" onclick="highlight(this)">InitSerials Method</a><br/>
+
+<a id="w_InvokeMethod (Object, String) Method" href="topic_000000000000011F.html" target="vbdocright" onclick="highlight(this)">InvokeMethod (Object, String) Method</a><br/>
+
+<a id="w_InvokeMethod (Object, String, Object()) Method" href="topic_0000000000000120.html" target="vbdocright" onclick="highlight(this)">InvokeMethod (Object, String, Object()) Method</a><br/>
+
+<a id="w_InvokeMethod (String, String) Method" href="topic_0000000000000121.html" target="vbdocright" onclick="highlight(this)">InvokeMethod (String, String) Method</a><br/>
+
+<a id="w_InvokeMethod (String, String, Object()) Method" href="topic_0000000000000122.html" target="vbdocright" onclick="highlight(this)">InvokeMethod (String, String, Object()) Method</a><br/>
+
+<a id="w_IsFinish Property" href="topic_000000000000012F.html" target="vbdocright" onclick="highlight(this)">IsFinish Property</a><br/>
+
+<a id="w_Kind Property" href="topic_0000000000000062.html" target="vbdocright" onclick="highlight(this)">Kind Property</a><br/>
+
+<a id="w_Last Property" href="topic_000000000000006E.html" target="vbdocright" onclick="highlight(this)">Last Property</a><br/>
+
+<a id="w_Locator Property" href="topic_00000000000000B8.html" target="vbdocright" onclick="highlight(this)">Locator Property</a><br/>
+
+<a id="w_LogInterface Interface" href="topic_0000000000000110.html" target="vbdocright" onclick="highlight(this)">LogInterface Interface</a><br/>
+
+<a id="w_MainWindow Class" href="topic_00000000000000A5.html" target="vbdocright" onclick="highlight(this)">MainWindow Class</a><br/>
+
+<a id="w_MainWindow Constructor" href="topic_00000000000000A6.html" target="vbdocright" onclick="highlight(this)">MainWindow Constructor</a><br/>
+
+<a id="w_ManualEvent Property" href="topic_000000000000010E.html" target="vbdocright" onclick="highlight(this)">ManualEvent Property</a><br/>
+
+<a id="w_Message Property" href="topic_000000000000012E.html" target="vbdocright" onclick="highlight(this)">Message Property</a><br/>
+
+<a id="w_MinSuttle Property {AppContext.Context}" href="topic_00000000000000BC.html" target="vbdocright" onclick="highlight(this)">MinSuttle Property {AppContext.Context}</a><br/>
+
+<a id="w_MinSuttle Property {STR2Valid.STR2CardValid}" href="topic_0000000000000168.html" target="vbdocright" onclick="highlight(this)">MinSuttle Property {STR2Valid.STR2CardValid}</a><br/>
+
+<a id="w_MinSuttleSql Property" href="topic_00000000000000BB.html" target="vbdocright" onclick="highlight(this)">MinSuttleSql Property</a><br/>
+
+<a id="w_Mobility Property" href="topic_00000000000000B7.html" target="vbdocright" onclick="highlight(this)">Mobility Property</a><br/>
+
+<a id="w_Model Property" href="topic_0000000000000065.html" target="vbdocright" onclick="highlight(this)">Model Property</a><br/>
+
+<a id="w_Module Property {Entities.InDeviceEntity}" href="topic_0000000000000089.html" target="vbdocright" onclick="highlight(this)">Module Property {Entities.InDeviceEntity}</a><br/>
+
+<a id="w_Module Property {Entities.SerialEntity}" href="topic_000000000000009A.html" target="vbdocright" onclick="highlight(this)">Module Property {Entities.SerialEntity}</a><br/>
+
+<a id="w_Module Property {Entities.WeighingEntity}" href="topic_000000000000009F.html" target="vbdocright" onclick="highlight(this)">Module Property {Entities.WeighingEntity}</a><br/>
+
+<a id="w_ModuleName Property" href="topic_00000000000000B2.html" target="vbdocright" onclick="highlight(this)">ModuleName Property</a><br/>
+
+<a id="w_Msg Property {DevicesControl.STR2RFID}" href="topic_0000000000000147.html" target="vbdocright" onclick="highlight(this)">Msg Property {DevicesControl.STR2RFID}</a><br/>
+
+<a id="w_Msg Property {Validity.ValidEventArgs}" href="topic_0000000000000163.html" target="vbdocright" onclick="highlight(this)">Msg Property {Validity.ValidEventArgs}</a><br/>
+
+<a id="w_MsgChanged Event" href="topic_0000000000000148.html" target="vbdocright" onclick="highlight(this)">MsgChanged Event</a><br/>
+
+<a id="w_OffState Property" href="topic_000000000000008D.html" target="vbdocright" onclick="highlight(this)">OffState Property</a><br/>
+
+<a id="w_Open Method {PeripheralsDriver.Serial.PeriphSerialDriver&lt;T&gt;}" href="topic_000000000000002D.html" target="vbdocright" onclick="highlight(this)">Open Method {PeripheralsDriver.Serial.PeriphSerialDriver&lt;T&gt;}</a><br/>
+
+<a id="w_Open Method {PeripheralsDriver.Serial.PeriphSerialInterface}" href="topic_0000000000000036.html" target="vbdocright" onclick="highlight(this)">Open Method {PeripheralsDriver.Serial.PeriphSerialInterface}</a><br/>
+
+<a id="w_Open Method {RFIDDriver.RFIDCardDriver&lt;T&gt;}" href="topic_0000000000000010.html" target="vbdocright" onclick="highlight(this)">Open Method {RFIDDriver.RFIDCardDriver&lt;T&gt;}</a><br/>
+
+<a id="w_Open Method {RFIDDriver.RFIDInterface}" href="topic_0000000000000018.html" target="vbdocright" onclick="highlight(this)">Open Method {RFIDDriver.RFIDInterface}</a><br/>
+
+<a id="w_Other Property" href="topic_0000000000000164.html" target="vbdocright" onclick="highlight(this)">Other Property</a><br/>
+
+<a id="w_OtherOne Property {Entities.InDeviceEntity}" href="topic_000000000000008F.html" target="vbdocright" onclick="highlight(this)">OtherOne Property {Entities.InDeviceEntity}</a><br/>
+
+<a id="w_OtherOne Property {Entities.SerialEntity}" href="topic_0000000000000097.html" target="vbdocright" onclick="highlight(this)">OtherOne Property {Entities.SerialEntity}</a><br/>
+
+<a id="w_OtherTwo Property {Entities.InDeviceEntity}" href="topic_0000000000000090.html" target="vbdocright" onclick="highlight(this)">OtherTwo Property {Entities.InDeviceEntity}</a><br/>
+
+<a id="w_OtherTwo Property {Entities.SerialEntity}" href="topic_0000000000000098.html" target="vbdocright" onclick="highlight(this)">OtherTwo Property {Entities.SerialEntity}</a><br/>
+
+<a id="w_Out Method" href="topic_000000000000002A.html" target="vbdocright" onclick="highlight(this)">Out Method</a><br/>
+
+<a id="w_OutDeviceSql Property" href="topic_00000000000000B0.html" target="vbdocright" onclick="highlight(this)">OutDeviceSql Property</a><br/>
+
+<a id="w_Parity Property {Entities.SerialEntity}" href="topic_0000000000000096.html" target="vbdocright" onclick="highlight(this)">Parity Property {Entities.SerialEntity}</a><br/>
+
+<a id="w_Parity Property {PeripheralsDriver.Serial.PeriphSerialDriver&lt;T&gt;}" href="topic_0000000000000025.html" target="vbdocright" onclick="highlight(this)">Parity Property {PeripheralsDriver.Serial.PeriphSerialDriver&lt;T&gt;}</a><br/>
+
+<a id="w_Parity Property {RFIDDriver.RFIDCardDriver&lt;T&gt;}" href="topic_000000000000000B.html" target="vbdocright" onclick="highlight(this)">Parity Property {RFIDDriver.RFIDCardDriver&lt;T&gt;}</a><br/>
+
+<a id="w_PauseReceive Method" href="topic_0000000000000158.html" target="vbdocright" onclick="highlight(this)">PauseReceive Method</a><br/>
+
+<a id="w_PeriphSerialAbstract Class" href="topic_000000000000001E.html" target="vbdocright" onclick="highlight(this)">PeriphSerialAbstract Class</a><br/>
+
+<a id="w_PeriphSerialDriver&lt;T&gt; Class" href="topic_0000000000000020.html" target="vbdocright" onclick="highlight(this)">PeriphSerialDriver&lt;T&gt; Class</a><br/>
+
+<a id="w_PeriphSerialDriver&lt;T&gt; Constructor" href="topic_0000000000000027.html" target="vbdocright" onclick="highlight(this)">PeriphSerialDriver&lt;T&gt; Constructor</a><br/>
+
+<a id="w_PeriphSerialEventArgs Class" href="topic_000000000000002F.html" target="vbdocright" onclick="highlight(this)">PeriphSerialEventArgs Class</a><br/>
+
+<a id="w_PeripheralsDriver.Serial Namespace" href="topic_000000000000001D.html" target="vbdocright" onclick="highlight(this)">PeripheralsDriver.Serial Namespace</a><br/>
+
+<a id="w_Port Property" href="topic_000000000000008B.html" target="vbdocright" onclick="highlight(this)">Port Property</a><br/>
+
+<a id="w_Port8Cmd Class" href="topic_0000000000000073.html" target="vbdocright" onclick="highlight(this)">Port8Cmd Class</a><br/>
+
+<a id="w_PortName Property {Entities.SerialEntity}" href="topic_0000000000000092.html" target="vbdocright" onclick="highlight(this)">PortName Property {Entities.SerialEntity}</a><br/>
+
+<a id="w_PortName Property {PeripheralsDriver.Serial.PeriphSerialDriver&lt;T&gt;}" href="topic_0000000000000021.html" target="vbdocright" onclick="highlight(this)">PortName Property {PeripheralsDriver.Serial.PeriphSerialDriver&lt;T&gt;}</a><br/>
+
+<a id="w_PortName Property {RFIDDriver.RFIDCardDriver&lt;T&gt;}" href="topic_0000000000000007.html" target="vbdocright" onclick="highlight(this)">PortName Property {RFIDDriver.RFIDCardDriver&lt;T&gt;}</a><br/>
+
+<a id="w_Query (String) Method {Core.Data.RODbAdapter&lt;T&gt;}" href="topic_00000000000000C6.html" target="vbdocright" onclick="highlight(this)">Query (String) Method {Core.Data.RODbAdapter&lt;T&gt;}</a><br/>
+
+<a id="w_Query (String) Method {Core.Data.RODbInterface&lt;T, P&gt;}" href="topic_00000000000000D1.html" target="vbdocright" onclick="highlight(this)">Query (String) Method {Core.Data.RODbInterface&lt;T, P&gt;}</a><br/>
+
+<a id="w_Query (String) Method {Core.Data.ROleDb}" href="topic_00000000000000DE.html" target="vbdocright" onclick="highlight(this)">Query (String) Method {Core.Data.ROleDb}</a><br/>
+
+<a id="w_Query (String) Method {Core.Data.ROracleDb}" href="topic_00000000000000EB.html" target="vbdocright" onclick="highlight(this)">Query (String) Method {Core.Data.ROracleDb}</a><br/>
+
+<a id="w_Query (String) Method {Core.Data.RSQLDb}" href="topic_00000000000000F8.html" target="vbdocright" onclick="highlight(this)">Query (String) Method {Core.Data.RSQLDb}</a><br/>
+
+<a id="w_Query (String, NameValueCollection) Method" href="topic_00000000000000C7.html" target="vbdocright" onclick="highlight(this)">Query (String, NameValueCollection) Method</a><br/>
+
+<a id="w_Query (String, NameValueCollection) Method {Core.Data.ROleDb}" href="topic_00000000000000DF.html" target="vbdocright" onclick="highlight(this)">Query (String, NameValueCollection) Method {Core.Data.ROleDb}</a><br/>
+
+<a id="w_Query (String, NameValueCollection) Method {Core.Data.ROracleDb}" href="topic_00000000000000EC.html" target="vbdocright" onclick="highlight(this)">Query (String, NameValueCollection) Method {Core.Data.ROracleDb}</a><br/>
+
+<a id="w_Query (String, NameValueCollection) Method {Core.Data.RSQLDb}" href="topic_00000000000000F9.html" target="vbdocright" onclick="highlight(this)">Query (String, NameValueCollection) Method {Core.Data.RSQLDb}</a><br/>
+
+<a id="w_Query (String, P) Method {Core.Data.RODbInterface&lt;T, P&gt;}" href="topic_00000000000000D2.html" target="vbdocright" onclick="highlight(this)">Query (String, P) Method {Core.Data.RODbInterface&lt;T, P&gt;}</a><br/>
+
+<a id="w_QueryZip Method {Core.Data.RODbAdapter&lt;T&gt;}" href="topic_00000000000000CC.html" target="vbdocright" onclick="highlight(this)">QueryZip Method {Core.Data.RODbAdapter&lt;T&gt;}</a><br/>
+
+<a id="w_QueryZip Method {Core.Data.RODbInterface&lt;T, P&gt;}" href="topic_00000000000000D8.html" target="vbdocright" onclick="highlight(this)">QueryZip Method {Core.Data.RODbInterface&lt;T, P&gt;}</a><br/>
+
+<a id="w_QueryZip Method {Core.Data.ROleDb}" href="topic_00000000000000E4.html" target="vbdocright" onclick="highlight(this)">QueryZip Method {Core.Data.ROleDb}</a><br/>
+
+<a id="w_QueryZip Method {Core.Data.ROracleDb}" href="topic_00000000000000F1.html" target="vbdocright" onclick="highlight(this)">QueryZip Method {Core.Data.ROracleDb}</a><br/>
+
+<a id="w_QueryZip Method {Core.Data.RSQLDb}" href="topic_00000000000000FE.html" target="vbdocright" onclick="highlight(this)">QueryZip Method {Core.Data.RSQLDb}</a><br/>
+
+<a id="w_RFIDAbstract Class" href="topic_0000000000000003.html" target="vbdocright" onclick="highlight(this)">RFIDAbstract Class</a><br/>
+
+<a id="w_RFIDCardDriver&lt;T&gt; Class" href="topic_0000000000000006.html" target="vbdocright" onclick="highlight(this)">RFIDCardDriver&lt;T&gt; Class</a><br/>
+
+<a id="w_RFIDCardDriver&lt;T&gt; Constructor" href="topic_000000000000000D.html" target="vbdocright" onclick="highlight(this)">RFIDCardDriver&lt;T&gt; Constructor</a><br/>
+
+<a id="w_RFIDDriver Namespace" href="topic_0000000000000002.html" target="vbdocright" onclick="highlight(this)">RFIDDriver Namespace</a><br/>
+
+<a id="w_RODbAdapter&lt;T&gt;  Constructor" href="topic_00000000000000C3.html" target="vbdocright" onclick="highlight(this)">RODbAdapter&lt;T&gt;  Constructor</a><br/>
+
+<a id="w_RODbAdapter&lt;T&gt; (String) Constructor" href="topic_00000000000000C4.html" target="vbdocright" onclick="highlight(this)">RODbAdapter&lt;T&gt; (String) Constructor</a><br/>
+
+<a id="w_RODbAdapter&lt;T&gt; Class" href="topic_00000000000000C2.html" target="vbdocright" onclick="highlight(this)">RODbAdapter&lt;T&gt; Class</a><br/>
+
+<a id="w_RODbInterface&lt;T, P&gt; Interface" href="topic_00000000000000CF.html" target="vbdocright" onclick="highlight(this)">RODbInterface&lt;T, P&gt; Interface</a><br/>
+
+<a id="w_ROleDb  Constructor" href="topic_00000000000000DB.html" target="vbdocright" onclick="highlight(this)">ROleDb  Constructor</a><br/>
+
+<a id="w_ROleDb (String) Constructor" href="topic_00000000000000DC.html" target="vbdocright" onclick="highlight(this)">ROleDb (String) Constructor</a><br/>
+
+<a id="w_ROleDb Class" href="topic_00000000000000DA.html" target="vbdocright" onclick="highlight(this)">ROleDb Class</a><br/>
+
+<a id="w_ROracleDb  Constructor" href="topic_00000000000000E8.html" target="vbdocright" onclick="highlight(this)">ROracleDb  Constructor</a><br/>
+
+<a id="w_ROracleDb (String) Constructor" href="topic_00000000000000E9.html" target="vbdocright" onclick="highlight(this)">ROracleDb (String) Constructor</a><br/>
+
+<a id="w_ROracleDb Class" href="topic_00000000000000E7.html" target="vbdocright" onclick="highlight(this)">ROracleDb Class</a><br/>
+
+<a id="w_RSQLDb  Constructor" href="topic_00000000000000F5.html" target="vbdocright" onclick="highlight(this)">RSQLDb  Constructor</a><br/>
+
+<a id="w_RSQLDb (String) Constructor" href="topic_00000000000000F6.html" target="vbdocright" onclick="highlight(this)">RSQLDb (String) Constructor</a><br/>
+
+<a id="w_RSQLDb Class" href="topic_00000000000000F4.html" target="vbdocright" onclick="highlight(this)">RSQLDb Class</a><br/>
+
+<a id="w_ReadArray Property" href="topic_000000000000010D.html" target="vbdocright" onclick="highlight(this)">ReadArray Property</a><br/>
+
+<a id="w_ReadTagEvent Event" href="topic_0000000000000004.html" target="vbdocright" onclick="highlight(this)">ReadTagEvent Event</a><br/>
+
+<a id="w_ReceivedBytesThreshold Property {PeripheralsDriver.Serial.PeriphSerialDriver&lt;T&gt;}" href="topic_0000000000000026.html" target="vbdocright" onclick="highlight(this)">ReceivedBytesThreshold Property {PeripheralsDriver.Serial.PeriphSerialDriver&lt;T&gt;}</a><br/>
+
+<a id="w_ReceivedBytesThreshold Property {RFIDDriver.RFIDCardDriver&lt;T&gt;}" href="topic_000000000000000C.html" target="vbdocright" onclick="highlight(this)">ReceivedBytesThreshold Property {RFIDDriver.RFIDCardDriver&lt;T&gt;}</a><br/>
+
+<a id="w_Recover Method" href="topic_0000000000000159.html" target="vbdocright" onclick="highlight(this)">Recover Method</a><br/>
+
+<a id="w_Reset Method" href="topic_000000000000002C.html" target="vbdocright" onclick="highlight(this)">Reset Method</a><br/>
+
+<a id="w_STR2 Property {AppContext.Context}" href="topic_00000000000000B4.html" target="vbdocright" onclick="highlight(this)">STR2 Property {AppContext.Context}</a><br/>
+
+<a id="w_STR2 Property {DevicesControl.STR2RFID}" href="topic_0000000000000145.html" target="vbdocright" onclick="highlight(this)">STR2 Property {DevicesControl.STR2RFID}</a><br/>
+
+<a id="w_STR2CardValid  Constructor" href="topic_000000000000016B.html" target="vbdocright" onclick="highlight(this)">STR2CardValid  Constructor</a><br/>
+
+<a id="w_STR2CardValid (String, String, Double) Constructor" href="topic_000000000000016C.html" target="vbdocright" onclick="highlight(this)">STR2CardValid (String, String, Double) Constructor</a><br/>
+
+<a id="w_STR2CardValid Class" href="topic_0000000000000167.html" target="vbdocright" onclick="highlight(this)">STR2CardValid Class</a><br/>
+
+<a id="w_STR2Changed Event" href="topic_0000000000000146.html" target="vbdocright" onclick="highlight(this)">STR2Changed Event</a><br/>
+
+<a id="w_STR2Cmd Class" href="topic_0000000000000053.html" target="vbdocright" onclick="highlight(this)">STR2Cmd Class</a><br/>
+
+<a id="w_STR2Driver Namespace" href="topic_0000000000000052.html" target="vbdocright" onclick="highlight(this)">STR2Driver Namespace</a><br/>
+
+<a id="w_STR2Driver Reference" href="topic_0000000000000000.html" target="vbdocright" onclick="highlight(this)">STR2Driver Reference</a><br/>
+
+<a id="w_STR2Handle Class" href="topic_000000000000005D.html" target="vbdocright" onclick="highlight(this)">STR2Handle Class</a><br/>
+
+<a id="w_STR2Handle Constructor" href="topic_000000000000005E.html" target="vbdocright" onclick="highlight(this)">STR2Handle Constructor</a><br/>
+
+<a id="w_STR2RFID Class" href="topic_0000000000000144.html" target="vbdocright" onclick="highlight(this)">STR2RFID Class</a><br/>
+
+<a id="w_STR2RFID Constructor" href="topic_0000000000000156.html" target="vbdocright" onclick="highlight(this)">STR2RFID Constructor</a><br/>
+
+<a id="w_STR2TagEventArgs Class" href="topic_0000000000000061.html" target="vbdocright" onclick="highlight(this)">STR2TagEventArgs Class</a><br/>
+
+<a id="w_STR2TagValidEventArgs Class" href="topic_0000000000000171.html" target="vbdocright" onclick="highlight(this)">STR2TagValidEventArgs Class</a><br/>
+
+<a id="w_STR2TestDemo Namespace" href="topic_00000000000000A3.html" target="vbdocright" onclick="highlight(this)">STR2TestDemo Namespace</a><br/>
+
+<a id="w_STR2Valid Namespace" href="topic_0000000000000166.html" target="vbdocright" onclick="highlight(this)">STR2Valid Namespace</a><br/>
+
+<a id="w_SchemaLog&lt;T&gt; Class" href="topic_0000000000000112.html" target="vbdocright" onclick="highlight(this)">SchemaLog&lt;T&gt; Class</a><br/>
+
+<a id="w_SchemaLog&lt;T&gt; Constructor" href="topic_0000000000000113.html" target="vbdocright" onclick="highlight(this)">SchemaLog&lt;T&gt; Constructor</a><br/>
+
+<a id="w_SealCmd Class" href="topic_0000000000000081.html" target="vbdocright" onclick="highlight(this)">SealCmd Class</a><br/>
+
+<a id="w_SealDriver Namespace" href="topic_0000000000000080.html" target="vbdocright" onclick="highlight(this)">SealDriver Namespace</a><br/>
+
+<a id="w_Sealing Property" href="topic_00000000000000B6.html" target="vbdocright" onclick="highlight(this)">Sealing Property</a><br/>
+
+<a id="w_SelfWeight Property" href="topic_0000000000000067.html" target="vbdocright" onclick="highlight(this)">SelfWeight Property</a><br/>
+
+<a id="w_Sequenced Property" href="topic_0000000000000068.html" target="vbdocright" onclick="highlight(this)">Sequenced Property</a><br/>
+
+<a id="w_SerialEntity Class" href="topic_0000000000000091.html" target="vbdocright" onclick="highlight(this)">SerialEntity Class</a><br/>
+
+<a id="w_SerialSQL Property" href="topic_00000000000000AE.html" target="vbdocright" onclick="highlight(this)">SerialSQL Property</a><br/>
+
+<a id="w_SetConnStr Method {Core.Data.RODbAdapter&lt;T&gt;}" href="topic_00000000000000C5.html" target="vbdocright" onclick="highlight(this)">SetConnStr Method {Core.Data.RODbAdapter&lt;T&gt;}</a><br/>
+
+<a id="w_SetConnStr Method {Core.Data.RODbInterface&lt;T, P&gt;}" href="topic_00000000000000D0.html" target="vbdocright" onclick="highlight(this)">SetConnStr Method {Core.Data.RODbInterface&lt;T, P&gt;}</a><br/>
+
+<a id="w_SetConnStr Method {Core.Data.ROleDb}" href="topic_00000000000000DD.html" target="vbdocright" onclick="highlight(this)">SetConnStr Method {Core.Data.ROleDb}</a><br/>
+
+<a id="w_SetConnStr Method {Core.Data.ROracleDb}" href="topic_00000000000000EA.html" target="vbdocright" onclick="highlight(this)">SetConnStr Method {Core.Data.ROracleDb}</a><br/>
+
+<a id="w_SetConnStr Method {Core.Data.RSQLDb}" href="topic_00000000000000F7.html" target="vbdocright" onclick="highlight(this)">SetConnStr Method {Core.Data.RSQLDb}</a><br/>
+
+<a id="w_SetConnect Method" href="topic_000000000000016D.html" target="vbdocright" onclick="highlight(this)">SetConnect Method</a><br/>
+
+<a id="w_SetFile Method" href="topic_0000000000000133.html" target="vbdocright" onclick="highlight(this)">SetFile Method</a><br/>
+
+<a id="w_SetLocalTimer Method" href="topic_000000000000013B.html" target="vbdocright" onclick="highlight(this)">SetLocalTimer Method</a><br/>
+
+<a id="w_SetMessage Method" href="topic_0000000000000134.html" target="vbdocright" onclick="highlight(this)">SetMessage Method</a><br/>
+
+<a id="w_SetProperties (String, Int32, Int32, Int32, Int32) Method {PeripheralsDriver.Serial.PeriphSerialDriver&lt;T&gt;}" href="topic_0000000000000028.html" target="vbdocright" onclick="highlight(this)">SetProperties (String, Int32, Int32, Int32, Int32) Method {PeripheralsDriver.Serial.PeriphSerialDriver&lt;T&gt;}</a><br/>
+
+<a id="w_SetProperties (String, Int32, Int32, Int32, Int32) Method {PeripheralsDriver.Serial.PeriphSerialInterface}" href="topic_0000000000000035.html" target="vbdocright" onclick="highlight(this)">SetProperties (String, Int32, Int32, Int32, Int32) Method {PeripheralsDriver.Serial.PeriphSerialInterface}</a><br/>
+
+<a id="w_SetProperties (String, Int32, Int32, Int32, Int32) Method {RFIDDriver.RFIDCardDriver&lt;T&gt;}" href="topic_000000000000000E.html" target="vbdocright" onclick="highlight(this)">SetProperties (String, Int32, Int32, Int32, Int32) Method {RFIDDriver.RFIDCardDriver&lt;T&gt;}</a><br/>
+
+<a id="w_SetProperties (String, Int32, Int32, Int32, Int32) Method {RFIDDriver.RFIDInterface}" href="topic_0000000000000017.html" target="vbdocright" onclick="highlight(this)">SetProperties (String, Int32, Int32, Int32, Int32) Method {RFIDDriver.RFIDInterface}</a><br/>
+
+<a id="w_SetProperties (String, Int32, Int32, StopBits, Parity) Method" href="topic_000000000000000F.html" target="vbdocright" onclick="highlight(this)">SetProperties (String, Int32, Int32, StopBits, Parity) Method</a><br/>
+
+<a id="w_SetProperties (String, Int32, Int32, StopBits, Parity) Method {PeripheralsDriver.Serial.PeriphSerialDriver&lt;T&gt;}" href="topic_0000000000000029.html" target="vbdocright" onclick="highlight(this)">SetProperties (String, Int32, Int32, StopBits, Parity) Method {PeripheralsDriver.Serial.PeriphSerialDriver&lt;T&gt;}</a><br/>
+
+<a id="w_SetProperties (String, Int32, Int32, StopBits, Parity) Method {PeripheralsDriver.Serial.PeriphSerialInterface}" href="topic_0000000000000034.html" target="vbdocright" onclick="highlight(this)">SetProperties (String, Int32, Int32, StopBits, Parity) Method {PeripheralsDriver.Serial.PeriphSerialInterface}</a><br/>
+
+<a id="w_SetProperties (String, Int32, Int32, StopBits, Parity) Method {RFIDDriver.RFIDInterface}" href="topic_0000000000000016.html" target="vbdocright" onclick="highlight(this)">SetProperties (String, Int32, Int32, StopBits, Parity) Method {RFIDDriver.RFIDInterface}</a><br/>
+
+<a id="w_SetPropertyValue Method" href="topic_0000000000000127.html" target="vbdocright" onclick="highlight(this)">SetPropertyValue Method</a><br/>
+
+<a id="w_Start Method" href="topic_0000000000000131.html" target="vbdocright" onclick="highlight(this)">Start Method</a><br/>
+
+<a id="w_StartRead Method {DevicesControl.STR2RFID}" href="topic_0000000000000157.html" target="vbdocright" onclick="highlight(this)">StartRead Method {DevicesControl.STR2RFID}</a><br/>
+
+<a id="w_StartRead Method {RFIDDriver.RFIDCardDriver&lt;T&gt;}" href="topic_0000000000000012.html" target="vbdocright" onclick="highlight(this)">StartRead Method {RFIDDriver.RFIDCardDriver&lt;T&gt;}</a><br/>
+
+<a id="w_Status Property" href="topic_0000000000000151.html" target="vbdocright" onclick="highlight(this)">Status Property</a><br/>
+
+<a id="w_StatusChanged Event" href="topic_0000000000000152.html" target="vbdocright" onclick="highlight(this)">StatusChanged Event</a><br/>
+
+<a id="w_StatusListeners Event" href="topic_000000000000001F.html" target="vbdocright" onclick="highlight(this)">StatusListeners Event</a><br/>
+
+<a id="w_StopBits Property {Entities.SerialEntity}" href="topic_0000000000000095.html" target="vbdocright" onclick="highlight(this)">StopBits Property {Entities.SerialEntity}</a><br/>
+
+<a id="w_StopBits Property {PeripheralsDriver.Serial.PeriphSerialDriver&lt;T&gt;}" href="topic_0000000000000024.html" target="vbdocright" onclick="highlight(this)">StopBits Property {PeripheralsDriver.Serial.PeriphSerialDriver&lt;T&gt;}</a><br/>
+
+<a id="w_StopBits Property {RFIDDriver.RFIDCardDriver&lt;T&gt;}" href="topic_000000000000000A.html" target="vbdocright" onclick="highlight(this)">StopBits Property {RFIDDriver.RFIDCardDriver&lt;T&gt;}</a><br/>
+
+<a id="w_StopRead Method {DevicesControl.STR2RFID}" href="topic_000000000000015A.html" target="vbdocright" onclick="highlight(this)">StopRead Method {DevicesControl.STR2RFID}</a><br/>
+
+<a id="w_StopRead Method {RFIDDriver.RFIDCardDriver&lt;T&gt;}" href="topic_0000000000000013.html" target="vbdocright" onclick="highlight(this)">StopRead Method {RFIDDriver.RFIDCardDriver&lt;T&gt;}</a><br/>
+
+<a id="w_SubStrLenth Method" href="topic_0000000000000139.html" target="vbdocright" onclick="highlight(this)">SubStrLenth Method</a><br/>
+
+<a id="w_Success Event {STR2Valid.STR2CardValid}" href="topic_000000000000016F.html" target="vbdocright" onclick="highlight(this)">Success Event {STR2Valid.STR2CardValid}</a><br/>
+
+<a id="w_Success Event {Validity.ValidAbstract}" href="topic_000000000000015E.html" target="vbdocright" onclick="highlight(this)">Success Event {Validity.ValidAbstract}</a><br/>
+
+<a id="w_SysDBConnect Property" href="topic_00000000000000AC.html" target="vbdocright" onclick="highlight(this)">SysDBConnect Property</a><br/>
+
+<a id="w_SysUnit Property {AppContext.Context}" href="topic_00000000000000B9.html" target="vbdocright" onclick="highlight(this)">SysUnit Property {AppContext.Context}</a><br/>
+
+<a id="w_SysUnit Property {Entities.WeighingEntity}" href="topic_00000000000000A0.html" target="vbdocright" onclick="highlight(this)">SysUnit Property {Entities.WeighingEntity}</a><br/>
+
+<a id="w_SysUnitSql Property" href="topic_00000000000000BA.html" target="vbdocright" onclick="highlight(this)">SysUnitSql Property</a><br/>
+
+<a id="w_SystemTimer Class" href="topic_000000000000013A.html" target="vbdocright" onclick="highlight(this)">SystemTimer Class</a><br/>
+
+<a id="w_Tag Property" href="topic_0000000000000064.html" target="vbdocright" onclick="highlight(this)">Tag Property</a><br/>
+
+<a id="w_TagEventArgs Class" href="topic_000000000000001A.html" target="vbdocright" onclick="highlight(this)">TagEventArgs Class</a><br/>
+
+<a id="w_TagValidSql Property {AppContext.Context}" href="topic_00000000000000BD.html" target="vbdocright" onclick="highlight(this)">TagValidSql Property {AppContext.Context}</a><br/>
+
+<a id="w_TagValidSql Property {DevicesControl.STR2RFID}" href="topic_000000000000014B.html" target="vbdocright" onclick="highlight(this)">TagValidSql Property {DevicesControl.STR2RFID}</a><br/>
+
+<a id="w_TagValidSql Property {STR2Valid.STR2CardValid}" href="topic_000000000000016A.html" target="vbdocright" onclick="highlight(this)">TagValidSql Property {STR2Valid.STR2CardValid}</a><br/>
+
+<a id="w_TagValidSqlChanged Event" href="topic_000000000000014C.html" target="vbdocright" onclick="highlight(this)">TagValidSqlChanged Event</a><br/>
+
+<a id="w_TextLog Class" href="topic_0000000000000117.html" target="vbdocright" onclick="highlight(this)">TextLog Class</a><br/>
+
+<a id="w_TextLog Constructor" href="topic_0000000000000118.html" target="vbdocright" onclick="highlight(this)">TextLog Constructor</a><br/>
+
+<a id="w_Tools Class" href="topic_000000000000013C.html" target="vbdocright" onclick="highlight(this)">Tools Class</a><br/>
+
+<a id="w_Type Property {Entities.InDeviceEntity}" href="topic_000000000000008A.html" target="vbdocright" onclick="highlight(this)">Type Property {Entities.InDeviceEntity}</a><br/>
+
+<a id="w_Type Property {Entities.SerialEntity}" href="topic_000000000000009C.html" target="vbdocright" onclick="highlight(this)">Type Property {Entities.SerialEntity}</a><br/>
+
+<a id="w_Type Property {PeripheralsDriver.Serial.PeriphSerialEventArgs}" href="topic_0000000000000031.html" target="vbdocright" onclick="highlight(this)">Type Property {PeripheralsDriver.Serial.PeriphSerialEventArgs}</a><br/>
+
+<a id="w_UnZip Method" href="topic_0000000000000141.html" target="vbdocright" onclick="highlight(this)">UnZip Method</a><br/>
+
+<a id="w_Update (String) Method {Core.Data.RODbAdapter&lt;T&gt;}" href="topic_00000000000000C8.html" target="vbdocright" onclick="highlight(this)">Update (String) Method {Core.Data.RODbAdapter&lt;T&gt;}</a><br/>
+
+<a id="w_Update (String) Method {Core.Data.RODbInterface&lt;T, P&gt;}" href="topic_00000000000000D3.html" target="vbdocright" onclick="highlight(this)">Update (String) Method {Core.Data.RODbInterface&lt;T, P&gt;}</a><br/>
+
+<a id="w_Update (String) Method {Core.Data.ROleDb}" href="topic_00000000000000E0.html" target="vbdocright" onclick="highlight(this)">Update (String) Method {Core.Data.ROleDb}</a><br/>
+
+<a id="w_Update (String) Method {Core.Data.ROracleDb}" href="topic_00000000000000ED.html" target="vbdocright" onclick="highlight(this)">Update (String) Method {Core.Data.ROracleDb}</a><br/>
+
+<a id="w_Update (String) Method {Core.Data.RSQLDb}" href="topic_00000000000000FA.html" target="vbdocright" onclick="highlight(this)">Update (String) Method {Core.Data.RSQLDb}</a><br/>
+
+<a id="w_Update (String, NameValueCollection) Method" href="topic_00000000000000C9.html" target="vbdocright" onclick="highlight(this)">Update (String, NameValueCollection) Method</a><br/>
+
+<a id="w_Update (String, NameValueCollection) Method {Core.Data.ROleDb}" href="topic_00000000000000E1.html" target="vbdocright" onclick="highlight(this)">Update (String, NameValueCollection) Method {Core.Data.ROleDb}</a><br/>
+
+<a id="w_Update (String, NameValueCollection) Method {Core.Data.ROracleDb}" href="topic_00000000000000EE.html" target="vbdocright" onclick="highlight(this)">Update (String, NameValueCollection) Method {Core.Data.ROracleDb}</a><br/>
+
+<a id="w_Update (String, NameValueCollection) Method {Core.Data.RSQLDb}" href="topic_00000000000000FB.html" target="vbdocright" onclick="highlight(this)">Update (String, NameValueCollection) Method {Core.Data.RSQLDb}</a><br/>
+
+<a id="w_Update (String, P) Method {Core.Data.RODbInterface&lt;T, P&gt;}" href="topic_00000000000000D4.html" target="vbdocright" onclick="highlight(this)">Update (String, P) Method {Core.Data.RODbInterface&lt;T, P&gt;}</a><br/>
+
+<a id="w_Valid Property" href="topic_0000000000000162.html" target="vbdocright" onclick="highlight(this)">Valid Property</a><br/>
+
+<a id="w_ValidAbstract Class" href="topic_000000000000015D.html" target="vbdocright" onclick="highlight(this)">ValidAbstract Class</a><br/>
+
+<a id="w_ValidCnt Property" href="topic_0000000000000149.html" target="vbdocright" onclick="highlight(this)">ValidCnt Property</a><br/>
+
+<a id="w_ValidCntChanged Event" href="topic_000000000000014A.html" target="vbdocright" onclick="highlight(this)">ValidCntChanged Event</a><br/>
+
+<a id="w_ValidConnect Property" href="topic_000000000000014D.html" target="vbdocright" onclick="highlight(this)">ValidConnect Property</a><br/>
+
+<a id="w_ValidConnectChanged Event" href="topic_000000000000014E.html" target="vbdocright" onclick="highlight(this)">ValidConnectChanged Event</a><br/>
+
+<a id="w_ValidEventArgs Class" href="topic_0000000000000160.html" target="vbdocright" onclick="highlight(this)">ValidEventArgs Class</a><br/>
+
+<a id="w_ValidFailed Event" href="topic_0000000000000154.html" target="vbdocright" onclick="highlight(this)">ValidFailed Event</a><br/>
+
+<a id="w_ValidMinSuttle Property" href="topic_000000000000014F.html" target="vbdocright" onclick="highlight(this)">ValidMinSuttle Property</a><br/>
+
+<a id="w_ValidMinSuttleChanged Event" href="topic_0000000000000150.html" target="vbdocright" onclick="highlight(this)">ValidMinSuttleChanged Event</a><br/>
+
+<a id="w_ValidSuccess Event" href="topic_0000000000000153.html" target="vbdocright" onclick="highlight(this)">ValidSuccess Event</a><br/>
+
+<a id="w_Validity Namespace" href="topic_000000000000015C.html" target="vbdocright" onclick="highlight(this)">Validity Namespace</a><br/>
+
+<a id="w_WeighingEntity Class" href="topic_000000000000009D.html" target="vbdocright" onclick="highlight(this)">WeighingEntity Class</a><br/>
+
+<a id="w_Write (String) Method {Core.Log.SchemaLog&lt;T&gt;}" href="topic_0000000000000115.html" target="vbdocright" onclick="highlight(this)">Write (String) Method {Core.Log.SchemaLog&lt;T&gt;}</a><br/>
+
+<a id="w_Write (String, SchemaLogType) Method {Core.Log.SchemaLog&lt;T&gt;}" href="topic_0000000000000114.html" target="vbdocright" onclick="highlight(this)">Write (String, SchemaLogType) Method {Core.Log.SchemaLog&lt;T&gt;}</a><br/>
+
+<a id="w_Write (String, String) Method {Core.Log.SchemaLog&lt;T&gt;}" href="topic_0000000000000116.html" target="vbdocright" onclick="highlight(this)">Write (String, String) Method {Core.Log.SchemaLog&lt;T&gt;}</a><br/>
+
+<a id="w_Write Method {Core.Log.LogInterface}" href="topic_0000000000000111.html" target="vbdocright" onclick="highlight(this)">Write Method {Core.Log.LogInterface}</a><br/>
+
+<a id="w_Write Method {Core.Log.TextLog}" href="topic_0000000000000119.html" target="vbdocright" onclick="highlight(this)">Write Method {Core.Log.TextLog}</a><br/>
+
+<a id="w_WriteArray Property" href="topic_000000000000010C.html" target="vbdocright" onclick="highlight(this)">WriteArray Property</a><br/>
+
+<a id="w_ZipFile Class" href="topic_000000000000013F.html" target="vbdocright" onclick="highlight(this)">ZipFile Class</a><br/>
+
+<a id="w_ZipFile Constructor" href="topic_0000000000000140.html" target="vbdocright" onclick="highlight(this)">ZipFile Constructor</a><br/>
+
+<a id="w_validData Method {STR2Valid.STR2CardValid}" href="topic_000000000000016E.html" target="vbdocright" onclick="highlight(this)">validData Method {STR2Valid.STR2CardValid}</a><br/>
+
+<a id="w_validData Method {Validity.ValidInterface}" href="topic_0000000000000165.html" target="vbdocright" onclick="highlight(this)">validData Method {Validity.ValidInterface}</a><br/>
+
+
+    <div style="height:100%"></div>
+		<script>
+			document.getElementById("loading").style.display = "none";
+		</script>
+  </div>
+</body>
+</html>

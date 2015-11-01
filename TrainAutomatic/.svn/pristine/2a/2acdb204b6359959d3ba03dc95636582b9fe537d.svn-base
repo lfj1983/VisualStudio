@@ -1,0 +1,96 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace S7ModbusDriver
+{
+    public class PackVSeatStatus
+    {
+        /// <summary>
+        /// 主机旋转到原点
+        /// </summary>
+        private bool m_Cmd_run_origin_seat = false;
+
+        public bool Cmd_run_origin_seat
+        {
+            get { return m_Cmd_run_origin_seat; }
+            set { m_Cmd_run_origin_seat = value; }
+        }
+
+        /// <summary>
+        /// 主机旋转到第一次压盖位置
+        /// </summary>
+        private bool m_Cmd_run_first_seat = false;
+
+        public bool Cmd_run_first_seat
+        {
+            get { return m_Cmd_run_first_seat; }
+            set { m_Cmd_run_first_seat = value; }
+        }
+        /// <summary>
+        /// 主机旋转到第二次压盖位置
+        /// </summary>
+        private bool m_Cmd_run_two_seat = false;
+
+        public bool Cmd_run_two_seat
+        {
+            get { return m_Cmd_run_two_seat; }
+            set { m_Cmd_run_two_seat = value; }
+        }
+
+        /// <summary>
+        /// 主机旋转到进桶口
+        /// </summary>
+        private bool m_Cmd_run_entry_seat = false;
+
+        public bool Cmd_run_entry_seat
+        {
+            get { return m_Cmd_run_entry_seat; }
+            set { m_Cmd_run_entry_seat = value; }
+        }
+
+        /// <summary>
+        /// 样桶是否到进桶口
+        /// </summary>
+        private bool m_Cmd_entry_bucket_seat = false;
+
+        public bool Cmd_entry_bucket_seat
+        {
+            get { return m_Cmd_entry_bucket_seat; }
+            set { m_Cmd_entry_bucket_seat = value; }
+        }
+
+        /// <summary>
+        /// 是否存在瓶盖
+        /// </summary>
+        private bool m_Cmd_cap_seat = false;
+
+        public bool Cmd_cap_seat
+        {
+            get { return m_Cmd_cap_seat; }
+            set { m_Cmd_cap_seat = value; }
+        }
+        /// <summary>
+        /// 进桶口是否有已经压过瓶盖的样桶
+        /// </summary>
+        private bool m_Cmd_bucket_cap_seat = false;
+
+        public bool Cmd_bucket_cap_seat
+        {
+            get { return m_Cmd_bucket_cap_seat; }
+            set { m_Cmd_bucket_cap_seat = value; }
+        }
+
+        private bool m_Cmd_error_seat = false;
+
+        /// <summary>
+        /// 是否有预定义异常
+        /// </summary>
+        public bool Cmd_error_seat
+        {
+            get { return m_Cmd_error_seat; }
+            set { m_Cmd_error_seat = value; }
+        }
+    }
+}

@@ -1,0 +1,1242 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using EntitiesType;
+using Core.Data;
+using Core.Log;
+using System.Data;
+using Entities;
+using System.Collections.Specialized;
+using System.IO.Ports;
+
+namespace AppContext
+{
+    /// <summary>
+    /// 应用程序上下文类，此类的静态引用通过ApplicationContext表态类实现
+    /// </summary>
+    public class Context
+    {
+        private RODbAdapter<ROracleDb> m_adapter;
+
+        private RODbAdapter<ROracleDb> m_sysAdapter;
+
+        private string m_contextConnect;
+
+        /// <summary>
+        /// 获取或设置主数据库连接
+        /// </summary>
+        public string ContextConnect
+        {
+            get { return m_contextConnect; }
+            set { m_contextConnect = value; }
+        }
+
+        private string m_sysDBConnect;
+        /// <summary>
+        /// 获取或设置系统数据库连接，如数据实际保存
+        /// </summary>
+        public string SysDBConnect
+        {
+            get { return m_sysDBConnect; }
+            set { m_sysDBConnect = value; }
+        }
+
+        /// <summary>
+        /// 获取系统时间SQL
+        /// </summary>
+        private string m_sysTimeSQL;
+
+        public string SysTimeSQL
+        {
+            get { return m_sysTimeSQL; }
+            set { m_sysTimeSQL = value; }
+        }
+
+        private string m_samDeviceConnect;
+
+        /// <summary>
+        /// 获取或设置采样机设备数据库连接
+        /// </summary>
+        public string SamDeviceConnect
+        {
+            get { return m_samDeviceConnect; }
+            set { m_samDeviceConnect = value; }
+        }
+
+
+        private string m_flowSQL;
+        /// <summary>
+        /// 获取或设置主流程SQL语句
+        /// </summary>
+        public string FlowSQL
+        {
+            get { return m_flowSQL; }
+            set { m_flowSQL = value; }
+        }
+
+        private string m_serialSQL;
+        /// <summary>
+        /// 获取或设置访问串口设备配置参数SQL语句
+        /// </summary>
+        public string SerialSQL
+        {
+            get { return m_serialSQL; }
+            set { m_serialSQL = value; }
+        }
+
+        private string m_inDeviceSql;
+        /// <summary>
+        /// 获取或设置具有输入功能设备配置参数SQL语句
+        /// </summary>
+        public string InDeviceSql
+        {
+            get { return m_inDeviceSql; }
+            set { m_inDeviceSql = value; }
+        }
+        private string m_outDeviceSql;
+        /// <summary>
+        /// 获取或设置具有输出功能设备配置参数SQL语句
+        /// </summary>
+        public string OutDeviceSql
+        {
+            get { return m_outDeviceSql; }
+            set { m_outDeviceSql = value; }
+        }
+
+
+        private string m_flowName;
+        /// <summary>
+        /// 获取或设置主流程名称
+        /// </summary>
+        public string FlowName
+        {
+            get { return m_flowName; }
+            set { m_flowName = value; }
+        }
+        private string m_moduleName;
+        /// <summary>
+        /// 获取或设置模块名称
+        /// </summary>
+        public string ModuleName
+        {
+            get { return m_moduleName; }
+            set { m_moduleName = value; }
+        }
+
+        private int m_flowId;
+        /// <summary>
+        /// 获取或设置主流程ID
+        /// </summary>
+        public int FlowId
+        {
+            get { return m_flowId; }
+            set { m_flowId = value; }
+        }
+        
+        private SerialEntity m_STR2 = new SerialEntity();
+        /// <summary>
+        /// 获取或设置单个STR2型号读卡器配置参数
+        /// </summary>
+        public SerialEntity STR2
+        {
+            get { return m_STR2; }
+            set { m_STR2 = value; }
+        }
+
+        private SerialEntity m_IO8Port = new SerialEntity();
+        /// <summary>
+        /// 获取或设置8路IO控制板配置参数
+        /// </summary>
+        public SerialEntity IO8Port
+        {
+            get { return m_IO8Port; }
+            set { m_IO8Port = value; }
+        }
+
+        private SerialEntity m_pack = new SerialEntity();
+        /// <summary>
+        /// 获取或设置具有打包密封功能设备配置参数
+        /// </summary>
+        public SerialEntity Pack
+        {
+            get { return m_pack; }
+            set { m_pack = value; }
+        }
+
+        private SerialEntity m_packRFID = new SerialEntity();
+
+        public SerialEntity PackRFID
+        {
+            get { return m_packRFID; }
+            set { m_packRFID = value; }
+        }
+
+        private InDeviceEntity m_mobility = new InDeviceEntity();
+        /// <summary>
+        /// 获取或设置煤流检测器配置参数，此煤流检测器通过8路IO控制板实现状态变化的检测
+        /// </summary>
+        public InDeviceEntity Mobility
+        {
+            get { return m_mobility; }
+            set { m_mobility = value; }
+        }
+
+        private InDeviceEntity m_frontLocator = new InDeviceEntity();
+        /// <summary>
+        /// 获取或设置前端定位器配置参数，此定位器通过8路IO控制板实现定位状态变化的检测
+        /// </summary>
+        public InDeviceEntity FrontLocator
+        {
+            get { return m_frontLocator; }
+            set { m_frontLocator = value; }
+        }
+
+        private InDeviceEntity m_centerLocator = new InDeviceEntity();
+
+        /// <summary>
+        /// 获取或设置中部定位器配置参数，此定位器通过8路IO控制板实现定位状态变化的检测
+        /// </summary>
+        public InDeviceEntity CenterLocator
+        {
+            get { return m_centerLocator; }
+            set { m_centerLocator = value; }
+        }
+
+        private InDeviceEntity m_backLocator = new InDeviceEntity();
+        /// <summary>
+        /// 获取或设置后部定位器配置参数，此定位器通过8路IO控制板实现定位状态变化的检测
+        /// </summary>
+        public InDeviceEntity BackLocator
+        {
+            get { return m_backLocator; }
+            set { m_backLocator = value; }
+        }
+        
+
+        private WeighUnit m_sysUnit;
+        /// <summary>
+        /// 获取或设置系统计量单位
+        /// </summary>
+        /// <example>
+        ///     例如系统计量单位为WeighUnit.KG,设备单位1吨转为系统计量数据：1*SysUnit=1000KG;
+        ///     Console.WriteLine(string.Format("毛重1吨，保存重量{0}KG", 1 * (int)ApplicationContext.Context.SysUnit));
+        /// </example>
+        public WeighUnit SysUnit
+        {
+            get { return m_sysUnit; }
+            set { m_sysUnit = value; }
+        }
+
+        private string m_sysUnitSql;
+        /// <summary>
+        /// 获取或设置系统计量单位SQL语句
+        /// </summary>
+        public string SysUnitSql
+        {
+            get { return m_sysUnitSql; }
+            set { m_sysUnitSql = value; }
+            
+        }
+
+        private string m_minSuttleSql;
+        /// <summary>
+        /// 获取车皮净重下限SQL
+        /// </summary>
+        public string MinSuttleSql
+        {
+            get { return m_minSuttleSql; }
+            set { m_minSuttleSql = value; }
+        }
+
+
+        private double m_minSuttle;
+        /// <summary>
+        /// 车皮净重下限，小于下限系统认为车辆为空车。
+        /// </summary>
+        public double MinSuttle
+        {
+            get { return m_minSuttle; }
+            set { m_minSuttle = value; }
+        }
+
+        private string m_tagValidSql;
+        /// <summary>
+        /// 获取或设置验证车辆标签有效性SQL语句
+        /// </summary>
+        public string TagValidSql
+        {
+            get { return m_tagValidSql; }
+            set { m_tagValidSql = value; }
+        }
+
+        private int m_ioInterval = 100;
+
+        /// <summary>
+        /// 获取或设置监控IO设备刷新间隔
+        /// </summary>
+        public int IoInterval
+        {
+            get { return m_ioInterval; }
+            set { m_ioInterval = value; }
+        }
+
+        private string m_logSQL;
+        /// <summary>
+        /// 获取或设置查询日志SQL
+        /// </summary>
+        public string LogSQL
+        {
+            get { return m_logSQL; }
+            set { m_logSQL = value; }
+        }
+
+        private string m_logWriteSql;
+        /// <summary>
+        /// 获取或设置写入日志SQL语句
+        /// </summary>
+        public string LogWriteSql
+        {
+            get { return m_logWriteSql; }
+            set { m_logWriteSql = value; }
+        }
+
+
+        private int m_logInterval;
+        /// <summary>
+        /// 获取或设置日志刷新间隔
+        /// </summary>
+        public int LogInterval
+        {
+            get { return m_logInterval; }
+            set { m_logInterval = value; }
+        }
+
+
+        private SamInfoEntity m_samEntity;
+        /// <summary>
+        /// 获取或设置采样机信息
+        /// </summary>
+        public SamInfoEntity SamEntity
+        {
+            get { return m_samEntity; }
+            set { m_samEntity = value; }
+        }
+
+        private string m_samDeviceBucketSql;
+
+        /// <summary>
+        /// 获取或设置采样机样罐中间表名
+        /// </summary>
+        public string SamDeviceBucketSql
+        {
+            get { return m_samDeviceBucketSql; }
+            set { m_samDeviceBucketSql = value; }
+        }
+
+        private string m_samDeviceResetPotSql;
+
+        /// <summary>
+        /// 获取或设置采样机样罐表更新SQL语句
+        /// </summary>
+        public string SamDeviceResetPotSql
+        {
+            get { return m_samDeviceResetPotSql; }
+            set { m_samDeviceResetPotSql = value; }
+        }
+
+        private string m_samDeviceControlSql;
+        /// <summary>
+        /// 获取或设置采样机控制中间表SQL
+        /// </summary>
+        public string SamDeviceControlSql
+        {
+            get { return m_samDeviceControlSql; }
+            set { m_samDeviceControlSql = value; }
+        }
+
+        private string m_samDeviceControlStatusSql;
+
+        /// <summary>
+        /// 获取或设置控制采样机状态中间表SQL
+        /// </summary>
+        public string SamDeviceControlStatusSql
+        {
+            get { return m_samDeviceControlStatusSql; }
+            set { m_samDeviceControlStatusSql = value; }
+        }
+
+
+        private string m_samDeviceStatusSql;
+
+        /// <summary>
+        /// 获取或设置采样机状态表名
+        /// </summary>
+        public string SamDeviceStatusSql
+        {
+            get { return m_samDeviceStatusSql; }
+            set { m_samDeviceStatusSql = value; }
+        }
+
+        private int m_samStatusInterval;
+
+        /// <summary>
+        /// 获取或设置采样机状态监控刷新间隔
+        /// </summary>
+        public int SamStatusInterval
+        {
+            get { return m_samStatusInterval; }
+            set { m_samStatusInterval = value; }
+        }
+
+        private int m_PLCListenerInterval;
+
+        /// <summary>
+        /// 获取或设置PLC点位监控间隔
+        /// </summary>
+        public int PLCListenerInterval
+        {
+            get { return m_PLCListenerInterval; }
+            set { m_PLCListenerInterval = value; }
+        }
+
+        private int m_PackDeviceInternal;
+
+        /// <summary>
+        /// 获取或设置打包机监控间隔
+        /// </summary>
+        public int PackDeviceInternal
+        {
+            get { return m_PackDeviceInternal; }
+            set { m_PackDeviceInternal = value; }
+        }
+
+        private int m_bucketFullToBucketInternal;
+
+        public int BucketFullToBucketInternal
+        {
+            get { return m_bucketFullToBucketInternal; }
+            set { m_bucketFullToBucketInternal = value; }
+        }
+        private SchemaLog<ROracleDb> m_schemaLog;
+
+        private int m_packAllDelayInternal;
+
+        public int PackAllDelayInternal
+        {
+            get { return m_packAllDelayInternal; }
+            set { m_packAllDelayInternal = value; }
+        }
+
+
+        private string m_enterSumSQL;
+        /// <summary>
+        /// 获取火车入场车数SQL
+        /// </summary>
+        public string EnterSumSQL
+        {
+            get { return m_enterSumSQL; }
+            set { m_enterSumSQL = value; }
+        }
+
+        private string m_centerControlSQL;
+        /// <summary>
+        /// 获取火车煤信息SQL
+        /// </summary>
+        public string CenterControlSQL
+        {
+            get { return m_centerControlSQL; }
+            set { m_centerControlSQL = value; }
+        }
+
+        private string m_waitPackBucketSql;
+        /// <summary>
+        /// 获取可以打包的所有样罐SQL
+        /// </summary>
+        public string WaitPackBucketSql
+        {
+            get { return m_waitPackBucketSql; }
+            set { m_waitPackBucketSql = value; }
+        }
+
+        private string m_waitPackBucketByCollierySql;
+        /// <summary>
+        /// 根据煤矿获取打包样罐SQL
+        /// </summary>
+        public string WaitPackBucketByCollierySql
+        {
+            get { return m_waitPackBucketByCollierySql; }
+            set { m_waitPackBucketByCollierySql = value; }
+        }
+
+        private string m_waitPackInvalidBucketSql;
+        /// <summary>
+        /// 获取所有采样编码为无效待打包样桶
+        /// </summary>
+        public string WaitPackInvalidBucketSql
+        {
+            get { return m_waitPackInvalidBucketSql; }
+            set { m_waitPackInvalidBucketSql = value; }
+        }
+
+        private string m_waitPackInvalidBucketByCollierySql;
+        /// <summary>
+        /// 根据煤矿只打包无效样桶
+        /// </summary>
+        public string WaitPackInvalidBucketByCollierySql
+        {
+            get { return m_waitPackInvalidBucketByCollierySql; }
+            set { m_waitPackInvalidBucketByCollierySql = value; }
+        }
+
+        private string m_offLineBucketsSql;
+        /// <summary>
+        /// 不考虑采样编码，获取所有离线可打包样桶Sql
+        /// </summary>
+        public string OffLineBucketsSql
+        {
+            get { return m_offLineBucketsSql; }
+            set { m_offLineBucketsSql = value; }
+        }
+
+        private string m_samCodeByCollierySql;
+        /// <summary>
+        /// 根据煤矿获取有效采样编码Sql
+        /// </summary>
+        public string SamCodeByCollierySql
+        {
+            get { return m_samCodeByCollierySql; }
+            set { m_samCodeByCollierySql = value; }
+        }
+
+        private string m_invalidBySamCodeIdSql;
+        /// <summary>
+        /// 根据采样编码记录id将采样编码记录状态更新为无效
+        /// </summary>
+        public string InvalidBySamCodeIdSql
+        {
+            get { return m_invalidBySamCodeIdSql; }
+            set { m_invalidBySamCodeIdSql = value; }
+        }
+
+        private string m_invalidBySamCodeIdAndPotSql;
+        /// <summary>
+        /// 根据煤矿及样桶号将采样编码记录状态更新为无效
+        /// </summary>
+        public string InvalidBySamCodeIdAndPotSql
+        {
+            get { return m_invalidBySamCodeIdAndPotSql; }
+            set { m_invalidBySamCodeIdAndPotSql = value; }
+        }
+
+        private string m_newSamCodeRecordByCollieryBucketSql;
+        /// <summary>
+        /// 新增一条有效的采样编码记录Sql
+        /// </summary>
+        public string NewSamCodeRecordByCollieryBucketSql
+        {
+            get { return m_newSamCodeRecordByCollieryBucketSql; }
+            set { m_newSamCodeRecordByCollieryBucketSql = value; }
+        }
+
+        private string m_newSamCodeBySenddateSql;
+        /// <summary>
+        /// 根据清样时间生成新的采样编码Sql
+        /// </summary>
+        public string NewSamCodeBySenddateSql
+        {
+            get { return m_newSamCodeBySenddateSql; }
+            set { m_newSamCodeBySenddateSql = value; }
+        }
+
+        private string m_newBucketNumberSql;
+        /// <summary>
+        /// 获取新的可用样桶号Sql
+        /// </summary>
+        public string NewBucketNumberSql
+        {
+            get { return m_newBucketNumberSql; }
+            set { m_newBucketNumberSql = value; }
+        }
+
+        private string m_validFullBucketNumberSql;
+        /// <summary>
+        /// 验证罐号是否已满Sql
+        /// </summary>
+        public string ValidFullBucketNumberSql
+        {
+            get { return m_validFullBucketNumberSql; }
+            set { m_validFullBucketNumberSql = value; }
+        }
+
+        private string m_bucketsCntByDeviceAndBucketSql;
+        /// <summary>
+        /// 根据设备及样桶号获取记录数
+        /// </summary>
+        public string BucketsCntByDeviceAndBucketSql
+        {
+            get { return m_bucketsCntByDeviceAndBucketSql; }
+            set { m_bucketsCntByDeviceAndBucketSql = value; }
+        }
+
+        private string m_bucketUpdateByDeviceAndBucketSql;
+        /// <summary>
+        /// 根据设备及样桶号更新样桶状态及子样量Sql
+        /// </summary>
+        public string BucketUpdateByDeviceAndBucketSql
+        {
+            get { return m_bucketUpdateByDeviceAndBucketSql; }
+            set { m_bucketUpdateByDeviceAndBucketSql = value; }
+        }
+
+        private string m_newBucketByDeviceAndBucketSql;
+        /// <summary>
+        /// 根据设备及样桶号插入插入样桶状态及子样量Sql
+        /// </summary>
+        public string NewBucketByDeviceAndBucketSql
+        {
+            get { return m_newBucketByDeviceAndBucketSql; }
+            set { m_newBucketByDeviceAndBucketSql = value; }
+        }
+
+        private string m_saveSamDataForTrainenterSql;
+        /// <summary>
+        /// 保存火车车厢采样记录Sql
+        /// </summary>
+        public string SaveSamDataForTrainenterSql
+        {
+            get { return m_saveSamDataForTrainenterSql; }
+            set { m_saveSamDataForTrainenterSql = value; }
+        }
+
+        private string m_validChangedBucketByCollierySql;
+        /// <summary>
+        /// 根据煤矿验证罐满样桶是否为煤矿当前使用样桶Sql
+        /// </summary>
+        public string ValidChangedBucketByCollierySql
+        {
+            get { return m_validChangedBucketByCollierySql; }
+            set { m_validChangedBucketByCollierySql = value; }
+        }
+
+        private string m_packFinishSql;
+        /// <summary>
+        /// 打包完成后更新打包标志位记录Sql
+        /// </summary>
+        public string PackFinishSql
+        {
+            get { return m_packFinishSql; }
+            set { m_packFinishSql = value; }
+        }
+
+        private string m_samIntervalSql;
+        /// <summary>
+        /// 火车采样机采样周期记录Sql
+        /// </summary>
+        public string SamIntervalSql
+        {
+            get { return m_samIntervalSql; }
+            set { m_samIntervalSql = value; }
+        }
+
+        private string m_divertorIntervalSql;
+        /// <summary>
+        /// 获取火车采样机可选缩分周期Sql
+        /// </summary>
+        public string DivertorIntervalSql
+        {
+            get { return m_divertorIntervalSql; }
+            set { m_divertorIntervalSql = value; }
+        }
+
+        private string m_trainCntByCollierySql;
+        /// <summary>
+        /// 根据车厢及煤矿获取当前车厢对应煤矿进煤车数Sql
+        /// </summary>
+        public string TrainCntByCollierySql
+        {
+            get { return m_trainCntByCollierySql; }
+            set { m_trainCntByCollierySql = value; }
+        }
+
+        private string m_newSamplingCodeSql;
+        /// <summary>
+        /// 根据采样编码生成新的分样编码Sql
+        /// </summary>
+        public string NewSamplingCodeSql
+        {
+            get { return m_newSamplingCodeSql; }
+            set { m_newSamplingCodeSql = value; }
+        }
+
+        private string m_saveSamplingSql;
+        /// <summary>
+        /// 保存分样编码记录Sql
+        /// </summary>
+        public string SaveSamplingSql
+        {
+            get { return m_saveSamplingSql; }
+            set { m_saveSamplingSql = value; }
+        }
+
+        private string m_samplingcodeBySamcodeSql;
+        /// <summary>
+        /// 根据采样编码或取已经存在的分样编码Sql
+        /// </summary>
+        public string SamplingcodeBySamcodeSql
+        {
+            get { return m_samplingcodeBySamcodeSql; }
+            set { m_samplingcodeBySamcodeSql = value; }
+        }
+
+        private string m_validSamCodeSql;
+        /// <summary>
+        /// 根据验证采样编码是否为系统采样编码Sql
+        /// </summary>
+        public string ValidSamCodeSql
+        {
+            get { return m_validSamCodeSql; }
+            set { m_validSamCodeSql = value; }
+        }
+
+        private string m_samCodeIsHavedForSamplingSql;
+        /// <summary>
+        /// 采样编码是否已经分样Sql
+        /// </summary>
+        public string SamCodeIsHavedForSamplingSql
+        {
+            get { return m_samCodeIsHavedForSamplingSql; }
+            set { m_samCodeIsHavedForSamplingSql = value; }
+        }
+
+        private string m_samplingcodeIsHavedForSamplingSql;
+        /// <summary>
+        /// 判断分样编码是否存在Sql
+        /// </summary>
+        public string SamplingcodeIsHavedForSamplingSql
+        {
+            get { return m_samplingcodeIsHavedForSamplingSql; }
+            set { m_samplingcodeIsHavedForSamplingSql = value; }
+        }
+
+        private string m_samDeviceByModuleNameSql;
+        /// <summary>
+        ///  根据火车翻车机名称获取对应采样机设备Sql
+        /// </summary>
+        public string SamDeviceByModuleNameSql
+        {
+            get { return m_samDeviceByModuleNameSql; }
+            set { m_samDeviceByModuleNameSql = value; }
+        }
+
+        private string m_changedSamDeviceByModuleNameSql;
+        /// <summary>
+        /// 根据模块名称更新对应采样设备Sql
+        /// </summary>
+        public string ChangedSamDeviceByModuleNameSql
+        {
+            get { return m_changedSamDeviceByModuleNameSql; }
+            set { m_changedSamDeviceByModuleNameSql = value; }
+        }
+
+        private string m_validSamDeviceNameIsHavedSql;
+        /// <summary>
+        /// 根据模块名称验证当前采样机名称是否与待更新采样机名称是否一至Sql
+        /// </summary>
+        public string ValidSamDeviceNameIsHavedSql
+        {
+            get { return m_validSamDeviceNameIsHavedSql; }
+            set { m_validSamDeviceNameIsHavedSql = value; }
+        }
+
+        private string m_centerValueByColumnSql;
+
+        /// <summary>
+        /// 获取控制中心相应字段值Sql
+        /// </summary>
+        public string CenterValueByColumnSql
+        {
+            get { return m_centerValueByColumnSql; }
+            set { m_centerValueByColumnSql = value; }
+        }
+
+        private int m_deviceId;
+
+        public int DeviceId
+        {
+            get { return m_deviceId; }
+            set { m_deviceId = value; }
+        }
+
+        private int m_centerRefrenshInterval;
+
+        /// <summary>
+        /// 获取或设置刷新控制中心命令间隔
+        /// </summary>
+        public int CenterRefrenshInterval
+        {
+            get { return m_centerRefrenshInterval; }
+            set { m_centerRefrenshInterval = value; }
+        }
+
+        private string m_samClearTimeSql;
+        /// <summary>
+        /// 获取火车煤清样时间Sql
+        /// </summary>
+        public string SamClearTimeSql
+        {
+            get { return m_samClearTimeSql; }
+            set { m_samClearTimeSql = value; }
+        }
+
+        private string m_validSamClearTimeSql;
+        /// <summary>
+        /// 判断清样时间是否存在Sql
+        /// </summary>
+        public string ValidSamClearTimeSql
+        {
+            get { return m_validSamClearTimeSql; }
+            set { m_validSamClearTimeSql = value; }
+        }
+
+        private string m_newSamClearTimeSql;
+        /// <summary>
+        /// 新建清样时间Sql
+        /// </summary>
+        public string NewSamClearTimeSql
+        {
+            get { return m_newSamClearTimeSql; }
+            set { m_newSamClearTimeSql = value; }
+        }
+
+        private string m_updateSamClearTimeSql;
+        /// <summary>
+        /// 更新清样时间Sql
+        /// </summary>
+        public string UpdateSamClearTimeSql
+        {
+            get { return m_updateSamClearTimeSql; }
+            set { m_updateSamClearTimeSql = value; }
+        }
+
+        private string m_samNameByTypeSql;
+        /// <summary>
+        /// 根据采样机类型获取采样机设备名称Sql
+        /// </summary>
+        public string SamNameByTypeSql
+        {
+            get { return m_samNameByTypeSql; }
+            set { m_samNameByTypeSql = value; }
+        }
+
+        private bool m_IsHandClearTime;
+
+        public bool IsHandClearTime
+        {
+            get { return m_IsHandClearTime; }
+            set { m_IsHandClearTime = value; }
+        }
+
+        private string m_collieryBySamCoalCodeSql;
+        /// <summary>
+        /// 根据采样编码信息获取煤矿id
+        /// </summary>
+        public string CollieryBySamCoalCodeSql
+        {
+            get { return m_collieryBySamCoalCodeSql; }
+            set { m_collieryBySamCoalCodeSql = value; }
+        }
+
+        private string m_updateCollieryBySamCoalCodeIdSql;
+        /// <summary>
+        /// 根据采样编码表ID更新煤矿Id
+        /// </summary>
+        public string UpdateCollieryBySamCoalCodeIdSql
+        {
+            get { return m_updateCollieryBySamCoalCodeIdSql; }
+            set { m_updateCollieryBySamCoalCodeIdSql = value; }
+        }
+        
+        /// <summary>
+        /// 上下文类构造函数
+        /// </summary>
+        /// <param name="connect">主数据库连接</param>
+        /// <param name="sysDBConnect">系统数据库连接</param>
+        /// <param name="flowSql">主流程SQL</param>
+        /// <param name="moduleName">模块名称</param>
+        /// <param name="serialSQL">串口设备参数查询SQL</param>
+        /// <param name="inDeviceSql">输入设备参数查询SQL</param>
+        /// <param name="outDeviceSql">输出设备参数查询SQL</param>
+        /// <param name="sysUnitSql">系统计量单位参数查询SQL</param>
+        /// <param name="minSuttleSql">车辆净重下限</param>
+        public Context()
+        {
+        }
+
+        public void Init()
+        {
+            m_adapter = new RODbAdapter<ROracleDb>(ContextConnect);
+            m_sysAdapter = new RODbAdapter<ROracleDb>(SysDBConnect);
+            m_schemaLog = new SchemaLog<ROracleDb>(SysDBConnect, LogWriteSql);
+            InitFlow();
+            InitSysParams();
+            
+        }
+
+        /// <summary>
+        /// 初始化主流程
+        /// </summary>
+        private void InitFlow()
+        {
+            NameValueCollection param = new NameValueCollection();
+            param.Add("flowName",this.FlowName);
+            DataTable table = m_adapter.Query(m_flowSQL, param);
+            FlowId = Convert.ToInt32(table.Rows[0]["id"]);
+            FlowName = table.Rows[0]["flowname"].ToString();
+        }
+
+        /// <summary>
+        /// 初始化系统参数
+        /// </summary>
+        private void InitSysParams()
+        {
+            InitSerials(SerialSQL);
+            InitInDevices(InDeviceSql);
+            InitSysUnit(SysUnitSql);
+            InitMinSuttle(MinSuttleSql);
+            InitSamInfo(SamDeviceByModuleNameSql,ModuleName);
+        }
+
+        /// <summary>
+        /// 初始化采样机信息
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="moduleName"></param>
+        public void InitSamInfo(string sql,string moduleName)
+        {
+            SamEntity = new SamInfoEntity();
+            NameValueCollection param = new NameValueCollection();
+            param.Add("moduleName", moduleName);
+            DataTable table = m_sysAdapter.Query(sql, param);
+            if (table.Rows.Count > 0)
+            {
+                DataRow row = table.Rows[0];
+                SamEntity.SamId = Convert.ToInt32( row["id"]);
+                SamEntity.SamName = row["samname"].ToString();
+                SamEntity.SamStatus = row["state"].ToString();
+                SamEntity.SamType = row["samtype"].ToString();
+                SamEntity.BucketCount = Convert.ToInt32(row["potnum"]);
+                SamEntity.SamDeviceId = Convert.ToInt32(row["samdeviceid"]);
+                SamEntity.ClearTimeName = row["cleartimename"].ToString();
+            }
+        }
+
+        /// <summary>
+        /// 初始化相关串口设备配置参数
+        /// </summary>
+        /// <param name="sql">串口设备参数查询SQL</param>
+        public void InitSerials(string sql)
+        {
+            NameValueCollection param = new NameValueCollection();
+            param.Add("flowId",FlowId.ToString());
+            param.Add("moduleName",ModuleName);
+            DataTable table  = m_adapter.Query(sql,param);
+            foreach(DataRow row in table.Rows)
+            {
+                SerialsType type = (SerialsType)Enum.Parse(typeof(SerialsType),row["purpose"].ToString(),true);
+                if(type==SerialsType.STR2读卡器)
+                {
+                    InitSTR2(row);
+                }
+                if (type == SerialsType.IO8路控制板)
+                {
+                    InitIO8Port(row);
+                }
+                if (type == SerialsType.打包机)
+                {
+                    InitPack(row);
+                }
+                if (type == SerialsType.打包机读写器)
+                {
+                    InitPackRFID(row);
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// 初始化相关输入设备配置参数
+        /// </summary>
+        /// <param name="sql">输入设备参数查询SQL</param>
+        public void InitInDevices(string sql)
+        {
+            NameValueCollection param = new NameValueCollection();
+            param.Add("flowId", FlowId.ToString());
+            param.Add("moduleName", ModuleName);
+            DataTable table = m_adapter.Query(sql, param);
+            foreach (DataRow row in table.Rows)
+            {
+                InDevicesType type = (InDevicesType)Enum.Parse(typeof(InDevicesType), row["purpose"].ToString(), true);
+                if (type == InDevicesType.煤流检测器)
+                {
+                    InitMobility(row);
+                }
+                if (type == InDevicesType.前端计轴定位器)
+                {
+                    InitFrontLocator(row);
+                }
+                if (type == InDevicesType.中部计轴定位器)
+                {
+                    InitCenterLocator(row);
+                }
+                if (type == InDevicesType.后端计轴定位器)
+                {
+                    InitBackLocator(row);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 初始化STR2读卡器配置参数
+        /// </summary>
+        /// <param name="row">包含配置参数的DataRow数据源</param>
+        private void InitSTR2(DataRow row)
+        {
+            if (null == STR2)
+            {
+                STR2 = new SerialEntity();
+            }
+            STR2 = GetSerial(row);
+        }
+        /// <summary>
+        /// 初始化8路IO控制板配置参数
+        /// </summary>
+        /// <param name="row">包含配置参数的DataRow数据源</param>
+        private void InitIO8Port(DataRow row)
+        {
+            if (null == IO8Port)
+            {
+                IO8Port = new SerialEntity();
+            }
+            IO8Port = GetSerial(row);
+        }
+
+        /// <summary>
+        /// 初始化打包器配置参数
+        /// </summary>
+        /// <param name="row">包含配置参数的DataRow数据源</param>
+        private void InitPack(DataRow row)
+        {
+            if (null == Pack)
+            {
+                Pack = new SerialEntity();
+            }
+            Pack = GetSerial(row);
+        }
+
+        /// <summary>
+        /// 初始化打包机读卡器配置参数
+        /// </summary>
+        /// <param name="row">包含配置参数的DataRow数据源</param>
+        private void InitPackRFID(DataRow row)
+        {
+            if (null == PackRFID)
+            {
+                PackRFID = new SerialEntity();
+            }
+            PackRFID = GetSerial(row);
+        }
+
+        /// <summary>
+        /// 获取输串口设备配置参数实例
+        /// </summary>
+        /// <param name="row">包含配置参数的DataRow数据源</param>
+        /// <returns>串口参数实例</returns>
+        private SerialEntity GetSerial(DataRow row)
+        {
+            SerialEntity serial = new SerialEntity();
+            serial.Module = row["moduleName"].ToString();
+            serial.FlowId = Convert.ToInt32(row["flowid"]);
+            serial.PortName = row["portName"].ToString();
+            serial.BaudRate = Convert.ToInt32(row["baudRate"]);
+            serial.DataBits = Convert.ToInt32(row["dataBits"]);
+            serial.StopBits = (System.IO.Ports.StopBits)Enum.Parse(typeof(System.IO.Ports.StopBits), row["stopBits"].ToString(), true);
+            serial.Parity = (System.IO.Ports.Parity)Enum.Parse(typeof(System.IO.Ports.Parity), row["parity"].ToString(), true);
+            serial.Enable = Convert.ToInt32(row["enable"]) == 1;
+            serial.OtherOne = row["other1"];
+            serial.OtherTwo = row["other2"];
+            serial.Type = (SerialsType)Enum.Parse(typeof(SerialsType), row["purpose"].ToString(), true);
+            return serial;
+        }
+
+        /// <summary>
+        /// 初始化系统计量单位
+        /// </summary>
+        /// <param name="sql">系统计量单位查询SQL</param>
+        private void InitSysUnit(string sql)
+        {
+            DataTable table = m_adapter.Query(sql);
+            foreach (DataRow row in table.Rows)
+            {
+                SysUnit = (WeighUnit)Enum.Parse(typeof(WeighUnit), row["value"].ToString());
+            }
+        }
+
+        /// <summary>
+        /// 初始化车辆净重下限
+        /// </summary>
+        /// <param name="sql">车辆净重下限查询SQL</param>
+        private void InitMinSuttle(string sql)
+        {
+            DataTable table = m_adapter.Query(sql);
+            foreach (DataRow row in table.Rows)
+            {
+                MinSuttle = Convert.ToDouble(row["value"]);
+            }
+        }
+
+        /// <summary>
+        /// 初始化煤流检测器配置参数
+        /// </summary>
+        /// <param name="row">包含配置参数的DataRow数据源</param>
+        private void InitMobility(DataRow row)
+        {
+            if (null == Mobility)
+            {
+                Mobility = new InDeviceEntity();
+            }
+            Mobility = GetInDevice(row);
+        }
+
+
+
+        /// <summary>
+        /// 初始化前端定位器配置参数
+        /// </summary>
+        /// <param name="row">包含配置参数的DataRow数据源</param>
+        private void InitFrontLocator(DataRow row)
+        {
+            if (null == FrontLocator)
+            {
+                FrontLocator = new InDeviceEntity();
+            }
+            FrontLocator = GetInDevice(row);
+        }
+
+        /// <summary>
+        /// 初始化中部定位器配置参数
+        /// </summary>
+        /// <param name="row">包含配置参数的DataRow数据源</param>
+        private void InitCenterLocator(DataRow row)
+        {
+            if (null == CenterLocator)
+            {
+                CenterLocator = new InDeviceEntity();
+            }
+            CenterLocator = GetInDevice(row);
+        }
+        /// <summary>
+        /// 初始化后端定位器配置参数
+        /// </summary>
+        /// <param name="row">包含配置参数的DataRow数据源</param>
+        private void InitBackLocator(DataRow row)
+        {
+            if (null == BackLocator)
+            {
+                BackLocator = new InDeviceEntity();
+            }
+            BackLocator = GetInDevice(row);
+        }
+
+        /// <summary>
+        /// 获取输入设备配置参数实例
+        /// </summary>
+        /// <param name="row">包含配置参数的DataRow数据源</param>
+        /// <returns>输入设备参数实例</returns>
+        private InDeviceEntity GetInDevice(DataRow row)
+        {
+            InDeviceEntity device = new InDeviceEntity();
+            device.Module = row["moduleName"].ToString();
+            device.FlowId = Convert.ToInt32(row["flowid"]);
+            device.Port = Convert.ToInt32(row["port"]);
+            device.DefaultState = Convert.ToInt32(row["defaultState"]);
+            device.OnStatus = Convert.ToInt32(row["onStatus"]);
+            device.Enable = Convert.ToInt32(row["enable"]) == 1;
+            device.OtherOne = row["other1"];
+            device.OtherTwo = row["other2"];
+            device.Type = (InDevicesType)Enum.Parse(typeof(InDevicesType), row["purpose"].ToString(), true);
+            return device;
+        }
+
+        /// <summary>
+        /// position取默认模块名称,写入日志信息
+        /// </summary>
+        /// <param name="msg">信息</param>
+        public void WriteSchemaLog(string msg)
+        {
+            m_schemaLog.Write(msg, ModuleName);
+        }
+        /// <summary>
+        /// 根据position,msg写入日志信息
+        /// </summary>
+        /// <param name="msg">信息</param>
+        /// <param name="position">位置</param>
+        public void WriteSchemaLog(string msg,string position)
+        {
+            m_schemaLog.Write(msg, position);
+        }
+
+        /// <summary>
+        /// 获取系统表ID
+        /// </summary>
+        /// <param name="table">表名</param>
+        /// <returns>表最大ID</returns>
+        public string GetTableID(string table)
+        {
+            int idTmp = 0;
+            NameValueCollection param;
+            
+            DataTable m_data = new DataTable();
+            string sql = "select id from t_idprovide where name=:tableName";
+            param = new NameValueCollection();
+            param.Add("tableName",table);
+            m_data = m_sysAdapter.Query(sql, param);
+            if (m_data.Rows.Count > 0)
+            {
+                foreach (DataRow theRow in m_data.Rows)
+                {
+                    idTmp = int.Parse(theRow["id"].ToString());
+                }
+            }
+            if (idTmp == 0)
+            {
+                sql = "insert into t_idprovide (id,name)  values (1,:tableName)";
+                m_sysAdapter.Update(sql, param);
+                idTmp = 1;
+            }
+            else
+            {
+                idTmp += 1;
+                param = new NameValueCollection();
+                param.Add("id",idTmp.ToString());
+                param.Add("tableName", table);
+                sql = "update t_idprovide set id=:id where name=:tableName";
+                m_sysAdapter.Update(sql,param);
+            }
+            return idTmp.ToString();
+        }
+
+        /// <summary>
+        /// 获取系统时间
+        /// </summary>
+        /// <returns></returns>
+        public string GetSystemTimer()
+        {
+            string sql = ApplicationContext.Context.SysTimeSQL;
+            DataTable dt = new DataTable();
+            dt = m_sysAdapter.Query(sql);
+            return dt.Rows[0][0].ToString();
+        }
+
+    }
+}

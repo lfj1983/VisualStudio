@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Index</title>
+  <meta content="text/html; charset=utf-8" http-equiv="content-type">
+	<style>
+		html { font-family:sans-serif; background-color:#ffffff; font-size:75%;}
+		a { text-decoration:none; color:#000; }
+		.highlighted { background:#06c; color:#fff }
+		#index_items { background:#fff; position:relative; white-space:nowrap;}
+		#loading { background:#a00; color:#fff; position:absolute; top:0; left:0; opacity:0.7; padding:8px; font-weight:bold;}
+	</style>
+	<script>
+		function highlight(el) {
+		    if(parent.frames['zform'].oldHighlight) parent.frames['zform'].oldHighlight.className = "";
+		    el.className = "highlighted";
+		    parent.frames['zform'].oldHighlight = el;
+		}
+	</script>
+</head>
+<body style="direction: ltr;">
+  <div id="index_items">
+    <div id="loading">Loading...</div>
+<a id="w_Connect Property" href="topic_0000000000000003.html" target="vbdocright" onclick="highlight(this)">Connect Property</a><br/>
+
+<a id="w_Failed Event" href="topic_000000000000000A.html" target="vbdocright" onclick="highlight(this)">Failed Event</a><br/>
+
+<a id="w_FailedType Property" href="topic_000000000000000C.html" target="vbdocright" onclick="highlight(this)">FailedType Property</a><br/>
+
+<a id="w_MinSuttle Property" href="topic_0000000000000002.html" target="vbdocright" onclick="highlight(this)">MinSuttle Property</a><br/>
+
+<a id="w_STR2CardValid  Constructor" href="topic_0000000000000005.html" target="vbdocright" onclick="highlight(this)">STR2CardValid  Constructor</a><br/>
+
+<a id="w_STR2CardValid (String, String, Double) Constructor" href="topic_0000000000000006.html" target="vbdocright" onclick="highlight(this)">STR2CardValid (String, String, Double) Constructor</a><br/>
+
+<a id="w_STR2CardValid Class" href="topic_0000000000000001.html" target="vbdocright" onclick="highlight(this)">STR2CardValid Class</a><br/>
+
+<a id="w_STR2TagValidEventArgs Class" href="topic_000000000000000B.html" target="vbdocright" onclick="highlight(this)">STR2TagValidEventArgs Class</a><br/>
+
+<a id="w_STR2Valid Namespace" href="topic_0000000000000000.html" target="vbdocright" onclick="highlight(this)">STR2Valid Namespace</a><br/>
+
+<a id="w_STR2Valid Reference" href="topic_000000000000000D.html" target="vbdocright" onclick="highlight(this)">STR2Valid Reference</a><br/>
+
+<a id="w_SetConnect Method" href="topic_0000000000000007.html" target="vbdocright" onclick="highlight(this)">SetConnect Method</a><br/>
+
+<a id="w_Success Event" href="topic_0000000000000009.html" target="vbdocright" onclick="highlight(this)">Success Event</a><br/>
+
+<a id="w_TagValidSql Property" href="topic_0000000000000004.html" target="vbdocright" onclick="highlight(this)">TagValidSql Property</a><br/>
+
+<a id="w_validData Method" href="topic_0000000000000008.html" target="vbdocright" onclick="highlight(this)">validData Method</a><br/>
+
+
+    <div style="height:100%"></div>
+		<script>
+			document.getElementById("loading").style.display = "none";
+		</script>
+  </div>
+</body>
+</html>

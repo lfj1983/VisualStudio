@@ -1,0 +1,102 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Collections;
+using RFIDDriver;
+using System.IO;
+using System.Data;
+using System.ComponentModel;
+
+
+namespace IVT9010Driver
+{
+    public class IVT9010Handle : RFIDHandleInterface<byte>
+    {   
+        /// <summary>
+        /// 声明m_ivt9010Cmd
+        /// </summary>
+        private IVT9010Cmd m_ivt9010Cmd;
+        
+        public IVT9010Handle()
+        {
+            m_ivt9010Cmd = new IVT9010Cmd();
+        }
+        /// <summary>
+        /// 解析标签
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public TagEventArgs DecodeTag(byte[] data)
+        {
+            byte[] tmp = new byte[data.Length - 1];
+            byte tmpCheck = data[data.Length - 1];
+            Array.ConstrainedCopy(data, 0, tmp, 0, tmp.Length);
+            byte check = m_ivt9010Cmd.CheckSum(tmp);
+            if (tmpCheck != check)
+            {
+                throw new CheckSumException();
+            }
+            AlienH3TagEventArgs args = new AlienH3TagEventArgs();
+            //byte[] tagData = new byte[m_ivt9010Cmd.GetDataLength()];
+            args.Cmd = (IVT9010Func)Enum.Parse(typeof(IVT9010Func), Convert.ToString(data[m_ivt9010Cmd.GetCmdIndex()]));
+            
+            if ((args.Cmd == IVT9010Func._ReadTag) || (args.Cmd == IVT9010Func._WriteTag))
+            {
+                args = DecodeEPCTag(data,args);
+            }
+            //判断错误编码
+            if (data[m_ivt9010Cmd.LengthIndex] == 0x04)
+            {
+                args.ErrCode = (IVT9010ErrorCode)Enum.Parse(typeof(IVT9010ErrorCode), Convert.ToString(data[m_ivt9010Cmd.ErrorcodeIndex]));
+            }
+            args.Data = data;
+            return args;
+        }
+        /// <summary>
+        /// 获得RFID接口命令的上下文命令
+        /// </summary>
+        /// <returns></returns>
+        public Commands.RFID.RFIDCmdInterface<byte> GetCmdContext()
+        {
+            return m_ivt9010Cmd;
+        }
+        /// <summary>
+        /// 解析EPC
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        protected AlienH3TagEventArgs DecodeEPCTag(byte[] data, AlienH3TagEventArgs args)
+        {
+            byte[] tagCountBytes = new byte[2];
+            Array.ConstrainedCopy(data, m_ivt9010Cmd.TagCountIndex, tagCountBytes, 0, tagCountBytes.Length);
+            foreach (byte b in tagCountBytes)
+            {
+                args.TagCount += b;
+            }
+            
+            if (args.Cmd == IVT9010Func._WriteTag)
+            {
+                args.ErrCode = (IVT9010ErrorCode)Enum.Parse(typeof(IVT9010ErrorCode), Convert.ToString(data[data.Length-4]));
+                if (args.ErrCode == IVT9010ErrorCode.命令成功完成)
+                {
+                    int tmp = data[m_ivt9010Cmd.DataLengthIndex];
+                    byte[] tmpData = new byte[tmp];
+                    Array.ConstrainedCopy(data, 7, tmpData, 0, tmp);
+                    byte[] tag = new byte[m_ivt9010Cmd.GetDataLength()];
+                    Array.ConstrainedCopy(tmpData, 2, tag, 0, tag.Length);
+                    args.Tag = BitConverter.ToString(tag).Replace("-", "");
+                }
+            }else if(args.Cmd==IVT9010Func._ReadTag)
+            {
+                int tmp = data[data.Length-4];
+                byte[] tag=new byte[tmp];
+                Array.ConstrainedCopy(data,data.Length-(tmp+4), tag, 0, tmp);
+                args.Tag = BitConverter.ToString(tag).Replace("-", "") ;
+            }
+            return args;
+        }
+        
+      }
+}

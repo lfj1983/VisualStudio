@@ -1,0 +1,408 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings>
+    <add key="AppProcessName" value="TrainApp_A"/>
+    <add key="FlowName" value="火车煤翻车"/>
+    <add key="ModuleName" value="A路火车煤翻车机"/>
+    <add key="LogDir" value="Log/"/>
+    <add key="IsDebug" value="true"/>
+    <add key="DeviceId" value="1"/>
+    <!--本地配置参数数据库连接-->
+    <add key="ContextConnect" value="Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.100.20.100)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=BPSBASE)));User Id=fuelmis;Password=ygzhzy_fuelmis"/>
+    <!--远程保存数据数据库连接-->
+    <add key="SysDBConnect" value="Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.100.20.100)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=BPSBASE)));User Id=fuelmis;Password=ygzhzy_fuelmis"/>
+    <!--采样机设备数据库连接-->
+    <add key="SamDeviceConnect" value="Data Source=10.100.20.211;Persist Security Info=True;User ID=sa;Password=123;Initial Catalog=mqpc"/>
+    
+    <!--<add key="ContextConnect" value="Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=BPSBASE)));User Id=fuelmis_mq;Password=fuelmis_mq"/>
+    
+    <add key="SysDBConnect" value="Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=BPSBASE)));User Id=fuelmis_mq;Password=fuelmis_mq"/>
+    
+    <add key="SamDeviceConnect" value="Data Source=.;Persist Security Info=True;User ID=sa;Password=123;Initial Catalog=mqpc;Connect Timeout=3"/>-->
+    
+    <add key="SamDeviceBucketSQL" value="select * from t_device_port t where t.deviceid=@deviceid"/>
+    <add key="SamDeviceControlSQL" value="update t_device_control set {0}=@cmd where deviceid=@deviceid"/>
+    <add key="SamDeviceControlStatusSQL" value="update t_device_status set {0}=@cmd where deviceid=@deviceid"/>
+    <add key="SamDeviceStatusSQL" value="select * from t_device_status where deviceid=@deviceid"/>
+    <add key="SamDeviceResetPotSql" value="update t_device_port set {0}=0,{1}=0 where deviceid=@deviceid"/>
+    <!--获取各样灌子样统计数据-->
+    <add key="SamBucketsCntSql" value="select t.count,nvl( ttcs.cnt,0) as cnt
+                                          from t_train_bucket t,
+                                                (select tcs.potcode,
+                                                        tcs.samcode,
+                                                        ttb.deviceid,
+                                                        (select count(distinct tt.id) as cnt
+                                                          from t_trainenter tt
+                                                          where tt.samcode = tcs.samcode
+                                                          group by tt.samcode) as cnt
+                                                  from t_coalsamcode tcs, t_train_bucket ttb
+                                                  where tcs.potcode = ttb.bucket
+                                                    and tcs.samid =
+                                                        (select ts.id
+                                                          from t_sam ts
+                                                          where ts.samdeviceid = ttb.deviceid)
+                                                    and tcs.ispack != 1
+                                                    and tcs.senddate =
+                                                        (select td.value
+                                                          from t_sys_dict td
+                                                          where td.name = :clearTimeName)) ttcs
+                                          where t.bucket = ttcs.potcode(+)
+                                            and t.deviceid = ttcs.deviceid(+)
+                                            and t.deviceid = :deviceid
+                                          order by t.deviceid, t.bucket"/>
+    <!--主流程查询SQL-->
+    <add key="FlowSQL" value="select * from t_fuelflow t where t.flowname=:flowName"/>
+    <!--获取火车煤清样时间Sql-->
+    <add key="SamClearTimeSql" value="select td.value from t_sys_dict td where td.name=:clearTimeName"/>
+    <!--判断清样时间是否存在Sql-->
+    <add key="ValidSamClearTimeSql" value="select count(td.id) from t_sys_dict td where td.name=:clearTimeName"/>
+    <!--新建清样时间Sql-->
+    <add key="NewSamClearTimeSql" value="insert into t_sys_dict
+                                            (id, name, value, parentid, note, dispindex)
+                                          values
+                                            (:id,
+                                             :clearTimeName,
+                                             to_char(sysdate, 'yyyy-MM-dd HH24:mi:ss'),
+                                             (select td.id from t_sys_dict td where td.name = '系统参数'),
+                                             '火车煤清样时间',
+                                             0)"/>
+    <!--更新清样时间Sql-->
+    <add key="UpdateSamClearTimeSql" value="update t_sys_dict t
+                                              set t.value = to_char(sysdate, 'yyyy-MM-dd HH24:mi:ss')
+                                            where t.name = :clearTimeName"/>
+    <!--根据火车翻车机名称获取对应采样机设备Sql-->
+    <add key="SamDeviceByModuleNameSql" value="select tsm.*
+                                                from t_sam tsm
+                                               where tsm.samname = (select td.value as samname
+                                                                      from t_sys_dict td
+                                                                     where td.name = :moduleName)"/>
+    <!--根据模块名称更新对应采样设备Sql-->
+    <add key="ChangedSamDeviceByModuleNameSql" value="update t_sys_dict t set t.value = :samName where t.name=:moduleName"/>
+    <!--根据模块名称验证当前采样机名称是否与待更新采样机名称是否一至Sql-->
+    <add key="ValidSamDeviceNameIsHavedSql" value="select decode(nvl(td.value,''),:samName,1,0) as valid from t_sys_dict td where td.name=:moduleName"/>
+    <!--串口查询SQL-->
+    <add key="SerialSQL" value="select t.moduledesc as moduleName,
+                                     t.serialdesc as purpose,
+                                     t.flowid,
+                                     t.serialname as portname,
+                                     t.baudrate,
+                                     t.databit as databits,
+                                     t.stopbit as stopbits,
+                                     t.checkbit as parity,
+                                     t.valid as enable,
+                                     t.param1 as other1,
+                                     t.param2 as other2
+                                from t_flowSerial t
+                               where t.flowid=:flowId and t.moduledesc=:moduleName"/>
+    <!--输入设备查询SQL-->
+    <add key="InDeviceSql" value="select * from t_flowindevices t where t.flowid=:flowId and t.modulename=:moduleName"/>
+    <!--输出设备查询SQL-->
+    <add key="OutDeviceSql" value="select * from t_flowOutDevices t where t.flowid=:flowId and t.modulename=:moduleName"/>
+    <!--保存重量计量单位查询SQL-->
+    <add key="SysUnitSql" value="select * from t_sys_dict t where t.name ='数据计量单位'"/>
+    <!--车厢皮重下限查询SQL-->
+    <add key="MinSuttleSql" value="select * from t_sys_dict t where t.name ='火车车厢净重下限'"/>
+    <!--车厢标签有效性验证SQL-->
+    <add key="TagValidSql" value="select te.id,
+                                       te.traincode,
+                                       te.trainnumber,
+                                       nvl(te.collieryid, 0) as collieryId,
+                                       te.fweight,
+                                       te.modelcode,
+                                       tm.traineweight,
+                                       tc.collieryname,
+                                       nvl(te.tosamtime,'0') as tosamtime ,
+                                       nvl(te.samcode,'0') as samcode
+                                  from t_trainenter te, t_trainmodel tm, t_colliery tc
+                                 where te.modelcode = tm.modelcode(+)
+                                   and te.collieryid = tc.id(+)
+                                   and te.traincode = :code0
+                                   and replace(te.trainnumber, '_', '') =
+                                       (select max(replace(t.trainnumber, '_', ''))
+                                          from t_trainenter t
+                                         where t.traincode = :code1
+                                           and t.trainnumber is not null)"/>
+    <!--根据采样机类型获取采样机设备名称Sql-->
+    <add key="SamNameByTypeSql" value="select t.samname from t_sam t where t.samtype='皮带' order by t.samname"/>
+    <add key="EnterSumSQL" value="select (select count(t1.id)
+                                          from t_trainenter t1
+                                         where t1.tosamtime is null
+                                           and t1.enterdate >= to_char(sysdate - 2, 'yyyy-MM-dd')
+                                           and t1.enterdate &lt;= to_char(sysdate, 'yyyy-MM-dd')) queen,
+                                       (select count(t2.id)
+                                          from t_trainenter t2
+                                         where t2.tosamtime is not null
+                                           and t2.enterdate >= to_char(sysdate - 2, 'yyyy-MM-dd')
+                                           and t2.enterdate &lt;= to_char(sysdate, 'yyyy-MM-dd')) samtrain,
+                                       (select count(t3.id)
+                                          from t_trainenter t3
+                                         where t3.enterdate >= to_char(sysdate - 2, 'yyyy-MM-dd')
+                                           and t3.enterdate &lt;= to_char(sysdate, 'yyyy-MM-dd')) enter
+                                  from dual"/>
+    <!--获取可以打包的所有样罐SQL-->
+    <add key="WaitPackBucketSql" value="select tcs.samcode, ttb.bucket, ttb.count
+                                        from t_coalsamcode tcs, t_train_bucket ttb
+                                       where tcs.potcode = ttb.bucket(+)
+                                         and tcs.samid = :samid
+                                         and tcs.ispack = 0
+                                         and tcs.senddate =
+                                             (select td.value from t_sys_dict td where td.name = :clearTimeName)
+                                         and ttb.deviceid = :deviceid
+                                         and (ttb.status = 1 or ttb.count != 0)
+                                       order by to_number(tcs.potcode) asc"/>
+    <!--根据煤矿获取打包样罐SQL-->
+    <add key="WaitPackBucketByCollierySql" value="select tcs.samcode, ttb.bucket, ttb.count
+                                        from t_coalsamcode tcs, t_train_bucket ttb
+                                       where tcs.potcode = ttb.bucket
+                                         and tcs.samid = :samid
+                                         and tcs.ispack = 0
+                                         and tcs.collieryid = :collieryid
+                                         and tcs.senddate =
+                                             (select td.value from t_sys_dict td where td.name = :clearTimeName)
+                                         and ttb.deviceid = :deviceid
+                                         and (ttb.status = 1 or ttb.count != 0) +
+                                       order by to_number(tcs.potcode) asc"/>
+    <!--获取所有采样编码为无效的待打包样桶-->
+    <add key="WaitPackInvalidBucketSql" value="select tcs.samcode, ttb.bucket, ttb.count
+                                          from t_coalsamcode tcs, t_train_bucket ttb
+                                         where tcs.potcode = ttb.bucket
+                                           and tcs.samid = :samid
+                                           and tcs.ispack = 0
+                                           and tcs.valid = '无效'
+                                           and tcs.senddate =
+                                               (select td.value from t_sys_dict td where td.name = :clearTimeName)
+                                           and ttb.deviceid = :deviceid
+                                           and (ttb.status = 1 or ttb.count != 0)
+                                         order by to_number(tcs.potcode) asc"/>
+    <add key="WaitPackInvalidBucketByCollierySql" value="select tcs.samcode, ttb.bucket, ttb.count
+                                                          from t_coalsamcode tcs, t_train_bucket ttb
+                                                         where tcs.potcode = ttb.bucket
+                                                           and tcs.samid = :samid
+                                                           and tcs.ispack = 0
+                                                           and tcs.valid = '无效'
+                                                           and tcs.collieryid = :collieryid
+                                                           and tcs.senddate =
+                                                               (select td.value from t_sys_dict td where td.name = :clearTimeName)
+                                                           and ttb.deviceid = :deviceid
+                                                           and (ttb.status = 1 or ttb.count != 0)
+                                                         order by to_number(tcs.potcode) asc"/>
+    <!--不考虑采样编码，获取所有离线可打包样桶Sql-->
+    <add key="OffLineBucketsSql" value="select t.bucket,t.count from t_train_bucket t where t.count>0 and t.deviceid=:deviceid"/>
+    <!--根据煤矿获取有效采样编码Sql-->
+    <add key="SamCodeByCollierySql" value="select t.id, t.samcode, t.senddate, t.potcode, t.collieryid
+                                            from t_coalsamcode t
+                                           where t.status = 6
+                                             and t.valid = '有效'
+                                             and t.collieryid = :collieryId
+                                             and t.samid = :samId
+                                             and t.senddate =
+                                                 (select td.value from t_sys_dict td where td.name = :clearTimeName)"/>
+    <!--根据采样编码记录id将采样编码记录状态更新为无效-->
+    <add key="InvalidBySamCodeIdSql" value="update t_coalsamcode t set t.valid = '无效' where t.id=:id"/>
+    <!--根据煤矿及样桶号将采样编码记录状态更新为无效-->
+    <add key="InvalidBySamCodeIdAndPotSql" value="update t_coalsamcode t
+                                                   set t.valid = '无效'
+                                                 where t.valid = '有效'
+                                                   and t.collieryid = :collieryid
+                                                   and t.potcode = :potnumber
+                                                   and t.samid = :samId
+                                                   and t.senddate =
+                                                   (select td.value from t_sys_dict td where td.name = :clearTimeName)"/>
+    <!--新增一条有效的采样编码记录Sql-->
+    <add key="NewSamCodeRecordByCollieryBucketSql" value="insert into t_coalsamcode
+                                            (id, samid, samcode, potcode, collieryid, valid, status, senddate)
+                                          values
+                                            (:id,
+                                              :samid,
+                                              :samcode,
+                                              :bucket,
+                                              :collieryid,
+                                              '有效',
+                                              6,
+                                              (select td.value from t_sys_dict td where td.name = :clearTimeName))"/>
+    <!--根据清样时间生成新的采样编码Sql-->
+    <add key="NewSamCodeBySenddateSql" value="select to_char(SYSDATE, 'yyyyMMddHH24miss') || substr('00' || cnt, length('00' || cnt) - 2, 3) as samcode
+                                              from (select count(t.samcode) + 1 as cnt
+                                                      from t_coalsamcode t
+                                                      where t.senddate =
+                                                            (select td.value from t_sys_dict td where td.name = :clearTimeName))"/>
+    <!--获取新的可用样桶号Sql-->
+    <add key="NewBucketNumberSql" value="select tb.bucket
+                        from t_train_bucket tb
+                       where tb.status = 0
+                         and tb.count = 0
+                         and tb.bucket not in
+                             (select nvl(tcs.potcode, 0)
+                                from t_coalsamcode tcs
+                               where tcs.valid = '有效'
+                                 and tcs.samid = :samId
+                                 and tcs.senddate =
+                                     (select td.value from t_sys_dict td where td.name = :clearTimeName))
+                         and tb.deviceid = :deviceId
+                       order by tb.bucket asc"/>
+    <!--验证罐号是否已满Sql-->
+    <add key="ValidFullBucketNumberSql" value="select count(t.id) cnt
+                        from t_train_bucket t
+                       where t.status = 0
+                         and t.deviceid = :deviceid
+                         and t.bucket = :bucket"/>
+    <!--根据设备及样桶号获取记录数-->
+    <add key="BucketsCntByDeviceAndBucketSql" value="select count(t.id) as cnt from t_train_bucket t where t.deviceid=:deviceid and t.bucket=:bucket"/>
+    <!--根据设备及样桶号更新样桶状态及子样量Sql-->
+    <add key="BucketUpdateByDeviceAndBucketSql" value="update t_train_bucket t set t.status=:status,t.count=:count where t.deviceid=:deviceid and t.bucket=:bucket"/>
+    <!--根据设备及样桶号插入插入样桶状态及子样量Sql-->
+    <add key="NewBucketByDeviceAndBucketSql" value="insert into t_train_bucket(status,count,deviceid,bucket,id) values(:status,:count,:deviceid,:bucket,:id)"/>
+    <!--保存火车车厢采样记录Sql-->
+    <add key="SaveSamDataForTrainenterSql" value="update t_trainenter te
+                                                   set te.samid     = :samid,
+                                                       te.samaddr   = :samaddr,
+                                                       te.samcode   = :samcode,
+                                                       te.tosamtime = to_char(sysdate, 'yyyy-MM-dd HH24:mi:ss'),
+                                                       te.tosamdate = to_char(sysdate, 'yyyy-MM-dd')
+                                                 where te.id = :id"/>
+    <!--根据煤矿验证罐满样桶是否为煤矿当前使用样桶Sql-->
+    <add key="ValidChangedBucketByCollierySql" value="select count(t.id) as cnt
+                                                      from t_coalsamcode t
+                                                     where t.valid = '有效'
+                                                       and t.collieryid = :collieryid
+                                                       and t.potcode = :potnumber
+                                                       and t.samid = :samId
+                                                       and t.senddate =
+                                                           (select td.value from t_sys_dict td where td.name = :clearTimeName)"/>
+    <!--打包完成后更新打包标志位记录Sql-->
+    <add key="PackFinishSql" value="update t_coalsamcode tcs
+                                      set tcs.ispack = 1, tcs.valid = '无效'
+                                    where tcs.status = 6
+                                      and tcs.samid = :samId
+                                      and tcs.samcode = :samcode
+                                      and tcs.potcode = :pot"/>
+    <!--火车采样机可选采样周期记录Sql-->
+    <add key="SamIntervalSql" value="select t.name, t.value
+                        from t_sys_dict t
+                       where t.parentid =
+                             (select td.id from t_sys_dict td where td.name = '火车采样机采样周期')
+                       order by to_number(t.name) asc"/>
+    <!--根据车厢及煤矿获取当前车厢对应煤矿进煤车数Sql-->
+    <add key="TrainCntByCollierySql" value="select count(te.id) cnt
+                                              from t_trainenter te
+                                            where te.collieryid = :collieryid
+                                              and te.netweight >:minSuttle
+                                              and te.trainnumber = (select max(t.trainnumber)
+                                                                      from t_trainenter t
+                                                                    where t.traincode = :traincode)"/>
+    <!--获取火车采样机可选缩分周期Sql-->
+    <add key="DivertorIntervalSql" value="select t.name, t.value
+                                        from t_sys_dict t
+                                       where t.parentid =
+                                             (select td.id from t_sys_dict td where td.name = '火车采样机缩分周期')
+                                       order by to_number(t.name) asc"/>
+    <!-- 根据采样编码生成新的分样编码Sql -->
+    <add key="NewSamplingCodeSql" value="with baseValue as
+                       (select (select t.value from t_dict t where t.name = '采样来煤量') as baseValule,
+                               (select t.value from t_dict t where t.name = '分样计算基础差值') as scopeValue,
+                               (select t.value from t_dict t where t.name = '火车车厢标准净重') as nomalNetweight
+                          from dual),
+                      waitSamCode as
+                       (select nvl(sum(te.netweight), 0) as netweight
+                          from t_trainenter te
+                         where te.samcode = '{0}'),
+                      samplingBase as
+                       (select tspl.samcode,
+                               tspl.samplingcode,
+                               (select count(tsp.id) cntsp
+                                  from t_sampling tsp
+                                 where substr(tsp.samplingtime, 0, 10) =
+                                       to_char(sysdate, 'yyyy-MM-dd')) as cntsp
+                          from t_sampling tspl
+                         where tspl.id =
+                               (select max(tsp.id)
+                                  from t_sampling tsp
+                                 where substr(tsp.samplingtime, 0, 10) =
+                                       to_char(sysdate, 'yyyy-MM-dd')
+                                   and tsp.samcode in
+                                       (select ttcs.samcode
+                                          from t_coalsamcode ttcs
+                                         where (ttcs.collieryid, ttcs.status, ttcs.senddate) =
+                                               (select tcs.collieryid, tcs.status, tcs.senddate
+                                                  from t_coalsamcode tcs
+                                                 where tcs.samcode = '{1}')
+                                           and ttcs.samcode != '{2}'))
+                        union all
+                        select null samplingcode,
+                               null samcode,
+                               (select count(distinct ts.samplingcode)
+                                  from t_sampling ts
+                                 where ts.samplingdate = to_char(sysdate, 'YYYY-MM-DD')) cntsp
+                          from dual),
+                      samEnterBase as
+                       (select nvl(sum(te.netweight), 0) as samweight
+                          from t_trainenter te, samplingBase sb
+                         where te.samcode = sb.samcode)
+                      select case
+                               when (tt.coefValue &lt; 0) or (tt.samplingcode is null) then
+                                to_char(sysdate, 'YYYYMMDD') || trim(to_char(tt.cntsp + 1, '000')) ||
+                                trim(to_char(ABS(MOD(DBMS_RANDOM.RANDOM, 999)), '000'))
+                               else
+                                tt.samplingcode
+                             end samplingcode
+                        from (select (bv.scopeValue -
+                                     ((sep.samweight + wsc.netweight) - bv.baseValule)) as coefValue,
+                                     spb.samplingcode,
+                                     spb.cntsp
+                                from samplingBase spb,
+                                     waitSamCode  wsc,
+                                     baseValue    bv,
+                                     samEnterBase sep) tt
+                       where rownum = 1"/>
+    
+    <!--保存分样编码记录Sql-->
+    <add key="SaveSamplingSql" value="insert into t_sampling (id,samplingcode,samcode,samplingtime,samplingdate)values(:id,:samplingcode,:samcode,to_char(sysdate,'yyyy-MM-dd HH24:mi:ss'),to_char(sysdate,'yyyy-MM-dd'))"/>
+    <!--根据采样编码或取已经存在的分样编码Sql-->
+    <add key="SamplingcodeBySamcodeSql" value="select ts.samplingcode from t_sampling ts where ts.samcode = :samcode" />
+    <!--根据验证采样编码是否为系统采样编码Sql-->
+    <add key="ValidSamCodeSql" value="select count(ts.id) from t_coalsamcode ts where ts.samcode = :samcode"/>
+    <!--根据采样编码验证是否已经分样Sql-->
+    <add key="SamCodeIsHavedForSamplingSql" value="select count(ts.id) from t_sampling ts where ts.samcode = :samcode"/>
+    <!--判断分样编码是否存在Sql-->
+    <add key="SamplingcodeIsHavedForSamplingSql" value="select count(ts.id) from t_sampling ts where ts.samplingcode = :samplingcode" />
+    
+    <!--查询日志SQL-->
+    <add key="LogSQL" value="select rownum, tt.*
+                            from (select t.logtime, t.logtext
+                                    from t_truckenterlog t
+                                   where t.position = :position
+                                     and substr(t.logtime, 0, 10) = to_char(sysdate, 'yyyy-MM-dd')
+                                   order by t.logtime desc) tt"/>
+    <add key="WriteLogSql" value="insert into t_truckenterlog (logtime,logtext,position) values(to_char(sysdate,'yyyy-MM-dd HH24:mi:ss'),'{0}','{1}')"/>
+    <!--获取系统时间SQL-->
+    <add key="SystimeSQL" value="select to_char(sysdate, 'yyyy-MM-dd HH24:mi:ss') from dual"/>
+    <!--控制中心写入控制命令-->
+    <add key="CenterControlSQL" value="update t_TrainCoalInfo t set t.{0}=:value "/>
+    <!--获取控制中心相应字段值Sql-->
+    <add key="CenterValueByColumnSql" value="select {0} from t_TrainCoalInfo"/>
+    <!--根据采样编码信息获取煤矿id-->
+    <add key="CollieryBySamCoalCodeSql" value="select max(t.id) as id
+                                                from t_coalsamcode t
+                                               where collieryid = 0
+                                                 and t.ispack = 0
+                                                 and t.samid = :samId
+                                                 and t.senddate =
+                                                     (select td.value from t_sys_dict td where td.name = :clearTimeName)"/>
+    <!--根据采样编码表ID更新煤矿Id-->
+    <add key="UpdateCollieryBySamCoalCodeIdSql" value="update t_coalsamcode t set t.collieryid = :collieryId where t.id=:Id"/>
+    <!--获取或设置刷新控制中心命令间隔-->
+    <add key="CenterRefrenshInterval" value="4000"/>
+    <!--日志刷新间隔-->
+    <add key="LogInterval" value="5000"/>
+    <!--输入/输出设备状态监控间隔-->
+    <add key="IoInterval" value="300"/>
+    <!--采样机设备状态刷新间隔-->
+    <add key="SamStatusInterval" value="1200"/>
+    <add key="PackDeviceInternal" value="4500"/>
+    <add key="PLCListenerInterval" value="500"/>
+    <!--当有煤流情况下，当前样桶满时，需要进行换罐时，延迟发送换罐命令时间间隔-->
+    <add key="BucketFullToBucketInternal" value="5000"/>
+    <add key="PackAllDelayInternal" value="5000"/>
+    <add key="IsHandClearTime" value="true" />
+  </appSettings>
+</configuration>

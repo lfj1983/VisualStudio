@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DynamicHelp xmlns="http://msdn.microsoft.com/vsdata/xsd/vsdh.xsd" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance" xsi:schemaLocation="http://msdn.microsoft.com/vsdata/xsd/vsdh.xsd">	
+   <LINKGROUP ID="STR2TestDemo" Title="STR2TestDemo Reference Help" Priority="2100">
+      <GLYPH Expanded="vs:/ctxhelp_show.gif" Collapsed="vs:/ctxhelp_hide.gif"/>
+   </LINKGROUP>
+
+
+   <Context>
+      <Keywords>
+         <KItem Name="STR2TestDemo.App" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:STR2TestDemo.chm::/topic_0000000000000001.html" LinkGroup="STR2TestDemo">App Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="STR2TestDemo.MainWindow" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:STR2TestDemo.chm::/topic_0000000000000002.html" LinkGroup="STR2TestDemo">MainWindow Class</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="STR2TestDemo.MainWindow.MainWindow" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:STR2TestDemo.chm::/topic_0000000000000003.html" LinkGroup="STR2TestDemo">MainWindow Constructor</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="STR2TestDemo" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:STR2TestDemo.chm::/topic_0000000000000000.html" LinkGroup="STR2TestDemo">STR2TestDemo Namespace</LItem>
+      </Links>
+   </Context>
+   
+
+   <Context>
+      <Keywords>
+         <KItem Name="STR2TestDemo Reference" />
+      </Keywords>
+      <Links>
+         <LItem URL="ms-its:STR2TestDemo.chm::/topic_0000000000000005.html" LinkGroup="STR2TestDemo">STR2TestDemo Reference</LItem>
+      </Links>
+   </Context>
+   
+
+</DynamicHelp>
+
